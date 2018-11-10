@@ -1,0 +1,51 @@
+.article-container {
+    justify-content: flex-start;
+    padding: 0 6em;
+}
+
+//element of story section styles
+.elementstory-container {
+    .section-heading {
+        font-size: 2em;
+        font-family: 'Open Sans Condensed-Bold';
+    }
+
+    .element-of-story-list {
+        li {
+            font-family: 'Open Sans Condensed';
+            font-size: 1.3em;
+            margin-bottom: 1em;
+
+            a {
+                text-decoration: none;
+            }
+
+            a:hover {
+                font-weight: bold;
+            }
+
+            ;
+        }
+    }
+}
+
+//routes container
+.article-right-section {
+    margin-left: 3em;
+}
+
+.elementstory-desc-container {
+    .section-heading {
+    	font-size: 2em;
+        font-family: 'Open Sans Condensed-Bold';
+    	margin-bottom:-0.2em;
+    }
+}
+
+//search-word section styles
+.searchword-container {
+    .section-heading {
+        font-size: 2em;
+        font-family: 'Open Sans Condensed-Bold';
+    }
+}

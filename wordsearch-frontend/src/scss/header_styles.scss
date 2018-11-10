@@ -1,0 +1,42 @@
+.site-header {
+    padding: 0 6em;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #aaa;
+    font-family: 'Open Sans Condensed-Bold';
+
+    .login-btn,
+    .submit-logindata-btn {
+        height: 2em;
+        width: 4em;
+        font-family: "Open Sans Condensed";
+        border-radius: 0.3em;
+        font-size: 1.3em;
+    }
+
+    .submit-logindata-btn {
+        margin-left: 0.4em;
+    }
+}
+
+.login-form-holder {
+    align-items: center;
+
+    .username-section {
+        height: 3em;
+        align-items: center;
+    }
+
+    .password-section {
+        align-items: center;
+        margin-left: 1em;
+        height: 3em;
+    }
+
+    .username-subheading,
+    .password-subheading {
+        margin-right: 0.5em;
+
+        input {}
+    }
+}
