@@ -14,7 +14,7 @@ class Header extends Component{
   		return(
 		    <React.Fragment>
 		      <div className="site-header flex-row">
-		        <h2 className='site-name'>Word dictionary</h2>
+		        <h2 className='site-name'>Word search</h2>
 		        <LoginForm />		        
 		      </div>
 		    </React.Fragment>
