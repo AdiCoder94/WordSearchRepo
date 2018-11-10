@@ -21,7 +21,7 @@ export default class LoginForm extends Component {
 						<p className="password-subheading">Password:</p>
 						<input type='text' />
 					</div>				
-				<button className='submit-logindata-btn'>Submit</button>
+				<button className='submit-logindata-btn'>Login</button>
 				</div>
  			</React.Fragment>
  		)
