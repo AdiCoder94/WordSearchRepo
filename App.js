@@ -45,24 +45,7 @@ var noName = new Kitten(
 )
 
 
-//saving Silence document in MongoDB
-Silence.save(function(err,Silence){
-	if (err) return console.error(err);
-	Silence.saved();	
-})
-noName.save(function(err,Silence){
-	if (err) return console.error(err);
-	noName.saved();	
-})
-
-
-//retriving document from the database
-Kitten.find(function(err,kittens){
-	if (err) return console.error(err);
-	console.log(kittens);
-})
-
 // setting port for the server
 app.listen(portNumber,(portNumber)=>{
-	console.log(`starting dev server at port ${portNumber} !`)
+	console.log(`starting server at port ${portNumber} !`)
 })
