@@ -36,9 +36,9 @@
 
 .elementstory-desc-container {
     .section-heading {
-    	font-size: 2em;
+        font-size: 2em;
         font-family: 'Open Sans Condensed-Bold';
-    	margin-bottom:-0.2em;
+        margin-bottom: -0.2em;
     }
 }
 
@@ -47,5 +47,57 @@
     .section-heading {
         font-size: 2em;
         font-family: 'Open Sans Condensed-Bold';
+    }
+}
+
+//login modal styles
+.modal-container {
+    position: fixed;
+    z-index: 1;
+    border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+
+    .modal-content {
+        margin: 15% auto;
+        align-items: center;
+        border: 1px solid black;
+        padding: 20px;
+        width: 20%;
+        border-radius: 0.2em;
+        background-color: #fefefe;
+
+        .username-section {
+            height: 3em;
+            align-items: center;
+        }
+
+        .password-section {
+            align-items: center;
+            margin-left: 1em;
+            margin-right: 0.5em;
+            height: 3em;
+        }
+
+        .username-subheading,
+        .password-subheading {
+            margin-right: 0.3em;
+            font-family: "Open Sans Condensed-Bold";
+
+            input {}
+        }
+
+        .login-cancel-holder {
+            align-self: flex-end;
+            .modal-btn {
+                background-color: transparent;
+                font-family: "Open Sans Condensed-Bold";
+                border:none;
+                cursor:pointer;
+                font-size: 1.1em;
+
+            }
+        }
     }
 }

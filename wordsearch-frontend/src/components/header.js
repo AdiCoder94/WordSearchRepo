@@ -29,9 +29,9 @@ class Header extends Component{
 		    <React.Fragment>
 		      <div className="site-header flex-row">
 		        <h2 className='site-name'>Word search</h2>
-		        {Modal}
-		        <button className='submit-logindata-btn' onClick={this.showLoginModal}>Login</button>	        
+		        <button className='login-btn' onClick={this.showLoginModal}>Login</button>	        
 		      </div>
+	      	  {Modal}
 		    </React.Fragment>
     	)
    }
