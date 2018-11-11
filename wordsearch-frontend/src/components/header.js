@@ -18,8 +18,8 @@ class Header extends Component{
 		this.setState(state => ({
 				viewLoginModal:!this.state.viewLoginModal
 			})
-		)
-		return console.log(this.state.viewLoginModal);
+		)		
+		console.log(this.state.viewLoginModal);
 	}
 
 	render(){
