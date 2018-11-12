@@ -12,17 +12,17 @@ import SearchEnterWord from './components/SearchEnterWord'
 class App extends Component {
   render() {
     return (
-    <React.Fragment>
-      <Header />
-      <div className="article-container flex-row">
-        <div className='article-left-section'>
-          <ElementOfStory />
-        </div>  
-        <div className='article-right-section'>
-          <Routes />
+      <React.Fragment>
+        <Header />
+        <div className="article-container flex-row">
+          <div className='article-left-section'>
+            <ElementOfStory />
+          </div>  
+          <div className='article-right-section'>
+            <Routes />
+          </div>
         </div>
-      </div>
-    </React.Fragment>
+      </React.Fragment>
     );
   }
 }

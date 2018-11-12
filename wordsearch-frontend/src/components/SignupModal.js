@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import '../scss/base_styles.scss';
 import '../scss/article_styles.scss';
 
-class LoginModal extends Component{
+class SignupModal extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -46,4 +46,4 @@ class LoginModal extends Component{
 	}
 }
 
-export default LoginModal;
+export default SignupModal;

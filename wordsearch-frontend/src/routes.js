@@ -7,6 +7,7 @@ import StoryConflict from './components/pages/Conflict';
 import StoryCharacter from './components/pages/Characters';
 import StoryTheme from './components/pages/Theme';
 import StoryPlot from './components/pages/Plot';
+import SignUp from './components/pages/SignUp';
 
 
 function Routes(){
