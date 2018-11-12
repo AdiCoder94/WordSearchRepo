@@ -66,7 +66,7 @@
         padding: 20px;
         width: 20%;
         border-radius: 0.2em;
-        background-color: #fefefe;
+        background-color: #ccc;
 
         .username-section {
             height: 3em;
@@ -89,6 +89,7 @@
         }
 
         .login-cancel-holder {
+            width:100%;
             align-self: flex-end;
             .modal-btn {
                 background-color: transparent;
@@ -97,6 +98,13 @@
                 cursor:pointer;
                 font-size: 1.1em;
 
+            }
+            .signup-form-btn{
+            margin-right: auto;
+            border:1px solid black;
+            line-height: 1.1em;
+            border-radius: 0.2em;
+            background-color: #bbb;
             }
         }
     }

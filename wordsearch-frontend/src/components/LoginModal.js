@@ -35,6 +35,7 @@ class LoginModal extends Component{
 							<input type='text' />
 						</div>
 						<div className='login-cancel-holder flex-row'>	
+							<button className="signup-form-btn modal-btn">Sign up</button>
 							<button className='close-modal-btn modal-btn' onClick={this.hideModal}>Cancel</button>
 							<button className="submit-form-btn modal-btn">Login</button>
 						</div>
