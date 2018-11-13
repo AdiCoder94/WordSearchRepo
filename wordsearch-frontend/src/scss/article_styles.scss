@@ -89,22 +89,102 @@
         }
 
         .login-cancel-holder {
-            width:100%;
-            align-self: flex-end;
+            width: 100%;
+            justify-content: flex-end;
+
             .modal-btn {
                 background-color: transparent;
                 font-family: "Open Sans Condensed-Bold";
-                border:none;
-                cursor:pointer;
+                border: none;
+                cursor: pointer;
                 font-size: 1.1em;
 
             }
-            .signup-form-btn{
-            margin-right: auto;
-            border:1px solid black;
-            line-height: 1.1em;
-            border-radius: 0.2em;
-            background-color: #bbb;
+
+            .signup-form-btn {
+                margin-right: auto;
+                border: 1px solid black;
+                line-height: 1.1em;
+                border-radius: 0.2em;
+                background-color: #bbb;
+            }
+        }
+    }
+}
+
+//signup form modal
+.modal-container {
+    position: fixed;
+    z-index: 1;
+    border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+
+    .signup-modal-content {
+        margin: 15% auto;
+        align-items: center;
+        border: 1px solid black;
+        padding: 20px;
+        width: 25%;
+        border-radius: 0.2em;
+        background-color: #ccc;
+
+        .username-section {
+            height: 3em;
+            align-items: center;
+        }
+
+        .password-section {
+            align-items: center;
+            margin-left: 1em;
+            margin-right: 0.5em;
+            height: 3em;
+        }
+
+        .confirm-password-section {
+            align-items: center;
+            margin-left: 1em;
+            margin-right: 0.5em;
+            height: 3em;
+        }
+
+        .email-section {
+            align-items: center;
+            margin-left: 1em;
+            margin-right: 0.5em;
+            height: 3em;
+        }
+
+        .username-subheading,
+        .password-subheading,
+        .email-subheading,
+        .confirm-password-subheading {
+            margin-right: 0.3em;
+            font-family: "Open Sans Condensed-Bold";
+
+            input {}
+        }
+
+        .login-cancel-holder {
+            width: 100%;
+            justify-content: flex-end;
+
+            .modal-btn {
+                background-color: transparent;
+                font-family: "Open Sans Condensed-Bold";
+                border: none;
+                cursor: pointer;
+                font-size: 1.1em;
+
+            }
+
+            .signup-form-btn {
+                margin-right: auto;
+                border: 1px solid black;
+                line-height: 1.1em;
+                border-radius: 0.2em;
+                background-color: #bbb;
             }
         }
     }
