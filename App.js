@@ -1,51 +1,26 @@
-//Module imports
+// importing modules
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
-//constants
-const portNumber = 3003;
-
-//starting the express module
+//starting the express app
 var app = express();
 
-//connecting to mongo database
-mongoose.connect('mongodb://localhost/test');
+// connecting to mongodb
+var dbConnect = mongoose.connect('mongodb://AdityaP:wordsearch2018@ds011298.mlab.com:11298/wordsearchdb');
+mongoose.Promise = global.Promise; 
 
-//to check the connection
-var dbconnect = mongoose.connection;
-dbconnect.on('error', console.error.bind(console, 'connection error'));
-dbconnect.once('open', function(){
+// importing the router
+const routes = require('./Routes/api.js');
 
+//initialize in the middlewares
+app.use(bodyParser.json()); 
+app.use('/api',routes);
+app.use(function(err, req, res, next) {
+    res.status(422).send({ error: err.message });
 })
 
-//defining kitty schema
-var kittySchema = new mongoose.Schema(
-	{name:String}
-);
-
-// assigning a function to kitty Schema
-kittySchema.methods.speak = function(){
-	var greeting = this.name ? "My name is " + this.name : "I got no name, bruh!!";
-	console.log(greeting);
-}
-kittySchema.methods.saved = function(){
-	var saveMsg = this.name +" has been saved in the database.";
-	console.log(saveMsg);
-}
-
-//compiling kitty schema into model
-var Kitten = mongoose.model("Kitten",kittySchema);
-
-// creating document in the Kitten model
-var Silence = new Kitten(
-	{name:"Silence"} 
-);
-var noName = new Kitten(
-	{name:"Fuck you"}
-)
-
-
-// setting port for the server
-app.listen(portNumber,(portNumber)=>{
-	console.log(`starting server at port ${portNumber} !`)
+//listening to request 
+app.listen(4000,function(){
+	console.log("Listening at port 4000");
 })

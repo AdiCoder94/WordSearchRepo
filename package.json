@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/AdiCoder94/Word-search-backend#readme",
   "dependencies": {
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
     "express": "^4.16.4",
     "mongoose": "^5.3.11",

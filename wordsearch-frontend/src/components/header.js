@@ -18,18 +18,28 @@ class Header extends Component{
 	}
 
 	showLoginModal(){
-		this.setState(state => ({
-				viewLoginModal:!this.state.viewLoginModal
-			})
-		)		
+		if((this.state.viewSignupModal == true) && (this.state.viewLoginModal == false)){
+			this.setState(state => ({
+					viewLoginModal:!this.state.viewLoginModal,
+					viewSignupModal:false
+				})
+			)}		
+		else this.setState(state =>({
+			viewLoginModal:!this.state.viewLoginModal
+		}))	
 		console.log(this.state.viewLoginModal);
 	}
 
 	showSignupModal(){
-		this.setState(state => ({
-				viewSignupModal:!this.state.viewSignupModal
-			})
-		)		
+		if((this.state.viewLoginModal == true) && (this.state.viewSignupModal == false)){
+			this.setState(state => ({
+					viewSignupModal:!this.state.viewSignupModal,
+					viewLoginModal:false
+				})
+			)}
+		else this.setState(state => ({
+			viewSignupModal:!this.state.viewSignupModal
+		}))		
 		console.log(this.state.viewSignupModal +"signup");
 	}
 
@@ -44,8 +54,7 @@ class Header extends Component{
 		        <h2 className='site-name'>Word search</h2>
 		        <div className="btn-holder">
 			        <button className='signup-btn' onClick={this.showSignupModal}>Sign up</button>	        
-			        <button className='login-btn' onClick={this.showLoginModal}>Login</button>
-	      	  
+			        <button className='login-btn' onClick={this.showLoginModal}>Login</button>	      	  
 		        </div>	        
 		      </div>
 		      {SignupModal}

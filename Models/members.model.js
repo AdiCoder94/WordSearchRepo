@@ -2,12 +2,12 @@ const mongoose = require ('mongoose');
 const bcrypt = require ('bcrypt');
 
 // creating schema for the member
-const memberSchema = new mongoose.Schema(
-	{email : { type : String, default : "" }},
-	{password : { type : String, default : "" }},
-	{isDeleted : { type : Boolean, default : "" }},
-	{signUpDate : { type : Date, default : Date.now() }}
-)
+const memberSchema = new mongoose.Schema({
+	email: { type: String, required: true },
+	password: { type: String, required: true },
+	isDeleted: { type: Boolean },
+	signUpDate: { type: Date }
+})
 
 //Schema method for hashing password
 memberSchema.methods.generateHash = function(password){
@@ -20,4 +20,5 @@ memberSchema.methods.validPassword = function(password){
 };
 
 //compiling the member schema to model and exporting
-module.exports = mongoose.model("Members",memberSchema);
+const SiteMember = mongoose.model("Member",memberSchema);
+module.exports = SiteMember;
