@@ -27,7 +27,6 @@ class Header extends Component{
 		else this.setState(state =>({
 			viewLoginModal:!this.state.viewLoginModal
 		}))	
-		console.log(this.state.viewLoginModal);
 	}
 
 	showSignupModal(){
@@ -40,7 +39,6 @@ class Header extends Component{
 		else this.setState(state => ({
 			viewSignupModal:!this.state.viewSignupModal
 		}))		
-		console.log(this.state.viewSignupModal +"signup");
 	}
 
 	render(){

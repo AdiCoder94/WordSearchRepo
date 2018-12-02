@@ -8,16 +8,37 @@ class LoginModal extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			viewLoginModal:true
+			viewLoginModal:true,
+			logInError:"",
+			signUpUsername:'',
+			logInPassword:''
 		}
 		this.hideModal = this.hideModal.bind(this);
+		this.onTextboxChangeUserName = this.onTextboxChangeUserName.bind(this);
+		this.onTextboxChangeLogInPassword = this.onTextboxChangeLogInPassword.bind(this);
 	}
+
+	onTextboxChangeUserName(e){
+		this.setState({
+			signUpUsername:e.target.value
+		})
+	}
+
+	onTextboxChangeLogInPassword(e){
+		this.setState({
+			logInPassword:e.target.value
+		})
+	}
+
+	componentDidUpdate(){
+		console.log("User name" + this.state.signUpUsername + " " + "password " + this.state.logInPassword)
+	}
+
 	hideModal(){
 		this.setState(state =>({
 				viewLoginModal:false
 			})
 		)
-		console.log(this.state.viewLoginModal + "from child");
 	}
 
 	render(props){
@@ -29,11 +50,11 @@ class LoginModal extends Component{
 					<div className="modal-content flex-column">
 						<div className="username-section flex-row">	
 							<p className="username-subheading">User name:</p>
-							<input type='text' />
+							<input type='text' onChange={this.onTextboxChangeUserName} />
 						</div>
 						<div className="password-section flex-row">
 							<p className="password-subheading">Password:</p>
-							<input type='text' />
+							<input type='text' onChange={this.onTextboxChangeLogInPassword} />
 						</div>
 						<div className='login-cancel-holder flex-row'>	
 							<button className='close-modal-btn modal-btn' onClick={this.hideModal}>Cancel</button>
