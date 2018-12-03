@@ -67,13 +67,34 @@ class SignupModal extends Component{
 				"Content-type" : "application/json"
 			},
 			body:JSON.stringify({
-				username:signUpUsername,
+				username : signUpUsername,
 				email : signUpEmail,
 				password : signUpPassword
-			})
+			}),
 		})
+		// .then(res =>  JSON.parse(res))	
+		.then(res => res.text())
+		.then(text => console.log(text))
+		/*.then(json => {
+			console.log("json",json);
+			if(json.success){
+				this.setState({
+					signUpError : json.message,
+					isLoading : false,
+					signUpEmail : "",
+					signUpPassword : ""
+				})
+			}	
+			else{
+				this.setState({
+					signUpError : json.message,
+					isLoading : false
+				})
+			}
+		})*/
 	}
 
+	// closing the modal on clicking Cancel
 	hideModal(){
 		this.setState(state =>({
 				viewSignUpModal:false
@@ -84,6 +105,7 @@ class SignupModal extends Component{
 	render(props){
 		let hideModalClassName;
 		(this.state.viewSignUpModal) ? (hideModalClassName = "modal-container") : (hideModalClassName="hidden")
+		
 		return(
 			<React.Fragment>
 				<div className={hideModalClassName}>
@@ -106,7 +128,7 @@ class SignupModal extends Component{
 						</div>
 						<div className='login-cancel-holder flex-row'>	
 							<button className='close-modal-btn modal-btn' onClick={this.hideModal}>Cancel</button>
-							<button className="submit-form-btn modal-btn">Submit</button>
+							<button className="submit-form-btn modal-btn" onClick={this.onSignUp}>Submit</button>
 						</div>
 					</div>
 				</div>
