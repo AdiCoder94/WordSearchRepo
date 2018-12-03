@@ -5,7 +5,6 @@ import '../scss/header_styles.scss';
 
 import LoginModal from './LoginModal';
 import SignUpModal from './SignupModal';
-import Spinner from './spinner'
 
 class Header extends Component{
 	constructor(props){

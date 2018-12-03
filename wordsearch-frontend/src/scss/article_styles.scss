@@ -54,15 +54,13 @@
 .modal-container {
     position: fixed;
     z-index: 1;
-    border: 1px solid black;
     background-color: rgba(0, 0, 0, 0.4);
     width: 100%;
     height: 100%;
 
     .modal-content {
-        margin: 15% auto;
+        margin: 5% auto;
         align-items: center;
-        border: 1px solid black;
         padding: 20px;
         width: 20%;
         border-radius: 0.2em;
@@ -116,15 +114,13 @@
 .modal-container {
     position: fixed;
     z-index: 1;
-    border: 1px solid black;
     background-color: rgba(0, 0, 0, 0.4);
     width: 100%;
     height: 100%;
 
     .signup-modal-content {
-        margin: 15% auto;
+        margin: 5% auto;
         align-items: center;
-        border: 1px solid black;
         padding: 20px;
         width: 25%;
         border-radius: 0.2em;
@@ -189,11 +185,20 @@
 
             .signup-form-btn {
                 margin-right: auto;
-                border: 1px solid black;
                 line-height: 1.1em;
                 border-radius: 0.2em;
                 background-color: #bbb;
             }
         }
     }
+}
+
+//loader container styles
+.loader-container{
+    align-items: center;
+    .pleasewait-txt{
+        font-family: "Open Sans Condensed-Bold";
+        margin-left: 0.4em;
+    }
+
 }

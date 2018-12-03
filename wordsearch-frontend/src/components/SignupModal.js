@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import 'whatwg-fetch';
 
+import Spinner from "./spinner";
 
 import '../scss/base_styles.scss';
 import '../scss/article_styles.scss';
@@ -11,7 +12,7 @@ class SignupModal extends Component{
 		super(props);
 		this.state = {
 			viewSignUpModal:true,
-			isLoading:true,
+			isLoading:false,
 			signUpError:"",			
 			signUpUsername:"",
 			signUpEmail:'',
@@ -44,7 +45,7 @@ class SignupModal extends Component{
 	}
 
 	componentDidUpdate(){
-		console.log("User name:" + this.state.signUpUsername +" "+ "Email:" + this.state.signUpEmail + " " + "Password:" + this.state.signUpPassword);
+		console.log("User name:" + this.state.signUpUsername +" "+ "Email:" + this.state.signUpEmail + " " + "Password:" + this.state.signUpPassword + this.state.isLoading);
 	}
 	
 
@@ -104,8 +105,9 @@ class SignupModal extends Component{
 
 	render(props){
 		let hideModalClassName;
-		(this.state.viewSignUpModal) ? (hideModalClassName = "modal-container") : (hideModalClassName="hidden")
-		
+		let loaderClassName;
+		(this.state.viewSignUpModal) ? (hideModalClassName = "modal-container") : (hideModalClassName="hidden");
+		(this.state.isLoading) ? (loaderClassName = "loader-container flex-row") : (loaderClassName = "hidden ");
 		return(
 			<React.Fragment>
 				<div className={hideModalClassName}>
@@ -129,6 +131,10 @@ class SignupModal extends Component{
 						<div className='login-cancel-holder flex-row'>	
 							<button className='close-modal-btn modal-btn' onClick={this.hideModal}>Cancel</button>
 							<button className="submit-form-btn modal-btn" onClick={this.onSignUp}>Submit</button>
+						</div>
+						<div className={loaderClassName}>
+							<Spinner />
+							<p className='pleasewait-txt'>Please wait...</p>
 						</div>
 					</div>
 				</div>

@@ -1,10 +1,10 @@
 .spinner-loader {
-    border: 16px solid #f3f3f3;
-    border-top: 16px solid #3498db;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid lighten(black, 10%);
     border-radius: 50%;
-    width: 10em;
-    height: 10em;
-    animation: spin 2s linear infinite;
+    width: 1em;
+    height: 1em;
+    animation: spin 1s linear infinite;
 
     @keyframes spin {
         0% {
