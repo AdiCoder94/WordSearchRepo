@@ -60,7 +60,8 @@ class SignupModal extends Component{
 		this.setState({
 			isLoading:true
 		});
-
+		
+		console.log(this.state);
 		//post request to backend
 		fetch('api/account/signup',{
 			method: "POST",
@@ -72,27 +73,7 @@ class SignupModal extends Component{
 				email : signUpEmail,
 				password : signUpPassword
 			}),
-		})
-		// .then(res =>  JSON.parse(res))	
-		.then(res => res.text())
-		.then(text => console.log(text))
-		/*.then(json => {
-			console.log("json",json);
-			if(json.success){
-				this.setState({
-					signUpError : json.message,
-					isLoading : false,
-					signUpEmail : "",
-					signUpPassword : ""
-				})
-			}	
-			else{
-				this.setState({
-					signUpError : json.message,
-					isLoading : false
-				})
-			}
-		})*/
+		})		
 	}
 
 	// closing the modal on clicking Cancel
