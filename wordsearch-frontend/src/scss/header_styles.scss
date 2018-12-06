@@ -5,18 +5,43 @@
     background-color: #aaa;
     font-family: 'Open Sans Condensed-Bold';
 
-    .login-btn,.signup-btn{
+    .site-name {
+        flex-grow: 1;
+    }
+
+    .login-btn,
+    .signup-btn {
         height: 2em;
         width: 4em;
         font-family: "Open Sans Condensed-Bold";
         border-radius: 0.3em;
         font-size: 1.1em;
     }
-    .login-btn{
-        margin-left:1em;
+
+    .login-btn {
+        margin-left: 1em;
     }
 }
 
+//member header
+.search-word-text {
+    margin-right: 0.3em;
+}
 
+.search-newword-textfield {
+    margin-right: 1em;
+    width: 20em;
+}
 
-    
+a {
+    text-decoration: none;
+
+    .enter-newword-link {
+        color: black;
+    }
+
+    &:hover {
+        text-decoration: underline;
+
+    }
+}

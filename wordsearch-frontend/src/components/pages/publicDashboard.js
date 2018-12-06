@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 
+
 import '../../scss/base_styles.scss';
 import '../../scss/article_styles.scss';
 
 import Header from '../Components/header';
 import ElementOfStory from '../Components/ElementsOfStory';
 import Routes from '../../routes';
-
-
 
 class PublicDashboard extends Component {
   render() {

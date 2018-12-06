@@ -8,8 +8,8 @@ import StoryConflict from './components/Pages/Conflict';
 import StoryCharacter from './components/Pages/Characters';
 import StoryTheme from './components/Pages/Theme';
 import StoryPlot from './components/Pages/Plot';
-import SignUp from './components/Pages/SignUp';
 import MemberHeader from './components/Components/memberHeader';
+import EnterNewWord from './components/Pages/enterNewWord';
 
 
 function Routes(){
@@ -22,6 +22,7 @@ function Routes(){
 			<Route path='/theme' component={StoryTheme} exact />
 			<Route path='/plot' component={StoryPlot} exact />
 			<Route path='/memberdashboard' component={MemberHeader} exact />
+			<Route path='/new_entry' component={EnterNewWord} exact />
 		</React.Fragment>
 	)
 }
