@@ -2,14 +2,14 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 
-import PublicDashboard from './components/publicDashboard';
-import StorySetting from './components/pages/Setting';
-import StoryConflict from './components/pages/Conflict';
-import StoryCharacter from './components/pages/Characters';
-import StoryTheme from './components/pages/Theme';
-import StoryPlot from './components/pages/Plot';
-import SignUp from './components/pages/SignUp';
-import MemberHeader from './components/memberHeader';
+import PublicDashboard from './components/Pages/publicDashboard';
+import StorySetting from './components/Pages/Setting';
+import StoryConflict from './components/Pages/Conflict';
+import StoryCharacter from './components/Pages/Characters';
+import StoryTheme from './components/Pages/Theme';
+import StoryPlot from './components/Pages/Plot';
+import SignUp from './components/Pages/SignUp';
+import MemberHeader from './components/Components/memberHeader';
 
 
 function Routes(){

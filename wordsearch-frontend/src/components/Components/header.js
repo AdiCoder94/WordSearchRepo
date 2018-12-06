@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import '../scss/base_styles.scss';
-import '../scss/header_styles.scss';
+import '../../scss/base_styles.scss';
+import '../../scss/header_styles.scss';
 
-import LoginModal from './LoginModal';
-import SignUpModal from './SignupModal';
+import LoginModal from '../Modals/LoginModal';
+import SignUpModal from '../Modals/SignupModal';
 
 class Header extends Component{
 	constructor(props){

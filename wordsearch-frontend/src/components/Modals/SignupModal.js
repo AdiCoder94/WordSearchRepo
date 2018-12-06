@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import 'whatwg-fetch';
 
-import Spinner from "./spinner";
+import Spinner from "../Components/spinner";
 
-import '../scss/base_styles.scss';
-import '../scss/article_styles.scss';
+import '../../scss/base_styles.scss';
+import '../../scss/article_styles.scss';
 
 class SignupModal extends Component{
 	constructor(props){

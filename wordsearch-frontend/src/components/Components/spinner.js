@@ -1,5 +1,5 @@
 import React from 'react';
-import '../scss/spinner_style.scss';
+import '../../scss/spinner_style.scss';
 
 const Spinner = () =>(
 	<React.Fragment>

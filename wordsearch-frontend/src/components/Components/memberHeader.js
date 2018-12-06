@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import '../scss/base_styles.scss';
-import '../scss/header_styles.scss';
+import '../../scss/base_styles.scss';
+import '../../scss/header_styles.scss';
 
 class MemberHeader extends Component{
 	render(){

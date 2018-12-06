@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../../scss/article_styles.scss';
 
-import Header from '../header';
-import ElementOfStory from '../ElementsOfStory';
+import Header from '../Components/header';
+import ElementOfStory from '../Components/ElementsOfStory';
 
 class StoryConflict extends Component{
 	render(){
