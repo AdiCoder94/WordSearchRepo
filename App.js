@@ -9,13 +9,18 @@ var app = express();
 // connecting to mongodb
 var dbConnect = mongoose.connect('mongodb://AdityaP:wordsearch2018@ds011298.mlab.com:11298/wordsearchdb');
 mongoose.Promise = global.Promise; 
+var connection = mongoose.connection;
+connection.on('connected', function(){
+	console.log('connected to database');
+});
+
 
 // importing the router
 const routes = require('./Routes/api.js');
 
 //initialize in the middlewares
 app.use(bodyParser.json()); 
-app.use('/api',routes);
+app.use('/api', routes);
 app.use(function(err, req, res, next) {
     res.status(422).send({ error: err.message });
 })

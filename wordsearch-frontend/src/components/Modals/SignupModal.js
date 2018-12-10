@@ -17,12 +17,14 @@ class SignupModal extends Component{
 			signUpUsername:"",
 			signUpEmail:'',
 			signUpPassword:'',			
+			signUpPasswordConfirm:'',			
 			token:''
 		}
 		this.hideModal = this.hideModal.bind(this);
 		this.onTextboxChangeUserName = this.onTextboxChangeUserName.bind(this);
 		this.onTextboxChangeSignUpEmail = this.onTextboxChangeSignUpEmail.bind(this);
 		this.onTextboxChangeSignUpPassword = this.onTextboxChangeSignUpPassword.bind(this);		
+		this.onTextboxChangeSignUpPasswordConfirm = this.onTextboxChangeSignUpPasswordConfirm.bind(this);		
 		this.onSignUp = this.onSignUp.bind(this);
 	}
 
@@ -44,70 +46,117 @@ class SignupModal extends Component{
 		})
 	}
 
-	componentDidUpdate(){
-		console.log("User name:" + this.state.signUpUsername +" "+ "Email:" + this.state.signUpEmail + " " + "Password:" + this.state.signUpPassword + this.state.isLoading);
+	onTextboxChangeSignUpPasswordConfirm(e){
+		this.setState({
+			signUpPasswordConfirm:e.target.value
+		})
 	}
-	
+
+	componentDidMount(){
+		this.setState({
+			isLoading:false
+		});
+	}
 
 	onSignUp(){
 		// grabbing the state
 		const {
 			signUpUsername,
 			signUpEmail,
-			signUpPassword
+			signUpPassword,
+			signUpPasswordConfirm
 		} = this.state;
 
 		this.setState({
 			isLoading:true
 		});
 		
-		console.log(this.state);
+		//passwords not matching scenario
+		if(signUpPassword !== signUpPasswordConfirm){
+			this.setState({
+				isLoading:false
+			});
+			console.log("emails are not matching");
+		}
+		else {
+			console.log("emails are matching");
+		}	
+
 		//post request to backend
 		fetch('api/account/signup',{
 			method: "POST",
 			headers: {
-				"Content-type" : "application/json"
+				"Content" : "application/json"
 			},
 			body:JSON.stringify({
 				username : signUpUsername,
 				email : signUpEmail,
 				password : signUpPassword
-			}),
-		})		
+			})
+		})
+		.then(res => res.json())
+		.then(json => {
+			if(json.success){
+				this.setState({
+					signUpError:json.message,
+					signUpEmail:'',
+					signUpPassword:'',
+					isLoading:false
+				});
+				console.log( "Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + this.state.signUpError )
+			}
+			else{
+				this.setState({
+					isLoading:false,
+					signUpError:json.message
+				});	
+				console.log( "Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + this.state.signUpError )
+			}
+		})	
 	}
 
 	// closing the modal on clicking Cancel
 	hideModal(){
-		this.setState(state =>({
-				viewSignUpModal:false
-			})
-		)
+		this.setState({
+			viewSignUpModal:false
+		})
 	}
 
 	render(props){
 		let hideModalClassName;
 		let loaderClassName;
+		let signUpErrorDisp;
 		(this.state.viewSignUpModal) ? (hideModalClassName = "modal-container") : (hideModalClassName="hidden");
 		(this.state.isLoading) ? (loaderClassName = "loader-container flex-row") : (loaderClassName = "hidden ");
+		const {
+			viewSignUpModal,
+			isLoading,
+			signUpError,			
+			signUpUsername,
+			signUpEmail,
+			signUpPassword,	
+			signUpPasswordConfirm,		
+			token	
+		} = this.state;
 		return(
 			<React.Fragment>
 				<div className={hideModalClassName}>
 					<div className="signup-modal-content flex-column">
 						<div className="username-section flex-row">	
 							<p className="username-subheading">User name:</p>
-							<input type='text' onChange={this.onTextboxChangeUserName} />
+							<input type='text' onChange={this.onTextboxChangeUserName} value={signUpUsername} />
 						</div>
 						<div className="email-section flex-row">	
 							<p className="email-subheading">Email:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpEmail} />
+							<input type='text' onChange={this.onTextboxChangeSignUpEmail} value={signUpEmail} />
 						</div>
 						<div className="password-section flex-row">
 							<p className="password-subheading">Password:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpPassword} />
+							<input type='text' onChange={this.onTextboxChangeSignUpPassword} value={signUpPassword} />
 						</div>
 						<div className="confirm-password-section flex-row">
 							<p className="confirm-password-subheading">Confirm password:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpPassword} />
+							<input type='text' onChange={this.onTextboxChangeSignUpPasswordConfirm} value={signUpPasswordConfirm}/>
 						</div>
 						<div className='login-cancel-holder flex-row'>	
 							<button className='close-modal-btn modal-btn' onClick={this.hideModal}>Cancel</button>
@@ -116,6 +165,9 @@ class SignupModal extends Component{
 						<div className={loaderClassName}>
 							<Spinner />
 							<p className='pleasewait-txt'>Please wait...</p>
+						</div>
+						<div className="error-display">
+							<p className='error-txt'>{this.state.signUpError}</p>
 						</div>
 					</div>
 				</div>

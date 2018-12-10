@@ -18,7 +18,7 @@ class Header extends Component{
 	}
 
 	showLoginModal(){
-		if((this.state.viewSignupModal == true) && (this.state.viewLoginModal == false)){
+		if((this.state.viewSignupModal === true) && (this.state.viewLoginModal === false)){
 			this.setState(state => ({
 					viewLoginModal:!this.state.viewLoginModal,
 					viewSignupModal:false
@@ -30,7 +30,7 @@ class Header extends Component{
 	}
 
 	showSignupModal(){
-		if((this.state.viewLoginModal == true) && (this.state.viewSignupModal == false)){
+		if((this.state.viewLoginModal === true) && (this.state.viewSignupModal === false)){
 			this.setState(state => ({
 					viewSignupModal:!this.state.viewSignupModal,
 					viewLoginModal:false
