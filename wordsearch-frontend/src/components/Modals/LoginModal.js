@@ -16,6 +16,7 @@ class LoginModal extends Component{
 		this.hideModal = this.hideModal.bind(this);
 		this.onTextboxChangeUserName = this.onTextboxChangeUserName.bind(this);
 		this.onTextboxChangeLogInPassword = this.onTextboxChangeLogInPassword.bind(this);
+		this.signIn = this.signIn.bind(this);
 	}
 
 	onTextboxChangeUserName(e){
@@ -32,6 +33,18 @@ class LoginModal extends Component{
 
 	componentDidUpdate(){
 		console.log("User name" + this.state.signUpUsername + " " + "password " + this.state.logInPassword)
+	}
+
+	onSignIn(){
+		// grab state
+		var {
+			signUpUsername,
+			logInPassword
+		} = this.state;
+
+		fetch('/api/account/signin',{
+
+		})
 	}
 
 	hideModal(){
@@ -58,7 +71,7 @@ class LoginModal extends Component{
 						</div>
 						<div className='login-cancel-holder flex-row'>	
 							<button className='close-modal-btn modal-btn' onClick={this.hideModal}>Cancel</button>
-							<button className="submit-form-btn modal-btn">Login</button>
+							<button className="submit-form-btn modal-btn" onClick={this.onSignIn} >Login</button>
 						</div>
 					</div>
 				</div>

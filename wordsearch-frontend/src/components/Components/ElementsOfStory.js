@@ -7,8 +7,7 @@ import '../../scss/article_styles.scss';
 function ElementOfStory(){
 	return(
 		<React.Fragment>
-			<div className="elementstory-container">
-				<h2 className='section-heading'>Elements of a story</h2>
+			<div className="elementstory-container">				
 				<ul className='element-of-story-list'>	
 					<li><Link to='/setting'>Setting</Link></li>
 					<li><Link to='/character'>Character</Link></li>

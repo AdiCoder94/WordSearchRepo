@@ -16,7 +16,7 @@ const SiteMember = require("../Models/members.model");
 //API for posting email and password
 router.post('/account/signup',(req, res, next) => {
 	const { body } = req;
-	const { email, password, username } = body;
+	var { email, password, username } = body;
 
     // empty input field scenarios
 	if (!email) {
@@ -85,12 +85,12 @@ router.post('/account/signup',(req, res, next) => {
 		}
 	)
 	// saving the new user
-	const newMember = new SiteMember();
+	var newMember = new SiteMember();
 
 	// allocating credentials
 	newMember.username = username;
 	newMember.email = email;
-	newMember.password = password.generateHash(password);
+	newMember.password = newMember.generateHash(password);
 
 	newMember.save((err, user) => {
 		if (err){
@@ -106,6 +106,42 @@ router.post('/account/signup',(req, res, next) => {
 			})
 		}
 	});
+})
+
+// API for sign in
+router.post('/account/signin',(req, res, next) => {
+	var { body } = req;
+	var { username, password } = body;
+
+	if (!username) {
+      return res.send({
+        success: false,
+        message: 'Error: Email cannot be blank.'
+      });
+    }
+    if (!password) {
+      return res.send({
+        success: false,
+        message: 'Error: Password cannot be blank.'
+      });
+    }
+
+    SiteMember.find(
+    	{ username:username }, (err, user) => {
+	    	if(err){
+	    		return res.send({
+	    			success:false,
+	    			error:"Error:Server error"
+	    		});
+	    	}	
+	    	else if(user.length !=1){
+	    		return res.send({
+	    			success:false,
+	    			error:"Error:Invalid"
+	    		});
+	    	}
+    	}	   
+	)
 })
 
 //Sample API 

@@ -9,17 +9,19 @@ class StoryConflict extends Component{
 		return(
 			<React.Fragment>
 				<Header />
-				<div className="article-container flex-row">
-              	  <div className='article-left-section'>
-		            <ElementOfStory />
-		          </div>  
-		          <div className='article-right-section'>
-					<div className="elementstory-desc-container">
-						<h2 className='section-heading'>Conflict</h2>
+	   			<div className='site-article-container'>
+		          <h2 className='section-heading'>Elements of a story</h2>
+		          <hr />
+		          <div className="article-container flex-row">
+		            <div className='article-left-section'>
+		              <ElementOfStory />
+		            </div>  
+		            <div className='article-right-section'>
+		            	<h2 className='section-heading'>Conflict</h2>
 						<hr />
-					</div>	
+		            </div>
 		          </div>
-    			</div>
+        		</div>
 			</React.Fragment>
 		)
 	}	

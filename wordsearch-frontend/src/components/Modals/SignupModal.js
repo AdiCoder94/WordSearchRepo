@@ -24,7 +24,7 @@ class SignupModal extends Component{
 		this.onTextboxChangeUserName = this.onTextboxChangeUserName.bind(this);
 		this.onTextboxChangeSignUpEmail = this.onTextboxChangeSignUpEmail.bind(this);
 		this.onTextboxChangeSignUpPassword = this.onTextboxChangeSignUpPassword.bind(this);		
-		this.onTextboxChangeSignUpPasswordConfirm = this.onTextboxChangeSignUpPasswordConfirm.bind(this);		
+		this.onTextboxChangeSignUpPasswordConfirm = this.onTextboxChangeSignUpPasswordConfirm.bind(this);
 		this.onSignUp = this.onSignUp.bind(this);
 	}
 
@@ -60,7 +60,7 @@ class SignupModal extends Component{
 
 	onSignUp(){
 		// grabbing the state
-		const {
+		var {
 			signUpUsername,
 			signUpEmail,
 			signUpPassword,
@@ -95,22 +95,23 @@ class SignupModal extends Component{
 			})
 		})
 		.then(res => res.json())
+		.then(res => console.log(res.stringify()))
 		.then(json => {
 			if(json.success){
 				this.setState({
 					signUpError:json.message,
-					signUpEmail:'',
-					signUpPassword:'',
+					signUpEmail:"",
+					signUpPassword:"",
 					isLoading:false
 				});
-				console.log( "Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + this.state.signUpError )
+				console.log( "Success Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + this.state.signUpError )
 			}
 			else{
 				this.setState({
 					isLoading:false,
 					signUpError:json.message
 				});	
-				console.log( "Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + this.state.signUpError )
+				console.log( " Fail Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + this.state.signUpError )
 			}
 		})	
 	}
@@ -125,10 +126,9 @@ class SignupModal extends Component{
 	render(props){
 		let hideModalClassName;
 		let loaderClassName;
-		let signUpErrorDisp;
 		(this.state.viewSignUpModal) ? (hideModalClassName = "modal-container") : (hideModalClassName="hidden");
 		(this.state.isLoading) ? (loaderClassName = "loader-container flex-row") : (loaderClassName = "hidden ");
-		const {
+		var {
 			viewSignUpModal,
 			isLoading,
 			signUpError,			
@@ -144,15 +144,15 @@ class SignupModal extends Component{
 					<div className="signup-modal-content flex-column">
 						<div className="username-section flex-row">	
 							<p className="username-subheading">User name:</p>
-							<input type='text' onChange={this.onTextboxChangeUserName} value={signUpUsername} />
+							<input type='text' onChange={this.onTextboxChangeUserName} value={this.state.signUpUsername} />
 						</div>
 						<div className="email-section flex-row">	
 							<p className="email-subheading">Email:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpEmail} value={signUpEmail} />
+							<input type='text' onChange={this.onTextboxChangeSignUpEmail} value={this.state.signUpEmail} />
 						</div>
 						<div className="password-section flex-row">
 							<p className="password-subheading">Password:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpPassword} value={signUpPassword} />
+							<input type='text' onChange={this.onTextboxChangeSignUpPassword} value={this.state.signUpPassword} />
 						</div>
 						<div className="confirm-password-section flex-row">
 							<p className="confirm-password-subheading">Confirm password:</p>

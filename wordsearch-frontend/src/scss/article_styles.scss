@@ -1,6 +1,10 @@
-.article-container {
-    justify-content: flex-start;
+.site-article-container {
     padding: 0 6em;
+}
+
+.section-heading {
+    font-family: "Open Sans Condensed-Bold";
+    margin-bottom: -0.3em;
 }
 
 //element of story section styles
@@ -27,6 +31,11 @@
             ;
         }
     }
+}
+
+//left section styles
+.article-left-section {
+    width: 15%;
 }
 
 //routes container
@@ -127,14 +136,14 @@
         background-color: #ccc;
 
         .username-section {
-            width:100%;
+            width: 100%;
             height: 3em;
             align-items: center;
             justify-content: space-between;
         }
 
         .password-section {
-            width:100%;
+            width: 100%;
             align-items: center;
             justify-content: space-between;
             margin-left: 1em;
@@ -144,7 +153,7 @@
 
         .confirm-password-section {
             justify-content: space-between;
-            width:100%;
+            width: 100%;
             align-items: center;
             margin-left: 1em;
             margin-right: 0.5em;
@@ -153,7 +162,7 @@
 
         .email-section {
             justify-content: space-between;
-            width:100%;
+            width: 100%;
             align-items: center;
             margin-left: 1em;
             margin-right: 0.5em;
@@ -190,17 +199,19 @@
                 background-color: #bbb;
             }
         }
-        .error-display{
+
+        .error-display {
             font-family: "Open Sans Condensed";
-            color:red;
+            color: red;
         }
     }
 }
 
 //loader container styles
-.loader-container{
+.loader-container {
     align-items: center;
-    .pleasewait-txt{
+
+    .pleasewait-txt {
         font-family: "Open Sans Condensed-Bold";
         margin-left: 0.4em;
     }
