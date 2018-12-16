@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
 import MemberHeader from "../Components/memberHeader";
+import NewWordFormComponent from "../Components/newWordFormComponent";
 
 class EnterNewWord extends Component{
 	render(){
 		return(
 			<React.Fragment>
-				<p>this is new entry</p>
+				<MemberHeader />
+				<NewWordFormComponent />
 			</React.Fragment>
 		)
 	}

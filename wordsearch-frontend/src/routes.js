@@ -22,7 +22,7 @@ function Routes(){
 			<Route path='/theme' component={StoryTheme} exact />
 			<Route path='/plot' component={StoryPlot} exact />
 			<Route path='/memberdashboard' component={MemberHeader} exact />
-			<Route path='/new_entry' component={EnterNewWord} exact />
+			<Route path='/memberdashboard/new_entry' component={EnterNewWord} exact />
 		</React.Fragment>
 	)
 }

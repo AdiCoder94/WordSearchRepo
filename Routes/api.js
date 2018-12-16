@@ -4,6 +4,7 @@ const router = express.Router();
 
 //importing Members model
 const SiteMember = require("../Models/members.model");
+const EnteredWord = require("../Models/word.model");
 
 /*
 	This is the SignUp API end point. This API is capable of:-
@@ -84,6 +85,7 @@ router.post('/account/signup',(req, res, next) => {
 			}
 		}
 	)
+
 	// saving the new user
 	var newMember = new SiteMember();
 
@@ -134,7 +136,7 @@ router.post('/account/signin',(req, res, next) => {
 	    			error:"Error:Server error"
 	    		});
 	    	}	
-	    	else if(user.length !=1){
+	    	else if(user.length != 1){
 	    		return res.send({
 	    			success:false,
 	    			error:"Error:Invalid"
@@ -142,6 +144,106 @@ router.post('/account/signin',(req, res, next) => {
 	    	}
     	}	   
 	)
+})
+
+//API for entering word
+router.post('/member/enterword', (req, res, next) => {
+	var { body } = req;
+	var { enteredWord, partOfSpeech, partOfSpeechSubCategory, connotation, root, languageOfOrigin, meaning } = body;
+
+	if(!partOfSpeech){
+		return res.send({
+			message:"You need to enter part of speech",
+			success:false
+		})
+	}
+	else if(!enteredWord){
+		return res.send({
+			message:"No word entered",
+			success:false
+		})
+	}
+	else if(!partOfSpeechSubCategory){
+		return res.send({
+			message:"You need to enter subcategory",
+			success:false
+		})
+	}
+	else if(!connotation){
+		return res.send({
+			message:"You need to enter connotation of the word",
+			success:false
+		})
+	}
+	else if(!root){
+		return res.send({
+			message:"You need to enter root",
+			success:false
+		})
+	}
+	else if(!languageOfOrigin){
+		return res.send({
+			message:"You need to enter language of origin",
+			success:false
+		})
+	}
+	else if(!meaning){
+		return res.send({
+			message:"You need to enter meaning",
+			success:false
+		})
+	}
+
+	enteredWord = enteredWord.toLowerCase();
+	enteredWord = enteredWord.trim();
+
+	/*	steps: 
+		1.Verify the word doesn't exist.
+		2.Save
+	*/
+	EnteredWord.find(
+		{ enteredWord: enteredWord }, ( err, existingWord ) => {
+			if (err){
+				return res.send({
+					success:false,
+					message:"Server error"
+				});
+			}
+			else if (existingWord.length > 0){
+				return res.send({
+					success:false,
+					message:"Word already exists in the database"
+				});
+			}
+		}
+	)
+
+	// Saving the new word
+	var newWord = new EnteredWord();
+
+	// allocating object variables
+	newWord.enteredWord = enteredWord; 
+	newWord.partOfSpeech = partOfSpeech; 
+	newWord.partOfSpeechSubCategory = partOfSpeechSubCategory; 
+	newWord.connotation = connotation; 
+	newWord.root = root; 
+	newWord.languageOfOrigin = languageOfOrigin; 
+	newWord.meaning = meaning; 
+
+	newWord.save((err, word) => {
+		if (err){
+			return res.send({
+				success:false,
+				message:"Server error",
+			})
+		}
+		else if (word){
+			return res.send({
+				success:true,
+				message:"New word entered in the database"
+			})
+		}
+	});
 })
 
 //Sample API 

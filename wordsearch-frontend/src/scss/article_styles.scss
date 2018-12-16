@@ -216,3 +216,95 @@
         margin-left: 0.4em;
     }
 }
+
+//new word form
+.form-article-container {
+
+    .new-word-form {
+        padding: 0 auto;
+        justify-content: space-between;
+        display: inline-block;
+
+        p,
+        span {
+            font-size: 1.1em;
+            font-family: "Open Sans Condensed-Bold";
+        }
+
+        .etymology-column,
+        .word-column {
+            margin-right: 1em;
+        }
+
+        .etymology-column {
+            .inputfield {
+                bottom-margin: 0.5em;
+            }
+
+        }
+
+        .form-bottom-section {
+            p {
+                margin: 0;
+            }
+
+            .meaning-textarea {
+                width: 45em;
+                height: 10em;
+            }
+        }
+    }
+
+    .word-preview-section {
+        font-family: "Open Sans Condensed";
+        margin-left: 1em;
+        width: 100%;
+
+        .word-partofspeech {
+            width: 100%;
+            margin-bottom: -0.5em;
+            border-bottom: 1px solid black;
+
+            h1 {
+                margin: 0;
+            }
+
+            p {
+                margin-bottom: 0;
+            }
+
+            .connotation-txt {
+                margin-left: auto;
+            }
+
+            .noun-type-txt {
+                font-family: "Open Sans Condensed-Bold";
+
+                &:before {
+                    content: "(";
+                }
+
+                &:after {
+                    content: ")";
+                }
+            }
+        }
+
+        .etymology-section {
+            p {
+                margin: 0;
+            }
+            .originlanguage-txt{
+                margin-top:1em;
+            }
+        }
+        .meaning-section{
+            .meaning-heading-txt{
+                margin-bottom: 0;
+            }
+            .meaning-desc-txt{
+                margin-top:0;
+            }
+        }
+    }
+}

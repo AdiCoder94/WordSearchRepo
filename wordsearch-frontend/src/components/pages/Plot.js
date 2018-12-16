@@ -17,7 +17,7 @@ function StoryPlot(){
             		</div>  
             		<div className='article-right-section'>
             			<h2 className='section-heading'>Plot</h2>
-						<hr />
+					      	<hr />
             		</div>
           		</div>
 			</div>

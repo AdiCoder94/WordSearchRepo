@@ -95,8 +95,8 @@ class SignupModal extends Component{
 			})
 		})
 		.then(res => res.json())
-		.then(res => console.log(res.stringify()))
 		.then(json => {
+			console.log(json);
 			if(json.success){
 				this.setState({
 					signUpError:json.message,
@@ -104,7 +104,7 @@ class SignupModal extends Component{
 					signUpPassword:"",
 					isLoading:false
 				});
-				console.log( "Success Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + this.state.signUpError )
+				console.log( "Success Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + this.state.signUpError)
 			}
 			else{
 				this.setState({
@@ -144,19 +144,19 @@ class SignupModal extends Component{
 					<div className="signup-modal-content flex-column">
 						<div className="username-section flex-row">	
 							<p className="username-subheading">User name:</p>
-							<input type='text' onChange={this.onTextboxChangeUserName} value={this.state.signUpUsername} />
+							<input type='text' onChange={this.onTextboxChangeUserName}  />
 						</div>
 						<div className="email-section flex-row">	
 							<p className="email-subheading">Email:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpEmail} value={this.state.signUpEmail} />
+							<input type='text' onChange={this.onTextboxChangeSignUpEmail} />
 						</div>
 						<div className="password-section flex-row">
 							<p className="password-subheading">Password:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpPassword} value={this.state.signUpPassword} />
+							<input type='text' onChange={this.onTextboxChangeSignUpPassword} />
 						</div>
 						<div className="confirm-password-section flex-row">
 							<p className="confirm-password-subheading">Confirm password:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpPasswordConfirm} value={signUpPasswordConfirm}/>
+							<input type='text' onChange={this.onTextboxChangeSignUpPasswordConfirm} />
 						</div>
 						<div className='login-cancel-holder flex-row'>	
 							<button className='close-modal-btn modal-btn' onClick={this.hideModal}>Cancel</button>
