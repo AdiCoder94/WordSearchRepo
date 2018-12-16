@@ -56,8 +56,8 @@ class NewWordFormComponent extends Component{
 								<p className='connotation-txt'>Connotation</p>
 							</div>
 							<div className="etymology-section flex-column">
-								<p className='originlanguage-txt'>Language of origin</p>
-								<p className='rootword-txt'>Root word</p>
+								<p className='originlanguage-txt'><b>Language of origin:</b>Hindi</p>
+								<p className='rootword-txt'><b>Root word:</b>Hello</p>
 							</div>
 							<div className='meaning-section'>
 								<h4 className='meaning-heading-txt'>Meaning:</h4>
