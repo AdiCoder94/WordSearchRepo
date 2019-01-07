@@ -55,27 +55,26 @@ class SignupModal extends Component{
 	componentDidMount(){
 		this.setState({
 			isLoading:false
-		});
+		})
 	}
 
 	onSignUp(){
+
 		// grabbing the state
 		var {
 			signUpUsername,
 			signUpEmail,
 			signUpPassword,
-			signUpPasswordConfirm
-		} = this.state;
+			signUpPasswordConfirm,
+			isLoading
+		} = this.state		
 
-		this.setState({
-			isLoading:true
-		});
-		
+	
 		//passwords not matching scenario
-		if(signUpPassword !== signUpPasswordConfirm){
+		if (signUpPassword !== signUpPasswordConfirm){
 			this.setState({
 				isLoading:false
-			});
+			})
 			console.log("emails are not matching");
 		}
 		else {
@@ -83,10 +82,10 @@ class SignupModal extends Component{
 		}	
 
 		//post request to backend
-		fetch('api/account/signup',{
-			method: "POST",
+		fetch('/api/account/signup',{
+			method: "POST", 
 			headers: {
-				"Content" : "application/json"
+				"Content-Type" : "application/json"
 			},
 			body:JSON.stringify({
 				username : signUpUsername,
@@ -94,26 +93,30 @@ class SignupModal extends Component{
 				password : signUpPassword
 			})
 		})
-		.then(res => res.json())
-		.then(json => {
+		// .then(res => res.json())
+		.then(res => res.text())
+		.then(res => console.log(res.text))
+		/*.then(json => {
 			console.log(json);
 			if(json.success){
 				this.setState({
 					signUpError:json.message,
+					signUpUsername:"",
 					signUpEmail:"",
 					signUpPassword:"",
+					signUpPasswordConfirm:"",
 					isLoading:false
-				});
-				console.log( "Success Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + this.state.signUpError)
+				})
+				console.log( "Success Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + this.state.signUpError);
 			}
 			else{
 				this.setState({
 					isLoading:false,
 					signUpError:json.message
 				});	
-				console.log( " Fail Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + this.state.signUpError )
+				console.log( " Fail Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + " " + this.state.signUpError )
 			}
-		})	
+		})	*/
 	}
 
 	// closing the modal on clicking Cancel
@@ -128,35 +131,25 @@ class SignupModal extends Component{
 		let loaderClassName;
 		(this.state.viewSignUpModal) ? (hideModalClassName = "modal-container") : (hideModalClassName="hidden");
 		(this.state.isLoading) ? (loaderClassName = "loader-container flex-row") : (loaderClassName = "hidden ");
-		var {
-			viewSignUpModal,
-			isLoading,
-			signUpError,			
-			signUpUsername,
-			signUpEmail,
-			signUpPassword,	
-			signUpPasswordConfirm,		
-			token	
-		} = this.state;
 		return(
 			<React.Fragment>
 				<div className={hideModalClassName}>
 					<div className="signup-modal-content flex-column">
 						<div className="username-section flex-row">	
 							<p className="username-subheading">User name:</p>
-							<input type='text' onChange={this.onTextboxChangeUserName}  />
+							<input type='text' onChange={this.onTextboxChangeUserName} value={this.state.signUpUsername} />
 						</div>
 						<div className="email-section flex-row">	
 							<p className="email-subheading">Email:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpEmail} />
+							<input type='text' onChange={this.onTextboxChangeSignUpEmail} value={this.state.signUpEmail} />
 						</div>
 						<div className="password-section flex-row">
 							<p className="password-subheading">Password:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpPassword} />
+							<input type='text' onChange={this.onTextboxChangeSignUpPassword} value={this.state.signUpPassword} />
 						</div>
 						<div className="confirm-password-section flex-row">
 							<p className="confirm-password-subheading">Confirm password:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpPasswordConfirm} />
+							<input type='text' onChange={this.onTextboxChangeSignUpPasswordConfirm} value={this.state.onTextboxChangeSignUpPasswordConfirm} />
 						</div>
 						<div className='login-cancel-holder flex-row'>	
 							<button className='close-modal-btn modal-btn' onClick={this.hideModal}>Cancel</button>

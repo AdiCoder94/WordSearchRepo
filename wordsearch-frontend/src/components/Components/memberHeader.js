@@ -14,7 +14,7 @@ class MemberHeader extends Component{
 		        <span className='search-word-text'>Search words:</span><input className='search-newword-textfield'></input>
 		        <Link to="/memberdashboard/new_entry"><p className='enter-newword-link'>Enter new word</p></Link>
 		        <div className="btn-holder">          
-			        <button className='login-btn'>Logout</button> 	  
+			        <button className='login-btn site-btn'>Logout</button> 	  
 		        </div>	        
 		      </div>
 			</React.Fragment>

@@ -51,8 +51,8 @@ class Header extends Component{
 		      <div className="site-header flex-row">
 		        <h2 className='site-name'>Word search</h2>
 		        <div className="btn-holder">
-			        <button className='signup-btn' onClick={this.showSignupModal}>Sign up</button>	        
-			        <button className='login-btn' onClick={this.showLoginModal}>Login</button>	      	  
+			        <button className='signup-btn site-btn' onClick={this.showSignupModal}>Sign up</button>	        
+			        <button className='login-btn site-btn' onClick={this.showLoginModal}>Login</button>	  
 		        </div>	        
 		      </div>
 		      {SignupModal}

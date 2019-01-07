@@ -48,6 +48,9 @@ class NewWordFormComponent extends Component{
 								<textarea className='meaning-textarea'>
 								</textarea>
 							</div>
+							<div className='btn-holder'>
+								<button className='view-word-preview-btn site-btn'>Preview</button>
+							</div>
 						</div>
 						<div className='word-preview-section flex-column'>
 							<div className='word-partofspeech flex-row'>

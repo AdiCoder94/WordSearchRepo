@@ -16,7 +16,7 @@ class LoginModal extends Component{
 		this.hideModal = this.hideModal.bind(this);
 		this.onTextboxChangeUserName = this.onTextboxChangeUserName.bind(this);
 		this.onTextboxChangeLogInPassword = this.onTextboxChangeLogInPassword.bind(this);
-		this.signIn = this.signIn.bind(this);
+		this.onSignIn = this.onSignIn.bind(this);
 	}
 
 	onTextboxChangeUserName(e){

@@ -253,6 +253,13 @@
                 height: 10em;
             }
         }
+
+        .btn-holder {
+            .view-word-preview-btn {
+                display: block;
+                margin-left: auto;
+            }
+        }
     }
 
     .word-preview-section {

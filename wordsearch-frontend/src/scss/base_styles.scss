@@ -1,18 +1,27 @@
 @import './fontstyles.scss';
 
- .flex-row {
-     display: flex;
-     flex-direction: row;
- }
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
 
- .flex-column {
-     display: flex;
-     flex-direction: column;
- }
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
 
- .hasborder {
-     border: 1px solid black;
- }
- .hidden{
- 	display: none;
- }
+.hasborder {
+    border: 1px solid black;
+}
+
+.hidden {
+    display: none;
+}
+
+.site-btn {
+    height: 2em;
+    width: 4em;
+    font-family: "Open Sans Condensed-Bold";
+    border-radius: 0.3em;
+    font-size: 1.1em;
+}

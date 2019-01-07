@@ -3,6 +3,8 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
+var port = process.env.PORT || 4000;
+
 //starting the express app
 var app = express();
 
@@ -14,7 +16,6 @@ connection.on('connected', function(){
 	console.log('connected to database');
 });
 
-
 // importing the router
 const routes = require('./Routes/api.js');
 
@@ -22,10 +23,10 @@ const routes = require('./Routes/api.js');
 app.use(bodyParser.json()); 
 app.use('/api', routes);
 app.use(function(err, req, res, next) {
-    res.status(422).send({ error: err.message });
+    res.status(422).send({ error: err.message })
 })
 
 //listening to request 
 app.listen(4000,function(){
-	console.log("Listening at port 4000");
+	console.log("Listening to port: " + port);
 })
