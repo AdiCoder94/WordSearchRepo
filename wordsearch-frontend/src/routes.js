@@ -9,6 +9,7 @@ import StoryTheme from './components/Pages/Theme';
 import StoryPlot from './components/Pages/Plot';
 import MemberHeader from './components/Components/memberHeader';
 import EnterNewWord from './components/Pages/enterNewWord';
+import ViewAllWords from './components/Pages/viewAllWords';
 
 
 function Routes(){
@@ -21,6 +22,7 @@ function Routes(){
 			<Route path='/theme' component={StoryTheme} exact />
 			<Route path='/plot' component={StoryPlot} exact />
 			<Route path='/memberdashboard' component={MemberHeader} exact />
+			<Route path='/memberdashboard/viewallword' component={ViewAllWords} exact />
 			<Route path='/memberdashboard/new_entry' component={EnterNewWord} exact />
 		</React.Fragment>
 	)

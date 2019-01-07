@@ -242,7 +242,9 @@
             }
 
         }
-
+        .form-top-section{
+            justify-content: space-between;
+        }
         .form-bottom-section {
             p {
                 margin: 0;
@@ -316,5 +318,17 @@
                 margin-top: 0;
             }
         }
+    }
+}
+
+//view all word styles
+.alphabet-row{
+    justify-content: space-between;
+    h4{
+        font-family: "Open Sans Condensed-Bold";
+        margin-bottom: 0;
+    }
+    hr{
+        margin-top: 0;
     }
 }

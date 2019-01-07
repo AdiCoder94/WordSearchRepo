@@ -27,8 +27,9 @@
 a {
     text-decoration: none;
 
-    .enter-newword-link {
+    .enter-newword-link, .view-all-words-link {
         color: black;
+        margin-right: 0.5em;
     }
 
     &:hover {
