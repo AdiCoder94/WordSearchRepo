@@ -1,27 +1,7 @@
 import React, { Component } from 'react';
 
-function getWordData(){
-	
-}
 
 class NewWordFormComponent extends Component{
-	constructor(props){
-		super(props);
-		this.state = {
-			newWord:"",
-			originLang:"",
-			rootWord:"",
-			partOfSpeech:"",
-			subCategory:"",
-			wordConnotation:""
-		}
-		this.onTextboxChangeNewWord = this.onTextboxChangeNewWord.bind(this);
-		this.onTextboxChangeLanguageOfOrigin = this.onTextboxChangeLanguageOfOrigin.bind(this);
-		this.onTextboxChangeRootWord = this.onTextboxChangeRootWord.bind(this);
-		this.onTextboxChangePartOfSpeech = this.onTextboxChangePartOfSpeech.bind(this);
-		this.onTextboxChangeSubCategory = this.onTextboxChangeSubCategory.bind(this);
-		this.onTextboxChangeConnotation = this.onTextboxChangeConnotation.bind(this);
-	}
 
 	onTextboxChangeNewWord(e){
 		this.setState({
@@ -59,37 +39,37 @@ class NewWordFormComponent extends Component{
 		})
 	}
 
-	render(){
+	render(props){
 		return(
 			<React.Fragment>
 				<div className='new-word-form flex-column'>
 					<div className='form-top-section flex-row'>
 						<div className='word-column flex-column'>
 							<span className='subheading-text'>Word: </span>
-							<input className='enter-word-form' value={this.state.newWord} onChange={this.onTextboxChangeNewWord} />
+							<input className='enter-word-form'  onChange={(e) => this.props.onTextboxChangeNewWord(e.target.value)} />
 						</div>
 						<div className='etymology-column flex-column'>
 							<div className='inputfield flex-column'>
 								<span className='subheading-text'>Language of origin: </span>
-								<input className='enter-word-form' value={this.state.originLang} onChange={this.onTextboxChangeLanguageOfOrigin}/>
+								<input className='enter-word-form'  onChange={(e) => this.props.onTextboxChangeLanguageOfOrigin(e.target.value)}/>
 							</div>
 							<div className='inputfield flex-column'>
 								<span className='subheading-text'>Root word: </span>
-								<input className='enter-word-form' value={this.state.rootWord} onChange={this.onTextboxChangeRootWord} />
+								<input className='enter-word-form' onChange={(e) => this.props.onTextboxChangeRootWord(e.target.value)} />
 							</div>
 						</div>
 						<div className='grammar-column flex-column'>
 							<div className='inputfield flex-column'> 
 								<span className='subheading-text'>Part of speech: </span>
-								<input className='enter-word-form' value={this.state.partOfSpeech} onChange={this.onTextboxChangePartOfSpeech} />
+								<input className='enter-word-form' onChange={(e) => this.props.onTextboxChangePartOfSpeech(e.target.value)} />
 							</div>
 							<div className='inputfield flex-column'>
 								<span className='subheading-text'>Subcategory: </span>
-								<input className='enter-word-form' value={this.state.subCategory} onChange={this.onTextboxChangeSubCategory} />
+								<input className='enter-word-form' onChange={(e) => this.props.onTextboxChangeSubCategory(e.target.value)} />
 							</div>
 							<div className='inputfield flex-column'>
 								<span className='subheading-text'>Connotation: </span>
-								<input className='enter-word-form' value={this.state.wordConnotation} onChange={this.onTextboxChangeConnotation} />
+								<input className='enter-word-form' onChange={(e) => this.props.onTextboxChangeConnotation(e.target.value)} />
 							</div>
 						</div>
 					</div>
@@ -97,9 +77,6 @@ class NewWordFormComponent extends Component{
 						<p className='subheading-text'>Meaning: </p>
 						<textarea className='meaning-textarea'>
 						</textarea>
-					</div>
-					<div className='btn-holder'>
-						<button className='view-word-preview-btn site-btn'>Preview</button>
 					</div>
 				</div>											
 			</React.Fragment>
