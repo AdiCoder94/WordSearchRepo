@@ -242,9 +242,11 @@
             }
 
         }
-        .form-top-section{
+
+        .form-top-section {
             justify-content: space-between;
         }
+
         .form-bottom-section {
             p {
                 margin: 0;
@@ -314,19 +316,20 @@
     }
 }
 
-.view-word-preview-btn{
-display: block;
-margin-left: calc(50% - 3em);
+.view-word-preview-btn {
+    display: block;
 }
 
 //view all word styles
-.alphabet-row{
+.alphabet-row {
     justify-content: space-between;
-    h4{
+
+    h4 {
         font-family: "Open Sans Condensed-Bold";
         margin-bottom: 0;
     }
-    hr{
+
+    hr {
         margin-top: 0;
     }
 }

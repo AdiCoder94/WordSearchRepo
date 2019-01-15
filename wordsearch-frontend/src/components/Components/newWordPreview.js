@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 
 class WordPreview extends Component{
+	constructor(props){
+		super(props);	
+	}
+
+	componentDidUpdate(){
+		console.log("definition props" + this.props.definition);
+	}
 
 	render(){
 		return(
 			<React.Fragment>
 				<div className='word-preview-section flex-column'>
 					<div className='word-partofspeech flex-row'>
-						<h1 className='word-preview-txt'>New word</h1>
-						<p className='noun-type-txt'>part-of-speech-subcategory</p>
-						<p className='connotation-txt'>Connotation</p>
+						<h1 className='word-preview-txt'>{this.props.newWord}</h1>
+						<p className='noun-type-txt'>{this.props.subCategory} {this.props.partOfSpeech}</p>
+						<p className='connotation-txt'>{this.props.wordConnotation}</p>
 					</div>
 					<div className="etymology-section flex-column">
-						<p className='originlanguage-txt'><b>Language of origin:</b>Hindi</p>
-						<p className='rootword-txt'><b>Root word:</b>Hello</p>
+						<p className='originlanguage-txt'><b>Language of origin:</b>{this.props.originLang}</p>
+						<p className='rootword-txt'><b>Root word:</b>{this.props.rootWord}</p>
 					</div>
 					<div className='meaning-section'>
 						<h4 className='meaning-heading-txt'>Meaning:</h4>
-						<p className="meaning-desc-txt">Vestibulum massa nisl, sodales vitae ultricies vitae, placerat at erat. Phasellus quis tellus quis neque dictum condimentum. Etiam vehicula lorem eget urna pulvinar tempus. Integer rutrum enim eget ex iaculis imperdiet. Integer porta augue nulla, at auctor sapien interdum vitae. Aliquam porttitor aliquam nulla</p>
+						<p className="meaning-desc-txt">{this.props.definition}</p>
 					</div>
 				</div>
 			</React.Fragment>
