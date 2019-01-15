@@ -80,43 +80,6 @@ class SignupModal extends Component{
 		else {
 			console.log("emails are matching");
 		}	
-
-		//post request to backend
-		fetch('/api/account/signup',{
-			method: "POST", 
-			headers: {
-				"Content-Type" : "application/json"
-			},
-			body:JSON.stringify({
-				username : signUpUsername,
-				email : signUpEmail,
-				password : signUpPassword
-			})
-		})
-		// .then(res => res.json())
-		.then(res => res.text())
-		.then(res => console.log(res.text))
-		/*.then(json => {
-			console.log(json);
-			if(json.success){
-				this.setState({
-					signUpError:json.message,
-					signUpUsername:"",
-					signUpEmail:"",
-					signUpPassword:"",
-					signUpPasswordConfirm:"",
-					isLoading:false
-				})
-				console.log( "Success Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + this.state.signUpError);
-			}
-			else{
-				this.setState({
-					isLoading:false,
-					signUpError:json.message
-				});	
-				console.log( " Fail Email: " + this.state.signUpEmail +" Password " + this.state.signUpPassword + " " + this.state.signUpError )
-			}
-		})	*/
 	}
 
 	// closing the modal on clicking Cancel
