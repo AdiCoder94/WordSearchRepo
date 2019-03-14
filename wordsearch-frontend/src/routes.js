@@ -15,14 +15,14 @@ import ViewAllWords from './components/Pages/viewAllWords';
 function Routes(){
 	return(	
 		<React.Fragment>
-			<Route path='' component={PublicDashboard} exact />
+			<Route path='/' component={PublicDashboard} exact />
 			<Route path='/setting' component={StorySetting} exact />
 			<Route path='/conflict' component={StoryConflict} exact />
 			<Route path='/character' component={StoryCharacter} exact />
 			<Route path='/theme' component={StoryTheme} exact />
 			<Route path='/plot' component={StoryPlot} exact />
 			<Route path='/memberdashboard' component={MemberHeader} exact />
-			<Route path='/memberdashboard/viewallword' component={ViewAllWords} exact />
+			<Route path='/memberdashboard/viewallwords' component={ViewAllWords} exact />
 			<Route path='/memberdashboard/new_entry' component={EnterNewWord} exact />
 		</React.Fragment>
 	)

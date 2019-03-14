@@ -1,32 +1,44 @@
-// importing modules
+var compression = require('compression');
 var express = require('express');
-var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var mongoose = require("mongoose");
 
-var port = process.env.PORT || 4000;
+const port = process.env.PORT || 4000;
+const db = require('./config/constants').mongoURI;
 
-//starting the express app
-var app = express();
+// Express app configuration
+	//creating instance of express app
+	const app = express();
 
-// connecting to mongodb
-var dbConnect = mongoose.connect('mongodb://AdityaP:wordsearch2018@ds011298.mlab.com:11298/wordsearchdb');
-mongoose.Promise = global.Promise; 
-var connection = mongoose.connection;
-connection.on('connected', function(){
-	console.log('connected to database');
-});
+	// using compression module
+	app.use(compression());
 
-// importing the router
-const routes = require('./Routes/api.js');
+// Database configuration
+	//setting mongoose promise to global promise
+	mongoose.Promise = global.Promise;
 
-//initialize in the middlewares
-app.use(bodyParser.json()); 
-app.use('/api', routes);
-app.use(function(err, req, res, next) {
-    res.status(422).send({ error: err.message })
-})
+	//connecting to the database
+	mongoose
+	.connect(db, { useNewUrlParser:true })
+	.then(() => console.log("connected to the database"))
+	.catch((err) => console.log(err))
+	
+// Server configuration	
+	// serving static files
+	app.use('/static', express.static('public'))
 
-//listening to request 
-app.listen(4000,function(){
-	console.log("Listening to port: " + port);
-})
+	// initiating body parser for POST requests
+	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({extended:true}));
+
+// Router configuration
+	// importing the router
+	var router = require('./Routes/index')
+
+	// initiating router
+	app.use('/api', router)	
+
+//Listening to request
+	app.listen(port, () => {
+		console.log('This express app is listening to port number '+ port)
+	})

@@ -9,7 +9,7 @@ class MemberDashboard extends Component{
 	render(){
 		return(
 			<React.Fragment>
-				<MemberHeader />
+				<MemberDashboard />
 			</React.Fragment>
 		)
 	}
