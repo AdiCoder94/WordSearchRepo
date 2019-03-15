@@ -3,7 +3,8 @@ var router = express.Router();
 
 const User = require("../Models/members.model")
 
-router.post('/signup', function (req, res, next) {
+// creating route endpoint for signing up new users
+router.post('/signup', (req, res, next) => {
 
     var {
         email,
@@ -29,7 +30,7 @@ router.post('/signup', function (req, res, next) {
     username = username.trim();
 
     User.find({
-        email: email,
+        email: email
     }, (err, docs) => {
         if (err) {
             return res.send({
@@ -55,13 +56,13 @@ router.post('/signup', function (req, res, next) {
                     // creating in new user document in the database
                     const newMember = new User();
                     newMember.email = email;
-                    newMember.password = newMember.generateHash(req.body.password);
+                    newMember.password = password;
                     newMember.username = username;
                     newMember.save((err, user) => {
                         if (err) {
                             return res.send({
                                 success: false,
-                                message: "Server error"
+                                message: err
                             });
                         }
                         return res.send({
@@ -70,6 +71,46 @@ router.post('/signup', function (req, res, next) {
                         })
                     })
                 }
+            })
+        }
+    })
+})
+
+// creating route endpoints for logging in members
+router.post('/signin', (req, res, next) => {
+    var {
+        username,
+        password
+    } = req.body;
+
+    if (!password) {
+        return res.send({
+            message: "Password cannot be blank"
+        })
+    } else if (!username) {
+        return res.send({
+            message: "Username cannot be blank"
+        })
+    }
+
+    username = username.trim();
+
+    User.findOne({
+        username: username,
+    }, (err, user) => {
+        if (err) {
+            return res.send({
+                message: "Server error"
+            })
+        } else if (user) {
+            console.log(user);
+            console.log(password);
+            if (user.validPassword(password)) {
+                console.log("This is comparision from server " + user.validPassword(password))
+            } else(console.log("fuck this comparision"))
+        } else {
+            return res.send({
+                message: "User doesn't exist"
             })
         }
     })
