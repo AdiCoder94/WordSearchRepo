@@ -7,38 +7,37 @@ const port = process.env.PORT || 4000;
 const db = require('./config/constants').mongoURI;
 
 // Express app configuration
-	//creating instance of express app
-	const app = express();
+//creating instance of express app
+const app = express();
 
-	// using compression module
-	app.use(compression());
+// using compression module
+app.use(compression());
 
 // Database configuration
-	//setting mongoose promise to global promise
-	mongoose.Promise = global.Promise;
+//setting mongoose promise to global promise
+mongoose.Promise = global.Promise;
 
-	//connecting to the database
-	mongoose
-	.connect(db, { useNewUrlParser:true })
+//connecting to the database
+mongoose
+	.connect(db, { useNewUrlParser: true })
 	.then(() => console.log("connected to the database"))
 	.catch((err) => console.log(err))
-	
-// Server configuration	
-	// serving static files
-	app.use('/static', express.static('public'))
 
-	// initiating body parser for POST requests
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({extended:true}));
+// Server configuration	
+// serving static files
+app.use('/static', express.static('public'))
+
+// initiating body parser for POST requests
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Router configuration
-	// importing the router
-	var router = require('./Routes/index')
+// importing the router
+var router = require('./Routes/index')
 
-	// initiating router
-	app.use('/api', router)	
+// initiating router
+app.use('/api', router)
 
 //Listening to request
-	app.listen(port, () => {
-		console.log('This express app is listening to port number '+ port)
-	})
+app.listen(port, () => {
+	console.log('This express app is listening to port number' + port)})
