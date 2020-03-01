@@ -32,8 +32,7 @@ memberSchema.pre('save', function (next) {
 
 	// only hash password if it's new or modified
 	if (!member.isModified('password')) {
-		return next();
-	}
+		return next();}
 
 	//generate salt
 	bcrypt.genSalt(8, (err, salt) => {
@@ -43,8 +42,7 @@ memberSchema.pre('save', function (next) {
 		//hashing password using new salt
 		bcrypt.hash(member.password, salt, (err, hash) => {
 			if (err) {
-				return next(err);
-			}
+			return next(err);}
 			//overwrite the new password over the old one
 			member.password = hash;
 			next();

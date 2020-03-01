@@ -94,8 +94,6 @@
         .password-subheading {
             margin-right: 0.3em;
             font-family: "Open Sans Condensed-Bold";
-
-            input {}
         }
 
         .login-cancel-holder {
@@ -178,8 +176,6 @@
         .confirm-password-subheading {
             margin-right: 0.3em;
             font-family: "Open Sans Condensed-Bold";
-
-            input {}
         }
 
         .login-cancel-holder {
@@ -218,6 +214,12 @@
         font-family: "Open Sans Condensed-Bold";
         margin-left: 0.4em;
     }
+}
+
+//loader container styles
+.message-container{
+    text-align: center;
+    color: red;
 }
 
 //new word form

@@ -14,16 +14,13 @@ router.post('/signup', (req, res, next) => {
 
     if (!email) {
         return res.send({
-            message: "Email cannot be blank"
-        })
+            message: "Email cannot be blank" })
     } else if (!password) {
         return res.send({
-            message: "Password cannot be blank"
-        })
+            message: "Password cannot be blank" })
     } else if (!username) {
         return res.send({
-            message: "Username cannot be blank"
-        })
+            message: "Username cannot be blank" })
     }
 
     email = email.toLowerCase().trim();
@@ -34,24 +31,20 @@ router.post('/signup', (req, res, next) => {
     }, (err, docs) => {
         if (err) {
             return res.send({
-                message: "Server error"
-            })
+                message: "Server error" })
         } else if (docs.length > 0) {
             return res.send({
-                message: "Sorry, user already exists"
-            })
+                message: "Sorry, user already exists" })
         } else if (!err) {
             User.find({
                 username: username,
             }, (err, docs) => {
                 if (err) {
                     return res.send({
-                        message: "Server error"
-                    })
+                        message: "Server error" })
                 } else if (docs.length > 0) {
                     return res.send({
-                        message: "Sorry, username already exists"
-                    })
+                        message: "Sorry, username already exists" })
                 } else if (!err) {
                     // creating in new user document in the database
                     const newMember = new User();
@@ -62,13 +55,11 @@ router.post('/signup', (req, res, next) => {
                         if (err) {
                             return res.send({
                                 success: false,
-                                message: err
-                            });
+                                message: err });
                         }
                         return res.send({
                             success: true,
-                            message: "New member created",
-                        })
+                            message: "New member created" })
                     })
                 }
             })

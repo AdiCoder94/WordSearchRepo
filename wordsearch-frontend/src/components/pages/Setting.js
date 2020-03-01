@@ -13,14 +13,10 @@ function StorySetting(){
     		<hr />
     		<div className="article-container flex-row">
      			<div className='article-left-section'>
-        			<ElementOfStory />
-      		</div>  
+        			<ElementOfStory /></div>  
       		<div className='article-right-section'>
       			<h2 className='section-heading'>Setting</h2>
-					<hr />
-      		</div>
-    		</div>
-			</div>	
+					<hr /></div></div></div>	
 		</React.Fragment>
 	)
 }

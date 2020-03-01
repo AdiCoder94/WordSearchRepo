@@ -41,19 +41,23 @@ router.post('/new', function (req, res, next) {
             newWord.root = root;
             newWord.languageOfOrigin = languageOfOrigin;
             newWord.meaning = meaning;
-            console.log(newWord);
             newWord.save((err, result) => {
                 if (err) {
                     return res.send({
-                        message: "Server error"
-                    });
+                        message: "Server error" });
                 }
                 return res.send({
-                    message:"Word saved to database"
-                })
+                    message:"Word saved to database" })
             })
         }
     })
 })
+
+router.get('/allwords', function(req, res, next){
+	Words.find({}, (err, doc) => {
+		if(err){
+		return res.send("Server error")	}
+		else if(doc){
+			return res.send(doc)}	})})
 
 module.exports = router;

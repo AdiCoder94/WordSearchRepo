@@ -3,7 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require("mongoose");
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4100;
 const db = require('./config/constants').mongoURI;
 
 // Express app configuration

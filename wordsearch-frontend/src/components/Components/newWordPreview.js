@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 
 class WordPreview extends Component{
-	constructor(props){
-		super(props);	
-	}
-
-	componentDidUpdate(){
-		console.log("definition props" + this.props.definition);
-	}
 
 	render(){
 		return(
