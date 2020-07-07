@@ -11,35 +11,25 @@ class Header extends Component{
 		super(props);
 		this.state = {
 			viewLoginModal:false,
-			viewSignupModal:false
-		}
+			viewSignupModal:false	}
 		this.showLoginModal = this.showLoginModal.bind(this);
-		this.showSignupModal = this.showSignupModal.bind(this);
-	}
+		this.showSignupModal = this.showSignupModal.bind(this);	}
 
 	showLoginModal(){
 		if((this.state.viewSignupModal === true) && (this.state.viewLoginModal === false)){
 			this.setState(state => ({
 					viewLoginModal:!this.state.viewLoginModal,
-					viewSignupModal:false
-				})
-			)}		
+					viewSignupModal:false	}))}		
 		else this.setState(state =>({
-			viewLoginModal:!this.state.viewLoginModal
-		}))	
-	}
+			viewLoginModal:!this.state.viewLoginModal} ))}
 
 	showSignupModal(){
 		if((this.state.viewLoginModal === true) && (this.state.viewSignupModal === false)){
 			this.setState(state => ({
 					viewSignupModal:!this.state.viewSignupModal,
-					viewLoginModal:false
-				})
-			)}
+					viewLoginModal:false} ))}
 		else this.setState(state => ({
-			viewSignupModal:!this.state.viewSignupModal
-		}))		
-	}
+			viewSignupModal:!this.state.viewSignupModal} ))}
 
 	render(){
 		let LogInModal;
@@ -52,14 +42,8 @@ class Header extends Component{
 		        <h2 className='site-name'>Word search</h2>
 		        <div className="btn-holder">
 			        <button className='signup-btn site-btn' onClick={this.showSignupModal}>Sign up</button>	        
-			        <button className='login-btn site-btn' onClick={this.showLoginModal}>Login</button>	  
-		        </div>	        
-		      </div>
-		      {SignupModal}
-	      	  {LogInModal}
-		    </React.Fragment>
-    	)
-   }
-} 
+			        <button className='login-btn site-btn' onClick={this.showLoginModal}>Login</button></div></div>
+		      	{SignupModal}
+	      	  {LogInModal}</React.Fragment>)}} 
 
 export default Header;

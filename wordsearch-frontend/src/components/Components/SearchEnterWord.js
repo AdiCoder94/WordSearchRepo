@@ -7,10 +7,6 @@ function SearchEnterWord(){
 	return(
 		<React.Fragment>
 			<div className="searchword-container">
-				<h2 className='section-heading'>Search words</h2>
-			</div>
-		</React.Fragment>
-	)
-}
+				<h2 className='section-heading'>Search words</h2></div></React.Fragment>)}
 
 export default SearchEnterWord;	

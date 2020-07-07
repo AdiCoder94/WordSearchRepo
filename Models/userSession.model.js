@@ -4,17 +4,14 @@ const mongoose = require('mongoose');
 const userSessionSchema = new mongoose.Schema({
 	userID: {
 		type: Number,
-		default: -1
-	},
+		default: -1	},
 	timeStamp: {
 		type: Date,
-		default: Date.now()
-	},
+		default: Date.now()	},
 	isDeleted: {
 		type: Boolean,
-		default: false
-	}
-})
+		default: false }}
+)
 
 //compiling the member schema to model and exporting
 const UserSession = mongoose.model("UserSession", userSessionSchema);

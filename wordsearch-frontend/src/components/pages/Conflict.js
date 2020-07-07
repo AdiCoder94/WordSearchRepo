@@ -14,17 +14,9 @@ class StoryConflict extends Component{
 						<hr />
 						<div className="article-container flex-row">
 							<div className='article-left-section'>
-								<ElementOfStory />
-							</div>  
+								<ElementOfStory /></div>  
 							<div className='article-right-section'>
 								<h2 className='section-heading'>Conflict</h2>
-							<hr />
-							</div>
-						</div>
-					</div>
-			</React.Fragment>
-		)
-	}	
-}
+							<hr /></div></div></div></React.Fragment>)}}
 
 export default StoryConflict;

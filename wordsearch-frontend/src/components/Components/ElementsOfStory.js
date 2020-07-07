@@ -13,11 +13,6 @@ function ElementOfStory(){
 					<li><Link to='/character'>Character</Link></li>
 					<li><Link to='/plot'>Plot</Link></li>
 					<li><Link to='/conflict'>Conflict</Link></li>
-					<li><Link to='/theme'>Theme</Link></li>
-				</ul>
-			</div>
-		</React.Fragment>
-	)
-}
+					<li><Link to='/theme'>Theme</Link></li></ul></div></React.Fragment>)}
 
 export default ElementOfStory;	

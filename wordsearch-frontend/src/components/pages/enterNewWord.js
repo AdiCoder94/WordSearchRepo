@@ -14,52 +14,36 @@ class EnterNewWord extends Component{
 			partOfSpeech:"XXX",
 			subCategory:"XXX",
 			wordConnotation:"XXX",
-			definition:"XXX",
-		}
+			definition:"XXX" }
 		this.handleNewWordChange = this.handleNewWordChange.bind(this);	
 		this.handleOriginLangChange = this.handleOriginLangChange.bind(this);	
 		this.handleRootWordChange = this.handleRootWordChange.bind(this);	
 		this.handleCategoryChange = this.handleCategoryChange.bind(this);	
 		this.handleSubCategoryChange = this.handleSubCategoryChange.bind(this);	
 		this.handleConnotationChange = this.handleConnotationChange.bind(this);	
-		this.handleDefinitionChange = this.handleDefinitionChange.bind(this);	
-	}
+		this.handleDefinitionChange = this.handleDefinitionChange.bind(this);	}
 
 	handleNewWordChange(e){
 		this.setState({
-			newWord:e.target.value
-		})
-	}
+			newWord:e.target.value} )}
 	handleOriginLangChange(e){
 		this.setState({
-			originLang:e.target.value
-		})
-	}
+			originLang:e.target.value} )}
 	handleRootWordChange(e){
 		this.setState({
-			rootWord:e.target.value
-		})
-	}
+			rootWord:e.target.value} )}
 	handleCategoryChange(e){
 		this.setState({
-			partOfSpeech:e.target.value
-		})
-	}
+			partOfSpeech:e.target.value} )}
 	handleSubCategoryChange(e){
 		this.setState({
-			subCategory:e.target.value
-		})
-	}
+			subCategory:e.target.value} )}
 	handleConnotationChange(e){
 		this.setState({
-			wordConnotation:e.target.value
-		})
-	}
+			wordConnotation:e.target.value} )}
 	handleDefinitionChange(e){
 		this.setState({
-			definition:e.target.value,
-		})
-	}
+			definition:e.target.value} )}
 
 	render(props){
 		return(
@@ -67,18 +51,11 @@ class EnterNewWord extends Component{
 				<MemberHeader />
 				<div className="site-article-container">
 					<h2 className='section-heading'>Enter word in the database</h2>
-	          		<hr />
+					<hr />
 					<div className='form-article-container flex-row'>
 						<NewWordFormComponent changeNewWord={this.handleNewWordChange} changeOriginLang={this.handleOriginLangChange} changeRootWord={this.handleRootWordChange} changeCategory={this.handleCategoryChange} changeSubCategory={this.handleSubCategoryChange} changeConnotation={this.handleConnotationChange} changeDefinition={this.handleDefinitionChange} />
-						<WordPreview newWord={this.state.newWord} originLang={this.state.originLang} rootWord={this.state.rootWord} partOfSpeech={this.state.partOfSpeech} subCategory={this.state.subCategory} wordConnotation={this.state.wordConnotation} definition={this.state.definition} />	
-					</div>	
+						<WordPreview newWord={this.state.newWord} originLang={this.state.originLang} rootWord={this.state.rootWord} partOfSpeech={this.state.partOfSpeech} subCategory={this.state.subCategory} wordConnotation={this.state.wordConnotation} definition={this.state.definition} /></div>	
 					<div className='btn-holder'>
-						<button className='view-word-preview-btn site-btn'>Save in the database</button>
-					</div>
-				</div>	
-			</React.Fragment>
-		)
-	}
-}
+						<button className='view-word-preview-btn site-btn'>Save in the database</button></div></div></React.Fragment>)}}
 
 export default EnterNewWord;

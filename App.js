@@ -1,17 +1,19 @@
 var compression = require('compression');
+var cors = require('cors');
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require("mongoose");
 
-const port = process.env.PORT || 4100;
+const port = process.env.PORT || 4000;
 const db = require('./config/constants').mongoURI;
 
 // Express app configuration
 //creating instance of express app
 const app = express();
 
-// using compression module
+// using compression module and cors module
 app.use(compression());
+app.use(cors())
 
 // Database configuration
 //setting mongoose promise to global promise

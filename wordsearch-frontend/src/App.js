@@ -9,10 +9,6 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-       <Routes />
-      </React.Fragment>
-    );
-  }
-}
+       <Routes /></React.Fragment>)}}
 
 export default App;

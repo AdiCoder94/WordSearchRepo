@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import 'whatwg-fetch';
 
 import Spinner from "../Components/spinner";
 
@@ -40,7 +40,6 @@ class SignupModal extends Component{
 	onTextboxChangeSignUpPasswordConfirm(e){
 		this.setState({ signUpPasswordConfirm:e.target.value } )}
 
-
 	onSignUp(){
 		this.setState({ isLoading: !this.state.isLoading });	
 
@@ -50,7 +49,6 @@ class SignupModal extends Component{
 			signUpEmail,
 			signUpPassword,
 			signUpPasswordConfirm,
-			isLoading
 		} = this.state	
 
 		// empty field scenario
@@ -68,27 +66,29 @@ class SignupModal extends Component{
 				inputErrorMsg: 'Passwords did not match.'} )}
 		
 		//submitting data for registration
-		if(isLoading) {
-			fetch('/api/account/signup', {
-				method: 'POST',
-				headers:{ 'Content type': 'application/json' },
-				body: JSON.stringify({
-					username:signUpUsername,
-					email: signUpEmail,
-					password: signUpPassword })})
-			.then(res => res.json() )
-			.then(console.log('inside fetch'))	 	
-			.then(json => (json.success) ? 
+		fetch('http://localhost:4000/api/account/signup', {
+			method: 'POST',
+			headers:{ 
+				'Access-Control-Allow-Origin': 'http://localhost:3012',
+				'Content-Type': 'application/json'},
+			body: JSON.stringify({
+				username: signUpUsername,
+				email: signUpEmail,
+				password: signUpPassword } )})
+		.then(res => res.json())
+		.then(json => {
+			// console.log('json', JSON.stringify(json));
+			(json.success) ?
 				this.setState({
 					isLoading: false,
 					inputErrorDisplay: false,
 					signUpEmail: '',
 					signUpUsername: '',
-					signUpPassword: '' }) :
+					signUpPassword: '',
+					signUpPasswordConfirm: ''} ) :
 				this.setState({ 
 					isLoading: false,
-					inputErrorDisplay: false } ))
-	}}
+					inputErrorDisplay: false} )})}
 
 	// closing the modal on clicking Cancel
 	hideModal(){
@@ -105,8 +105,7 @@ class SignupModal extends Component{
 			signUpEmail,
 			signUpPassword,
 			signUpPasswordConfirm,
-			inputErrorMsg
-		} = this.state
+			inputErrorMsg	} = this.state
 
 		return(
 			<React.Fragment>
@@ -132,7 +131,8 @@ class SignupModal extends Component{
 							<p className='pleasewait-txt'>Please wait...</p></div>
 						<p className={ messageClassName }>{inputErrorMsg}</p>
 						<div className="error-display">
-							<p className='error-txt'>{this.state.signUpError}</p></div></div></div>	</React.Fragment>)}
-}
+							<p className='error-txt'>{this.state.signUpError}</p></div></div></div>	</React.Fragment>)}}
 
 export default SignupModal;
+
+

@@ -18,15 +18,7 @@ class PublicDashboard extends Component {
           <hr />
           <div className="article-container flex-row">
             <div className='article-left-section'>
-              <ElementOfStory />
-            </div>  
-            <div className='article-right-section'>
-            </div>
-          </div>
-        </div>
-      </React.Fragment>
-    );
-  }
-}
+              <ElementOfStory /></div>  
+            <div className='article-right-section'></div></div></div></React.Fragment>)}}
 
 export default PublicDashboard;

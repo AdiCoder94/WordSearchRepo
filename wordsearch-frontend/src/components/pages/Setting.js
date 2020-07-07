@@ -16,9 +16,6 @@ function StorySetting(){
         			<ElementOfStory /></div>  
       		<div className='article-right-section'>
       			<h2 className='section-heading'>Setting</h2>
-					<hr /></div></div></div>	
-		</React.Fragment>
-	)
-}
+					<hr /></div></div></div></React.Fragment>)}
 
 export default StorySetting;

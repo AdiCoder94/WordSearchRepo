@@ -10,9 +10,6 @@ class MemberDashboard extends Component{
 		return(
 			<React.Fragment>
 				<MemberDashboard />
-			</React.Fragment>
-		)
-	}
-}
+			</React.Fragment>)}}
 
 export default MemberDashboard

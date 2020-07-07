@@ -6,60 +6,34 @@ const memberSchema = new mongoose.Schema({
 	username: {
 		type: String,
 		reqiured: true,
-		default: ''
-	},
+		default: ''	},
 	email: {
 		type: String,
 		required: true,
-		default: ''
-	},
+		default: ''	},
 	password: {
 		type: String,
 		required: true,
-		default: ''
-	},
+		default: ''	},
 	isDeleted: {
-		type: Boolean
-	},
+		type: Boolean	},
 	signUpDate: {
-		type: Date
-	}
-})
+		type: Date }}
+)
 
 //Document middleware for hashing
-memberSchema.pre('save', function (next) {
-	var member = this;
+memberSchema.methods.generateHash = function (password) {
+	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+}
 
-	// only hash password if it's new or modified
-	if (!member.isModified('password')) {
-		return next();}
-
-	//generate salt
-	bcrypt.genSalt(8, (err, salt) => {
-		if (err) {
-			return next(err);
-		}
-		//hashing password using new salt
-		bcrypt.hash(member.password, salt, (err, hash) => {
-			if (err) {
-			return next(err);}
-			//overwrite the new password over the old one
-			member.password = hash;
-			next();
-		})
-	})
-})
 
 //Schema method for comparing password
 memberSchema.methods.validPassword = function (password) {
 	bcrypt.compare(password, this.password, (err, res) => {
 		if (err) return err;
 		else {
-			console.log("this is the comparision in the database " + res);
-			return res;
-		}
-	});
-};
+			return res;}});
+}
 
 //compiling the member schema to model and exporting
 const SiteMember = mongoose.model("Member", memberSchema);

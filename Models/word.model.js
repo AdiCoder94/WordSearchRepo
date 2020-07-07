@@ -5,39 +5,32 @@ const wordSchema = new mongoose.Schema({
 	enteredWord: {
 		type: String,
 		required: true,
-		default: ''
-	},
+		default: ''	},
 	partOfSpeech: {
 		type: String,
 		required: true,
-		default: ''
-	},
+		default: ''	},
 	partOfSpeechSubCategory: {
 		type: String,
 		required: true,
-		default: ''
-	},
+		default: ''	},
 	connotation: {
 		type: String,
 		required: true,
-		default: ''
-	},
+		default: ''	},
 	root: {
 		type: String,
 		required: true,
-		default: ''
-	},
+		default: ''	},
 	languageOfOrigin: {
 		type: String,
 		required: true,
-		default: ''
-	},
+		default: ''	},
 	meaning: {
 		type: String,
 		required: true,
-		default: ''
-	}
-})
+		default: ''	}}
+)
 
 //compiling the member schema to model and exporting
 const EnteredWord = mongoose.model("Word", wordSchema)
