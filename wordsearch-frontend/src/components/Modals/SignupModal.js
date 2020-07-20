@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
-
 import Spinner from "../Components/spinner";
-
 import '../../scss/base_styles.scss';
 import '../../scss/article_styles.scss';
+import { frontendURL, backendURL } from '../../config/constants';
+
+// const frontend = require('../../config/constants.js').frontendURL;
+// const backend = require('../../config/constants.js').backendURL;
 
 class SignupModal extends Component{
 	constructor(props){
@@ -51,44 +53,55 @@ class SignupModal extends Component{
 			signUpPasswordConfirm,
 		} = this.state	
 
-		// empty field scenario
-		if(!signUpUsername || !signUpEmail || !signUpPassword || !signUpPasswordConfirm){ 
-			this.setState({ 
-				inputErrorDisplay: true,
-				inputErrorMsg: 'All fields are neccessary.',
-				isLoading: false } )}							 
-				
-		//password not matching scenario
-		if((signUpPassword !== signUpPasswordConfirm)) {
-			this.setState({ 
-				inputErrorDisplay: true,
-				isLoading: false,
-				inputErrorMsg: 'Passwords did not match.'} )}
-		
-		//submitting data for registration
-		fetch('http://localhost:4000/api/account/signup', {
-			method: 'POST',
-			headers:{ 
-				'Access-Control-Allow-Origin': 'http://localhost:3012',
-				'Content-Type': 'application/json'},
-			body: JSON.stringify({
-				username: signUpUsername,
-				email: signUpEmail,
-				password: signUpPassword } )})
-		.then(res => res.json())
-		.then(json => {
-			// console.log('json', JSON.stringify(json));
-			(json.success) ?
-				this.setState({
-					isLoading: false,
-					inputErrorDisplay: false,
-					signUpEmail: '',
-					signUpUsername: '',
-					signUpPassword: '',
-					signUpPasswordConfirm: ''} ) :
+		const checkEmptyField = () => {
+			// empty field scenario
+			if(!signUpUsername || !signUpEmail || !signUpPassword || !signUpPasswordConfirm){ 
 				this.setState({ 
+					inputErrorDisplay: true,
+					inputErrorMsg: 'All fields are neccessary.',
+					isLoading: false })
+					return false }	
+			else return true;}							 
+					
+		const matchPassword = () => {	
+			//password not matching scenario
+			if(signUpPassword !== signUpPasswordConfirm) {
+				this.setState({ 
+					inputErrorDisplay: true,
 					isLoading: false,
-					inputErrorDisplay: false} )})}
+					inputErrorMsg: 'Passwords did not match.'})
+					return false }
+			else return true;}		
+		
+		var match = matchPassword()
+		var check = checkEmptyField()
+		
+		if(check && match){		
+			//submitting data for registration
+			fetch(`${backendURL}api/account/signup`, {
+				method: 'POST',
+				headers:{ 
+					'Access-Control-Allow-Origin': `${frontendURL}`,
+					'Content-Type': 'application/json'},
+				body: JSON.stringify({
+					username: signUpUsername,
+					email: signUpEmail,
+					password: signUpPassword,
+					confirmPassword: signUpPasswordConfirm } )})
+			.then(res => res.json())
+			.then(json => {
+				(json.success) ?
+					this.setState({
+						isLoading: false,
+						inputErrorDisplay: true,
+						inputErrorMsg: 'You successfully signed up.',
+						signUpEmail: '',
+						signUpUsername: '',
+						signUpPassword: '',
+						signUpPasswordConfirm: ''} ) :
+					this.setState({ 
+						isLoading: false,
+						inputErrorDisplay: false} )})}}
 
 	// closing the modal on clicking Cancel
 	hideModal(){
@@ -119,10 +132,10 @@ class SignupModal extends Component{
 							<input type='text' onChange={this.onTextboxChangeSignUpEmail} value={signUpEmail} /></div>
 						<div className="password-section flex-row">
 							<p className="password-subheading">Password:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpPassword} value={signUpPassword} /></div>
+							<input type='password' onChange={this.onTextboxChangeSignUpPassword} value={signUpPassword} /></div>
 						<div className="confirm-password-section flex-row">
 							<p className="confirm-password-subheading">Confirm password:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpPasswordConfirm} value={signUpPasswordConfirm} /></div>
+							<input type='password' onChange={this.onTextboxChangeSignUpPasswordConfirm} value={signUpPasswordConfirm} /></div>
 						<div className='login-cancel-holder flex-row'>	
 							<button className='close-modal-btn modal-btn' onClick={this.hideModal}>Cancel</button>
 							<button className="submit-form-btn modal-btn" onClick={this.onSignUp}>Submit</button></div>
@@ -134,5 +147,3 @@ class SignupModal extends Component{
 							<p className='error-txt'>{this.state.signUpError}</p></div></div></div>	</React.Fragment>)}}
 
 export default SignupModal;
-
-

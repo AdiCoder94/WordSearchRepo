@@ -34,9 +34,19 @@ class LoginModal extends Component{
 			signUpUsername,
 			logInPassword } = this.state;
 
-		fetch('/api/account/signin',{
-
-		})}
+		fetch('http://localhost:4000/api/account/signin', {
+			method: 'POST',
+			headers:{
+				'Access-Control-Allow-Origin': 'http://localhost:3012',
+				'Content-Type': 'application/json'},
+			body: JSON.stringify({
+				email: signUpUsername,
+				password: logInPassword	} )})
+			.then(res => res.json())
+			.then(json =>{
+				console.log('json', JSON.stringify(json));
+				} )
+			}
 
 	hideModal(){
 		this.setState(state =>({

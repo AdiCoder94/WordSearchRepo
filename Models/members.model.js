@@ -22,17 +22,16 @@ const memberSchema = new mongoose.Schema({
 )
 
 //Document middleware for hashing
-memberSchema.methods.generateHash = function (password) {
+memberSchema.methods.generateHash = function(password) {
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 }
 
 
 //Schema method for comparing password
-memberSchema.methods.validPassword = function (password) {
+memberSchema.methods.validPassword = function(password) {
 	bcrypt.compare(password, this.password, (err, res) => {
 		if (err) return err;
-		else {
-			return res;}});
+		else return res;});
 }
 
 //compiling the member schema to model and exporting
