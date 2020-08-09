@@ -3,7 +3,6 @@ var router = express.Router();
 
 const User = require("../Models/members.model");
 const UserSession = require('../Models/userSession.model');
-const { compareSync } = require('bcrypt');
 
 // creating route endpoint for signing up new users
 router.post('/signup', (req, res, next) => {
@@ -16,17 +15,13 @@ router.post('/signup', (req, res, next) => {
 
     if (!email) {
         return res.send({
-            message: "Email cannot be blank"
-        })
+            message: "Email cannot be blank" })
     } else if (!password) {
         return res.send({
-            message: "Password cannot be blank"
-        })
+            message: "Password cannot be blank" })
     } else if (!username) {
         return res.send({
-            message: "Username cannot be blank"
-        })
-    }
+            message: "Username cannot be blank" })}
 
     email = email.toLowerCase().trim();
     username = username.trim();
@@ -36,11 +31,11 @@ router.post('/signup', (req, res, next) => {
     }, (err, docs) => {
         if (err) {
             return res.send({
-                message: "Server error"
+                err_msg: "Server error"
             })
         } else if (docs.length > 0) {
             return res.send({
-                message: "Sorry, user already exists"
+                err_msg: "Sorry, user already exists"
             })
         } else if (!err) {
             User.find({
@@ -48,36 +43,36 @@ router.post('/signup', (req, res, next) => {
             }, (err, docs) => {
                 if (err) {
                     return res.send({
-                        message: "Server error"
+                        err_msg: "Server error"
                     })
                 } else if (docs.length > 0) {
                     return res.send({
-                        message: "Sorry, username already exists"
+                        err_msg: "Sorry, username already exists"
                     })
                 } else if (!err) {
                     // creating in new user document in the database
-                    const newMember = new User();
-                    newMember.email = email;
-                    newMember.password = newMember.generateHash(password);
-                    newMember.username = username;
-                    newMember.save((err, user) => {
-                        if (err) {
+                    async function createUser(){
+                        const newMember = new User()
+                        newMember.password = await newMember.generateHash(password)
+                        newMember.email = email
+                        newMember.username = username
+                        return newMember
+                    }
+                    createUser()
+                    .then((json) => User.create(json, (err, doc) => {
+                        if(err){
                             return res.send({
                                 success: false,
-                                message: err
-                            });
-                        }
-                        return res.send({
+                                err_msg: err })}
+                        else return res.send({
                             success: true,
-                            message: user
-                        })
-                    })
+                            user: doc })}))
+                    .catch(err => res.send({err_msg: err}))
                 }
             })
         }
     })
-}
-)
+})
 
 // creating route endpoints for logging in members
 router.post('/signin', (req, res, next) => {
@@ -100,49 +95,70 @@ router.post('/signin', (req, res, next) => {
     }, (err, docs) => {
         if (err) {
             return res.send({
-                message: "Server error"
-            })
+                message: "Server error" })
         } else if (docs.length != 1) {
             return res.send({
-                message: 'Invalid'
-            })
+                message: 'not signed up' })
         } else {
-            const user = docs[0]; 
-            var compare = user.validPassword(password)
-            return res.send({
-                message: typeof(compare)
-            })
-            // if (!user.validPassword(password)){
-            //     return res.send({
-            //         message: typeof(user.validPassword(password))})
-            // } 
-            // else return res.send({
-            //     message: 'gooo' })
-            // const userSession = new UserSession();
-            // userSession.userID = user._id;
-            // userSession.save((err, docs) => {
-            //     if(err){
-            //         return res.send({
-            //             message: err})
-            //     } else
-            //     return res.send({
-            //         message: 'Signed in'}) 
-            // })                 
+            const user = docs[0]
+
+            async function matchPassword(){
+                let compare = await user.validPassword(password)
+                return compare }
+
+            matchPassword()
+            .then((result) => {
+                if(result){
+                    let userSession = new UserSession()
+                    userSession.userID = user._id
+                    userSession.save()
+                    .then((docs, err) => {
+                        if(docs){
+                            return res.send({
+                                message: 'signed in',
+                                token: docs._id,  
+                                success: true })}
+                        else return res.send({
+                            err: err ,
+                            success: false })})
+                    .catch(err => console.log('err', err))
+                } else return res.send({ message: 'wrong password'})})
+            .catch(err => console.log(err))
         }
     })
 })
 
+// creating route endpoints for logging out members
+router.post('/signout', (req, res, next) => {
+
+    // getting the token by sending query parameters
+    var { token } = req.query
+
+    UserSession.findOneAndUpdate(
+        {_id: token, isDeleted: false}, 
+        {$set: {isDeleted: true}},
+        {new: true},
+        (err, docs) => {
+            if(err){
+                return res.send({
+                    err: err,
+                    success: false
+                })
+            }else return res.send({
+                success: true,
+                doc: docs
+            })
+        })   
+})
+
 module.exports = router;
 
-// if (!user.validPassword(password)){
-//     return res.send({
-//         message: res })
-// } else 
-//     return res.send({
-//         message: 'good'})                      
-
-
-
-// return res.send({
-//     message: user
-// }) 
+// , (err, docs) => {
+//     if(err){
+//         return res.send({
+//             err: err
+//         })
+//     } else return res.send({
+//         message: docs
+//     })
+// }

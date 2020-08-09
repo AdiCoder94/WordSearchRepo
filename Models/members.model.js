@@ -22,18 +22,30 @@ const memberSchema = new mongoose.Schema({
 )
 
 //Document middleware for hashing
-memberSchema.methods.generateHash = function(password) {
-	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+memberSchema.methods.generateHash = async function(password) {
+	const hashedPassword = await new Promise((resolve, reject) => {
+		bcrypt.hash(password, 8)
+		.then((hashp) => {
+			resolve (hashp)})
+		.catch(err => reject(err))	
+	})
+	return hashedPassword
 }
 
 
 //Schema method for comparing password
-memberSchema.methods.validPassword = function(password) {
-	bcrypt.compare(password, this.password, (err, res) => {
-		if (err) return err;
-		else return res;});
+memberSchema.methods.validPassword = async function(password) {
+	const matchPassword = await new Promise((resolve, reject) => {
+		bcrypt.compare(password, this.password)
+		.then((hashp) => {
+			console.log('compare', hashp)
+			resolve (hashp)})
+		.catch(err => reject(err))	
+	})
+	return matchPassword
 }
 
 //compiling the member schema to model and exporting
 const SiteMember = mongoose.model("Member", memberSchema);
 module.exports = SiteMember;
+

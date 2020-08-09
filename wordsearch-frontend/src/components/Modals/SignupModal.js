@@ -5,9 +5,6 @@ import '../../scss/base_styles.scss';
 import '../../scss/article_styles.scss';
 import { frontendURL, backendURL } from '../../config/constants';
 
-// const frontend = require('../../config/constants.js').frontendURL;
-// const backend = require('../../config/constants.js').backendURL;
-
 class SignupModal extends Component{
 	constructor(props){
 		super(props);
@@ -19,7 +16,6 @@ class SignupModal extends Component{
 			signUpEmail:'',
 			signUpPassword:'',			
 			signUpPasswordConfirm:'',			
-			token:'',
 			inputErrorDisplay: false,
 			inputErrorMsg: '' }
 
@@ -28,7 +24,8 @@ class SignupModal extends Component{
 		this.onTextboxChangeSignUpEmail = this.onTextboxChangeSignUpEmail.bind(this);
 		this.onTextboxChangeSignUpPassword = this.onTextboxChangeSignUpPassword.bind(this);		
 		this.onTextboxChangeSignUpPasswordConfirm = this.onTextboxChangeSignUpPasswordConfirm.bind(this);
-		this.onSignUp = this.onSignUp.bind(this);	}
+		this.onSignUp = this.onSignUp.bind(this);
+		this.getStateArr = this.getStateArr.bind(this)	}
 
 	onTextboxChangeUserName(e){
 		this.setState({ signUpUsername:e.target.value })}
@@ -42,6 +39,14 @@ class SignupModal extends Component{
 	onTextboxChangeSignUpPasswordConfirm(e){
 		this.setState({ signUpPasswordConfirm:e.target.value } )}
 
+	getStateArr(){
+		let stateArr = [ 
+			this.state.signUpUsername,
+			this.state.signUpEmail,
+			this.state.signUpPassword,
+			this.state.signUpPasswordConfirm ]
+			console.log(stateArr)}	
+	
 	onSignUp(){
 		this.setState({ isLoading: !this.state.isLoading });	
 
@@ -90,24 +95,30 @@ class SignupModal extends Component{
 					confirmPassword: signUpPasswordConfirm } )})
 			.then(res => res.json())
 			.then(json => {
-				(json.success) ?
+				(json.success) ? 
 					this.setState({
-						isLoading: false,
-						inputErrorDisplay: true,
-						inputErrorMsg: 'You successfully signed up.',
 						signUpEmail: '',
 						signUpUsername: '',
 						signUpPassword: '',
-						signUpPasswordConfirm: ''} ) :
-					this.setState({ 
+						signUpPasswordConfirm: '',
 						isLoading: false,
-						inputErrorDisplay: false} )})}}
+						inputErrorDisplay: true,
+						inputErrorMsg: 'You successfully signed up!'
+					}, () => setTimeout(this.hideModal, 500)) :
+					this.setState({
+						isLoading: false,
+						inputErrorDisplay: true,
+						inputErrorMsg: json.err_msg	})
+			})
+		}}
 
 	// closing the modal on clicking Cancel
 	hideModal(){
-		this.setState({	viewSignUpModal:false })}
+		this.setState({ viewSignUpModal:false }, () => {
+			this.props.headerBtnActive(this.state.viewSignUpModal)
+			this.props.isModalClosed(this.state.viewSignUpModal)})}
 
-	render(props){
+	render(){
 		let hideModalClassName, loaderClassName, messageClassName;
 		(this.state.viewSignUpModal) ? (hideModalClassName = 'modal-container') : (hideModalClassName='hidden');
 		(this.state.isLoading) ? (loaderClassName = 'loader-container flex-row') : (loaderClassName = 'hidden');
@@ -147,3 +158,19 @@ class SignupModal extends Component{
 							<p className='error-txt'>{this.state.signUpError}</p></div></div></div>	</React.Fragment>)}}
 
 export default SignupModal;
+
+// signUpStateLog()
+// 				console.log(json);
+// 				(json.success) ?
+// 					this.setState({
+// 						isLoading: false,
+// 						inputErrorDisplay: true,
+// 						inputErrorMsg: json.message,
+// 						signUpEmail: 'fskffjflsj',
+// 						signUpUsername: '',
+// 						signUpPassword: '',
+// 						signUpPasswordConfirm: ''}) :
+// 					this.setState({ 
+// 						isLoading: false,
+// 						inputErrorMsg: json.message,
+// 						inputErrorDisplay: true} )

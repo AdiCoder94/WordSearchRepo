@@ -21,7 +21,10 @@ mongoose.Promise = global.Promise;
 
 //connecting to the database
 mongoose
-	.connect(db, { useNewUrlParser: true })
+	.connect(db, { 
+		useNewUrlParser: true, 
+		useFindAndModify: false, 
+		useUnifiedTopology: true })
 	.then(() => console.log("connected to the database"))
 	.catch((err) => console.log(err))
 

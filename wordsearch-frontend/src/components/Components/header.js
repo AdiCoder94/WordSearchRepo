@@ -11,38 +11,43 @@ class Header extends Component{
 		super(props);
 		this.state = {
 			viewLoginModal:false,
-			viewSignupModal:false	}
+			viewSignupModal:false,
+			headerUnclickable: false	}
 		this.showLoginModal = this.showLoginModal.bind(this);
-		this.showSignupModal = this.showSignupModal.bind(this);	}
+		this.showSignupModal = this.showSignupModal.bind(this);	
+		this.activateHeader = this.activateHeader.bind(this);
+		this.closeModal = this.closeModal.bind(this)}
 
 	showLoginModal(){
-		if((this.state.viewSignupModal === true) && (this.state.viewLoginModal === false)){
-			this.setState(state => ({
-					viewLoginModal:!this.state.viewLoginModal,
-					viewSignupModal:false	}))}		
-		else this.setState(state =>({
-			viewLoginModal:!this.state.viewLoginModal} ))}
+		this.setState({ headerUnclickable: true })
+		this.setState(() =>({
+			viewLoginModal: true})
+		)}
 
 	showSignupModal(){
-		if((this.state.viewLoginModal === true) && (this.state.viewSignupModal === false)){
-			this.setState(state => ({
-					viewSignupModal:!this.state.viewSignupModal,
-					viewLoginModal:false} ))}
-		else this.setState(state => ({
-			viewSignupModal:!this.state.viewSignupModal} ))}
+		this.setState({ headerUnclickable: true })
+		this.setState(() => ({
+			viewSignupModal: true} ))}
+
+	activateHeader(e){
+		this.setState({	headerUnclickable: e	})}	
+			
+	closeModal(e){
+		this.setState({
+			viewLoginModal: e,
+			viewSignupModal:e })}		
 
 	render(){
-		let LogInModal;
-		let SignupModal;
-		this.state.viewLoginModal ? (LogInModal = <LoginModal />) : (LogInModal = <React.Fragment />);
-		this.state.viewSignupModal ? (SignupModal = <SignUpModal />) : (SignupModal = <React.Fragment />);
+		let LogInModal, SignupModal;
+		this.state.viewLoginModal ? (LogInModal = <LoginModal  headerBtnActive={this.activateHeader} isModalClosed={this.closeModal} />) : (LogInModal = <React.Fragment />);
+		this.state.viewSignupModal ? (SignupModal = <SignUpModal headerBtnActive={this.activateHeader} isModalClosed={this.closeModal} />) : (SignupModal = <React.Fragment />);
   		return(
 		    <React.Fragment>
 		      <div className="site-header flex-row">
 		        <h2 className='site-name'>Word search</h2>
 		        <div className="btn-holder">
-			        <button className='signup-btn site-btn' onClick={this.showSignupModal}>Sign up</button>	        
-			        <button className='login-btn site-btn' onClick={this.showLoginModal}>Login</button></div></div>
+			        <button className='signup-btn site-btn' onClick={this.showSignupModal} disabled={this.state.headerUnclickable}>Sign up</button>	        
+			        <button className='login-btn site-btn' onClick={this.showLoginModal} disabled={this.state.headerUnclickable}>Login</button></div></div>
 		      	{SignupModal}
 	      	  {LogInModal}</React.Fragment>)}} 
 

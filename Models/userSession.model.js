@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // creating schema for the member
 const userSessionSchema = new mongoose.Schema({
 	userID: {
-		type: Number,
+		type: String,
 		default: -1	},
 	timeStamp: {
 		type: Date,
