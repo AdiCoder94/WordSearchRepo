@@ -26,7 +26,7 @@ const wordSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 		default: ''	},
-	meaning: {
+	definition: {
 		type: String,
 		required: true,
 		default: ''	}}

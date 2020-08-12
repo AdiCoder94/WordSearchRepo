@@ -11,12 +11,12 @@ router.post('/new', function (req, res, next) {
 		connotation,
 		root,
 		languageOfOrigin,
-		meaning
+		definition
 	} = req.body;
 
-	if (!enteredWord || !partOfSpeech || !partOfSpeechSubCategory || !connotation || !root || !languageOfOrigin || !meaning) {
+	if (!enteredWord || !partOfSpeech || !partOfSpeechSubCategory || !connotation || !root || !languageOfOrigin || !definition) {
 		return res.send({
-			message: "Inadequate data" })
+			err_msg: "Inadequate data" })
 	}
 
 	Words.findOne({
@@ -24,10 +24,10 @@ router.post('/new', function (req, res, next) {
 	}, (err, doc) => {
 		if (err) {
 			return res.send({
-				message: "Server error" })
+				err_msg: err })
 		} else if (doc) {
 			return res.send({
-				message: "Sorry word already exists" })
+				err_msg: "Sorry word already exists" })
 		} else if (!err) {
 			//creating new word document in the database
 			const newWord = new Words();
@@ -37,15 +37,17 @@ router.post('/new', function (req, res, next) {
 			newWord.connotation = connotation;
 			newWord.root = root;
 			newWord.languageOfOrigin = languageOfOrigin;
-			newWord.meaning = meaning;
+			newWord.definition = definition;
 			newWord.save((err, result) => {
 				if (err) {
 					return res.send({
-						message: "Server error" });
+						success: false,
+						err_msg: err });
 				}
 				return res.send({
-					message:"Word saved to database" })})}})}
-)
+					success: true,
+					word: result,
+					message:"Word saved to database" })})}})})
 
 router.get('/allwords', function(req, res, next){
 	Words.find({}, (err, doc) => {

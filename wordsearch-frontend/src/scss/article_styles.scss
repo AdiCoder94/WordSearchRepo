@@ -27,8 +27,6 @@
             a:hover {
                 font-weight: bold;
             }
-
-            ;
         }
     }
 }
@@ -225,7 +223,7 @@
 
 //new word form
 .form-article-container {
-
+    
     .new-word-form {
         padding: 0 auto;
         justify-content: space-between;
@@ -244,7 +242,7 @@
 
         .etymology-column {
             .inputfield {
-                bottom-margin: 0.5em;
+                margin-bottom: 0.5em;
             }
 
         }
@@ -322,8 +320,12 @@
     }
 }
 
-.view-word-preview-btn {
-    display: block;
+.savedword_btn-holder{
+    align-items: center;
+    .wordsaved_msg{
+        margin-left: 41%;
+        font-family: 'Open Sans Condensed-Bold'
+    }
 }
 
 //view all word styles

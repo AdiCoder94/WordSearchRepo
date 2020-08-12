@@ -98,7 +98,7 @@ class LoginModal extends Component{
 							<input type='text' value={signUpEmail} onChange={this.onTextboxChangeUserName} /></div>
 						<div className="password-section flex-row">
 							<p className="password-subheading">Password:</p>
-							<input type='text' value={logInPassword} onChange={this.onTextboxChangeLogInPassword} /></div>
+							<input type='password' value={logInPassword} onChange={this.onTextboxChangeLogInPassword} /></div>
 						<div className='login-cancel-holder flex-row'>	
 							<button className='close-modal-btn modal-btn' onClick={this.hideModal}>Cancel</button>
 							<button className="submit-form-btn modal-btn" onClick={this.onSignIn}>Login</button></div>
