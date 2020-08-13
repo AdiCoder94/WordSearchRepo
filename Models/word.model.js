@@ -32,6 +32,11 @@ const wordSchema = new mongoose.Schema({
 		default: ''	}}
 )
 
+wordSchema.methods.capitalize = function(word){
+	const lowerCased = word.toLowerCase()
+	return word.charAt(0).toUpperCase() + lowerCased.slice(1)
+}
+
 //compiling the member schema to model and exporting
 const EnteredWord = mongoose.model("Word", wordSchema)
 module.exports = EnteredWord;

@@ -39,8 +39,9 @@
 //routes container
 .article-right-section {
     margin-left: 3em;
-    .section-heading{
-        margin-top: 0.3em;        
+
+    .section-heading {
+        margin-top: 0.3em;
     }
 }
 
@@ -216,14 +217,14 @@
 }
 
 //loader container styles
-.message-container{
+.message-container {
     text-align: center;
     color: red;
 }
 
 //new word form
 .form-article-container {
-    
+
     .new-word-form {
         padding: 0 auto;
         justify-content: space-between;
@@ -320,24 +321,49 @@
     }
 }
 
-.savedword_btn-holder{
+.savedword_btn-holder {
     align-items: center;
-    .wordsaved_msg{
-        margin-left: 41%;
+
+    .wordsaved_msg {
+        margin-left: 0.5em;
         font-family: 'Open Sans Condensed-Bold'
     }
 }
 
 //view all word styles
-.alphabet-row {
-    justify-content: space-between;
-
-    h4 {
-        font-family: "Open Sans Condensed-Bold";
-        margin-bottom: 0;
-    }
-
-    hr {
-        margin-top: 0;
+.wordcount_header{
+    font-family: 'Open Sans Condensed-Bold';
+}
+.no_word_msg{
+    font-family: 'Open Sans Condensed-Bold';
+    font-size: 2em;
+}
+.view_word_gridcontainer {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    padding: 10px;
+    
+    .view_word_griditem {
+        padding-right: 0.5em;
+        .view_word_grid-header{
+            justify-content: space-between;
+            align-items: center;
+            h2{
+                font-family: 'Open Sans Condensed-Bold';
+                margin-bottom: 0;
+            }
+            p{
+                font-size: 1.3em;
+                align-self: flex-end;
+                margin-bottom: 0;
+                font-family: 'Open Sans Condensed-Bold';
+            }
+        }
+        hr{
+            margin-top: 0;
+        }
+        li{
+            font-family: 'Open Sans Condensed';
+        }
     }
 }

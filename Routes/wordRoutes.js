@@ -31,7 +31,7 @@ router.post('/new', function (req, res, next) {
 		} else if (!err) {
 			//creating new word document in the database
 			const newWord = new Words();
-			newWord.enteredWord = enteredWord;
+			newWord.enteredWord = newWord.capitalize(enteredWord);
 			newWord.partOfSpeech = partOfSpeech;
 			newWord.partOfSpeechSubCategory = partOfSpeechSubCategory;
 			newWord.connotation = connotation;

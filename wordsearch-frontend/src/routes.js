@@ -7,7 +7,6 @@ import StoryConflict from './components/Pages/Conflict';
 import StoryCharacter from './components/Pages/Characters';
 import StoryTheme from './components/Pages/Theme';
 import StoryPlot from './components/Pages/Plot';
-import MemberHeader from './components/Components/memberHeader';
 import EnterNewWord from './components/Pages/enterNewWord';
 import ViewAllWords from './components/Pages/viewAllWords';
 import MemberDashboard from './components/Pages/memberDashboard';

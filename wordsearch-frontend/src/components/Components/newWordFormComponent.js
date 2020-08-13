@@ -69,7 +69,6 @@ class NewWordFormComponent extends Component{
 						<p className='subheading-text'>Meaning: </p>
 						<textarea className='meaning-textarea' 
 							onInput={changeDefinition} 
-							defaultValue="This is where you write the definition of the word" 
 							value={showValue_Definition}/></div></div></React.Fragment>)}}
 
 export default NewWordFormComponent;
