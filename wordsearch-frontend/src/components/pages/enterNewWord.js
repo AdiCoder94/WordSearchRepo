@@ -17,6 +17,7 @@ class EnterNewWord extends Component{
 			subCategory:"",
 			wordConnotation:"",
 			definition:"", 
+			isDuplicate: "",
 			showWordSavedMsg: false }
 
 		this.handleNewWordChange = this.handleNewWordChange.bind(this);	
@@ -27,6 +28,7 @@ class EnterNewWord extends Component{
 		this.handleConnotationChange = this.handleConnotationChange.bind(this);	
 		this.handleDefinitionChange = this.handleDefinitionChange.bind(this);	
 		this.saveWord = this.saveWord.bind(this); 
+		this.capitalizeFirstLetter = this.capitalizeFirstLetter.bind(this); 
 		this.changeSaveWordMsgState = this.changeSaveWordMsgState.bind(this);}
 
 	handleNewWordChange(e){
@@ -54,6 +56,11 @@ class EnterNewWord extends Component{
 		if(this.state.showWordSavedMsg){
 			this.setState({ showWordSavedMsg: false })}}	
 
+	capitalizeFirstLetter(word){
+		const lowerCased = word.toLowerCase()
+		return word.charAt(0).toUpperCase() + lowerCased.slice(1)
+	}		
+
 	saveWord(){
 		// grabbing state
 		var {
@@ -71,7 +78,7 @@ class EnterNewWord extends Component{
 				'Access-Control-Allow-Origin': `${frontendURL}`,
 				'Content-Type': 'application/json'},
 			body: JSON.stringify({
-				enteredWord: newWord,
+				enteredWord: this.capitalizeFirstLetter(newWord),
 				languageOfOrigin: originLang,
 				root: rootWord,
 				partOfSpeech: partOfSpeech,
@@ -89,9 +96,14 @@ class EnterNewWord extends Component{
 						subCategory: '',
 						wordConnotation: '',
 						definition: '',
+						savingStatus: json.message,
 						showWordSavedMsg: true }, () => {
-							setTimeout(this.changeSaveWordMsgState, 1000)
-						})}})}		
+							setTimeout(this.changeSaveWordMsgState, 1000)})}
+				else {
+					this.setState({
+						savingStatus: json.err_msg,
+						showWordSavedMsg: true }, () => {
+						setTimeout(this.changeSaveWordMsgState, 1000)})}})}		
 
 	render(){
 		let wordSaved_msg;
@@ -107,7 +119,7 @@ class EnterNewWord extends Component{
 		} = this.state
 
 		if(showWordSavedMsg ? 
-				wordSaved_msg = <span className='wordsaved_msg'>Word saved!</span> :
+				wordSaved_msg = <span className='wordsaved_msg'>{this.state.savingStatus}</span> :
 				wordSaved_msg = <React.Fragment />)
 
 		return(

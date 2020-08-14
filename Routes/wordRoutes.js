@@ -16,7 +16,7 @@ router.post('/new', function (req, res, next) {
 
 	if (!enteredWord || !partOfSpeech || !partOfSpeechSubCategory || !connotation || !root || !languageOfOrigin || !definition) {
 		return res.send({
-			err_msg: "Inadequate data" })
+			err_msg: "Fill all the fields" })
 	}
 
 	Words.findOne({
@@ -27,7 +27,7 @@ router.post('/new', function (req, res, next) {
 				err_msg: err })
 		} else if (doc) {
 			return res.send({
-				err_msg: "Sorry word already exists" })
+				err_msg: "Word already exists" })
 		} else if (!err) {
 			//creating new word document in the database
 			const newWord = new Words();
@@ -47,7 +47,7 @@ router.post('/new', function (req, res, next) {
 				return res.send({
 					success: true,
 					word: result,
-					message:"Word saved to database" })})}})})
+					message:"Word saved!" })})}})})
 
 router.get('/allwords', function(req, res, next){
 	Words.find({}, (err, doc) => {
