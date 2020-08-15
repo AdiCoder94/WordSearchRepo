@@ -61,16 +61,6 @@ router.get('/viewwordsbyletter/:letter', function(req, res, next){
 	var { letter } = req.params
 	var toMatch = `^${letter}`
 
-	function matchToRegex(array){
-		let resultArray = []
-		array.forEach(string => {
-			var re = new RegExp(toMatch)
-			var result = string.match(re)
-			console.log('is', result)
-			if( result !== null ){
-				resultArray.push(result.input) }})
-		return resultArray }
-
 	Words.find({}, (err, docs) => {
 		if(err){
 			return res.send({
@@ -78,17 +68,13 @@ router.get('/viewwordsbyletter/:letter', function(req, res, next){
 				err_msg: err }) 
 		}else {
 			var enteredWordArray = []
-			let matchedWords;
-			var i = 0;
 			docs.forEach(word => {
-				enteredWordArray.push(word.enteredWord)
-				++i;
-				if(i === docs.length){
-					matchedWords = matchToRegex(enteredWordArray).slice()
-					return res.send({
-						success: true,
-						words: matchedWords })}})	
-		}})})			
+				if(word.enteredWord.match(toMatch)){
+					enteredWordArray.push(word)}
+				else return null })
+			res.send({
+				success: true,
+				obj: enteredWordArray	})}})})			
 
 module.exports = router;
 

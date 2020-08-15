@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { viewWordByLetterURL } from '../../config/constants';
 
 import { backendURL, alphabetsArray } from '../../config/constants';
 import MemberHeader from '../Components/memberHeader';
@@ -39,7 +41,7 @@ function ViewAllWords(){
 							return (
 								<div className='view_word_griditem'>
 									<div className='view_word_grid-header flex-row'>
-										<h2>{char}</h2>
+										<Link to={`${viewWordByLetterURL}/${char}`}><h2>{char}</h2></Link>
 										<p>({orderWordList(char).length})	</p></div>
 									<hr />
 									<ul className='word_list'>
