@@ -135,30 +135,18 @@ router.post('/signout', (req, res, next) => {
     var { token } = req.query
 
     UserSession.findOneAndUpdate(
-        {_id: token, isDeleted: false}, 
-        {$set: {isDeleted: true}},
-        {new: true},
+        { _id: token, isDeleted: false }, 
+        { $set: { isDeleted: true } },
+        { new: true },
         (err, docs) => {
             if(err){
                 return res.send({
                     err: err,
-                    success: false
-                })
+                    success: false })
             }else return res.send({
                 success: true,
-                doc: docs
-            })
+                doc: docs })
         })   
 })
 
 module.exports = router;
-
-// , (err, docs) => {
-//     if(err){
-//         return res.send({
-//             err: err
-//         })
-//     } else return res.send({
-//         message: docs
-//     })
-// }

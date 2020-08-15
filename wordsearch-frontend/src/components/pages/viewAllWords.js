@@ -40,7 +40,7 @@ function ViewAllWords(){
 								<div className='view_word_griditem'>
 									<div className='view_word_grid-header flex-row'>
 										<h2>{char}</h2>
-										<p>{orderWordList(char).length}</p></div>
+										<p>({orderWordList(char).length})	</p></div>
 									<hr />
 									<ul className='word_list'>
 									{ orderWordList(char).map((word)=>{
