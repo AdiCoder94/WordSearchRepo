@@ -57,8 +57,9 @@ router.get('/allwords', function(req, res, next){
 		else if(doc){
 			return res.send(doc) }})})
 
-router.get('/viewwordsbyletter/:letter', function(req, res, next){
-	var { letter } = req.params
+router.post('/viewwordsbyletter', function(req, res, next){
+	var { letter } = req.body
+	letter = letter.trim()
 	var toMatch = `^${letter}`
 
 	Words.find({}, (err, docs) => {
@@ -74,7 +75,8 @@ router.get('/viewwordsbyletter/:letter', function(req, res, next){
 				else return null })
 			res.send({
 				success: true,
-				obj: enteredWordArray	})}})})			
+				obj: enteredWordArray	})}})
+			})			
 
 module.exports = router;
 

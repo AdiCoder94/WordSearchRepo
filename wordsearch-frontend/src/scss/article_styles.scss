@@ -354,9 +354,9 @@
         .view_word_grid-header {
             justify-content: space-between;
             align-items: center;
+            font-family: 'Open Sans Condensed-Bold';
 
             h2 {
-                font-family: 'Open Sans Condensed-Bold';
                 margin-bottom: 0;
             }
 
@@ -364,7 +364,6 @@
                 font-size: 1.3em;
                 align-self: flex-end;
                 margin-bottom: 0;
-                font-family: 'Open Sans Condensed-Bold';
             }
         }
 
@@ -376,9 +375,67 @@
             background-color: #ccc;
             padding-inline-start: 1.3em;
             margin: 0;
+
             li {
                 font-family: 'Open Sans Condensed';
             }
         }
+    }
+}
+
+//view word in detail styles
+.viewwordindetail-section-container {
+    width: 100%;
+
+    hr {
+        width: 100%;
+        margin: 0;
+        margin-top: 0.5em;
+    }
+
+    .wordlist-section {
+        width: 28%;
+
+        .wordlist-header {
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Open Sans Condensed-Bold';
+
+            p {
+                position: relative;
+                bottom: -0.3em;
+                margin: 0;
+                margin-top: 0.1em;
+                font-size: 1em;
+                align-self:flex-end;
+            }
+        }
+
+        .wordlist-container {
+            height: 25em;
+
+            ul {
+                background-color: white;
+                padding-inline-start: 1.5em;
+                margin: 0;
+                height: 100%;
+                
+
+                li {
+                    font-family: 'Open Sans Condensed';
+                    padding: 0.2em 0;
+                    cursor: pointer !important;
+
+                    &:hover {
+                        background-color: #3279db;
+                        color: white
+                    }
+                }
+            }
+        }
+    }
+
+    .word-preview-section {
+        width: 70%
     }
 }

@@ -10,7 +10,7 @@ import StoryPlot from './components/Pages/Plot';
 import EnterNewWord from './components/Pages/enterNewWord';
 import ViewAllWords from './components/Pages/viewAllWords';
 import MemberDashboard from './components/Pages/memberDashboard';
-import ViewWordByLetter from './components/Pages/viewWordByLetter';
+import ViewWordsByLetter from './components/Pages/viewWordsByLetter';
 
 
 function Routes(){
@@ -25,7 +25,7 @@ function Routes(){
 			<Route path='/memberdashboard' component={MemberDashboard} exact />
 			<Route path='/memberdashboard/viewallwords' component={ViewAllWords} exact />
 			<Route path='/memberdashboard/new_entry' component={EnterNewWord} exact />
-			<Route path='/memberdashboard/viewwordbyletter/:letter' component={ViewWordByLetter} exact />
+			<Route path='/memberdashboard/viewwordsbyletter/:letter' component={ViewWordsByLetter} exact />
 		</React.Fragment>
 	)
 }
