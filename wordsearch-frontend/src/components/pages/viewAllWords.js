@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { backendURL, alphabetsArray, viewWordsByLetterURL } from '../../config/constants';
+import { backendURL, alphabetsArray, viewWordsByLetterURL, viewworddatabaseURL } from '../../config/constants';
 import MemberHeader from '../Components/memberHeader';
 import Spinner from "../Components/spinner";
 	
@@ -20,7 +20,7 @@ function ViewAllWords(){
 	const [triggerComponent, setTriggerComponent] = useState(false)
 
 	useEffect(() => {
-		fetch(`${backendURL}api/word/allwords`, 
+		fetch(`${backendURL}${viewworddatabaseURL}`, 
 			{	method: 'GET' })
 			.then(res => res.json())
 			.then(json => setWordArray(json))

@@ -4,7 +4,7 @@ import MemberHeader from "../Components/memberHeader";
 import NewWordFormComponent from "../Components/newWordFormComponent";
 import WordPreview from "../Components/newWordPreview";
 
-import { frontendURL, backendURL } from '../../config/constants';
+import { frontendURL, backendURL, enternewwordURL } from '../../config/constants';
 
 class EnterNewWord extends Component{
 	constructor(props){
@@ -72,7 +72,7 @@ class EnterNewWord extends Component{
 			wordConnotation,
 			definition } = this.state
 
-		fetch(`${backendURL}api/word/new`, {
+		fetch(`${backendURL}${enternewwordURL}`, {
 			method: 'POST',
 			headers:{
 				'Access-Control-Allow-Origin': `${frontendURL}`,

@@ -20,15 +20,7 @@ function WordInDetailComponent(props){
 
 function WordByLetterListComponent(props){
   let { recievedWordsProps } = props
-  let clickedWordDetailObj
   const [ clickedWord, setClickedWord ] = useState(null)
-
-  useEffect(() => {
-    console.log(clickedWord)
-    clickedWordDetailObj = clickedWord
-    console.log('data', clickedWordDetailObj)
-  }, [clickedWord])
-
 
   return(
     <React.Fragment>

@@ -1,6 +1,6 @@
 import React,{ useState, useEffect } from 'react';
 
-import { backendURL, frontendURL } from '../../config/constants';
+import { backendURL, frontendURL, viewwordbyletterURL } from '../../config/constants';
 import MemberHeader from "../Components/memberHeader";
 import WordByLetterListComponent from "../Components/wordByLetterListComponent";
 import Spinner from "../Components/spinner";
@@ -13,7 +13,7 @@ function ViewWordsByLetter(props){
   let recievedWords, viewWordInDetailComponent
 
   useEffect(() => {
-    fetch(`${backendURL}api/word/viewwordsbyletter`, { 
+    fetch(`${backendURL}${viewwordbyletterURL}`, { 
       method: 'POST',
       headers:{
         'Access-Control-Allow-Origin': `${frontendURL}`,
