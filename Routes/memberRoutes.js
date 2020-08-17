@@ -130,10 +130,9 @@ router.post('/signin', (req, res, next) => {
 
 // creating route endpoints for logging out members
 router.post('/signout', (req, res, next) => {
-
     // getting the token by sending query parameters
-    var { token } = req.query
-
+    var token  = req.header('Autherization')
+    
     UserSession.findOneAndUpdate(
         { _id: token, isDeleted: false }, 
         { $set: { isDeleted: true } },
@@ -143,10 +142,17 @@ router.post('/signout', (req, res, next) => {
                 return res.send({
                     err: err,
                     success: false })
-            }else return res.send({
-                success: true,
-                doc: docs })
-        })   
+            }else UserSession.deleteOne({_id: docs._id}, (err, status) => {
+                    if(err){
+                        return res.send({ 
+                            success: false,
+                            err_msg: err })}
+                    else return res.send({
+                        success: true,
+                        deleteStatus: 'session expired'
+                    })
+                })                
+        }) 
 })
 
 module.exports = router;

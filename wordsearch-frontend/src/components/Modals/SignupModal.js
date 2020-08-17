@@ -3,7 +3,7 @@ import 'whatwg-fetch';
 import Spinner from "../Components/spinner";
 import '../../scss/base_styles.scss';
 import '../../scss/article_styles.scss';
-import { frontendURL, backendURL } from '../../config/constants';
+import { frontendURL, backendURL, signupURL } from '../../config/constants';
 
 class SignupModal extends Component{
 	constructor(props){
@@ -83,7 +83,7 @@ class SignupModal extends Component{
 		
 		if(check && match){		
 			//submitting data for registration
-			fetch(`${backendURL}api/account/signup`, {
+			fetch(`${backendURL}${signupURL}`, {
 				method: 'POST',
 				headers:{ 
 					'Access-Control-Allow-Origin': `${frontendURL}`,

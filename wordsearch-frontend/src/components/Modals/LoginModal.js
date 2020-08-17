@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../scss/base_styles.scss';
 import '../../scss/article_styles.scss';
 import Spinner from "../Components/spinner";
-import { frontendURL, backendURL, memberDashboardURL } from '../../config/constants';
+import { frontendURL, backendURL, memberDashboardURL, signinURL } from '../../config/constants';
 
 class LoginModal extends Component{
 	constructor(props){
@@ -51,7 +51,7 @@ class LoginModal extends Component{
 		var check = checkEmptyField()	
 		
 		if(check){	
-			fetch(`${backendURL}api/account/signin`, {
+			fetch(`${backendURL}${signinURL}`, {
 				method: 'POST',
 				headers:{
 					'Access-Control-Allow-Origin': `${frontendURL}`,
