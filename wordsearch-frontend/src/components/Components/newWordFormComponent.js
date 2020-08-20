@@ -1,11 +1,35 @@
 import React, { Component } from 'react';
 
+import { originLanguages, partsOfSpeech, connotation, subTypes } from '../../config/constants';
+
 class NewWordFormComponent extends Component{
 	constructor(props){
 		super(props);
 
 		this.state = {
-			value:"There is no definition provided" }}
+			value:"There is no definition provided",
+			enteredPartOfSpeech: "" }
+
+		this.showSubCategoryInput = this.showSubCategoryInput.bind(this);  }
+
+	 showSubCategoryInput(event){
+		let { value } = event.target
+		switch(value){
+			case "Noun": this.setState({ enteredPartOfSpeech: 'Noun' })
+			break;
+			case "Pronoun": this.setState({ enteredPartOfSpeech: 'Pronoun' })
+			break;
+			case "Verb": this.setState({ enteredPartOfSpeech: 'Verb' })
+			break;
+			case "Adjective": this.setState({ enteredPartOfSpeech: 'Adjective' })
+			break;
+			case "Adverb": this.setState({ enteredPartOfSpeech: 'Adverb' })
+			break;
+			case "Preposition": this.setState({ enteredPartOfSpeech: 'Preposition' })
+			break;
+			case "Conjuction": this.setState({ enteredPartOfSpeech: 'Conjuction' })
+			break;
+			default :	this.setState({ enteredPartOfSpeech: '' } )}}
 
 	render(){
 		let {
@@ -25,8 +49,7 @@ class NewWordFormComponent extends Component{
 			showValue_Connotation,
 			showValue_Definition } = this.props
 		
-		if(clearFormProps === true){
-			this.clearOnSave()}
+		if(clearFormProps === true){ this.clearOnSave() }
 
 		return(
 			<React.Fragment>
@@ -42,29 +65,54 @@ class NewWordFormComponent extends Component{
 								<span className='subheading-text'>Language of origin: </span>
 								<input className='enter-word-form' 
 									onInput={changeOriginLang}  
-									value={showValue_OriginLang}/></div>
+									value={showValue_OriginLang}
+									list='originlang' />
+								<datalist id='originlang'>
+									{originLanguages.map(language => (
+										<option value={`${language}`} /> ))}</datalist></div>
 							<div className='inputfield flex-column'>
 								<span className='subheading-text'>Root word: </span>
 								<input className='enter-word-form' 
 									onInput={changeRootWord}  
-									value={showValue_RootWord}/></div>
-						</div>
+									value={showValue_RootWord}/></div></div>
 						<div className='grammar-column flex-column'>
 							<div className='inputfield flex-column'> 
 								<span className='subheading-text'>Part of speech: </span>
 								<input className='enter-word-form'  
 									onInput={changeCategory}  
-									value={showValue_PartOfSpeech}/></div>
+									onChange={this.showSubCategoryInput}
+									value={showValue_PartOfSpeech}
+									list='partofspeech'/>
+								<datalist id='partofspeech'>
+									{partsOfSpeech.map(part => (
+										<option value={`${part}`} /> ))}</datalist></div>
 							<div className='inputfield flex-column'>
 								<span className='subheading-text'>Subcategory: </span>
 								<input className='enter-word-form' 
 									onInput={changeSubCategory}  
-									value={showValue_SubCategory}/></div>
+									value={showValue_SubCategory}
+									list={`${this.state.enteredPartOfSpeech}`}/>
+								<datalist id='Noun'>
+									{subTypes.Nouns.map(type => (
+										<option value={`${type}`}></option>))}</datalist>	
+								<datalist id='Adjective'>
+									{subTypes.Adjective.map(type => (
+										<option value={`${type}`}></option>))}</datalist>	
+								<datalist id='Adverb'>
+									{subTypes.Adverb.map(type => (
+										<option value={`${type}`}></option>))}</datalist>
+								<datalist id='Verb'>
+									{subTypes.Verb.map(type => (
+										<option value={`${type}`}></option>))}</datalist></div>
 							<div className='inputfield flex-column'>
 								<span className='subheading-text'>Connotation: </span>
 								<input className='enter-word-form' 
 									onInput={changeConnotation}  
-									value={showValue_Connotation}/></div></div></div>
+									value={showValue_Connotation}
+									list='connotation' />
+								<datalist id='connotation'>
+									{connotation.map(type => (
+										<option value={`${type}`} /> ))}</datalist></div></div></div>
 					<div className='form-bottom-section'>
 						<p className='subheading-text'>Meaning: </p>
 						<textarea className='meaning-textarea' 
