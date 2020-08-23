@@ -38,7 +38,6 @@ memberSchema.methods.validPassword = async function(password) {
 	const matchPassword = await new Promise((resolve, reject) => {
 		bcrypt.compare(password, this.password)
 		.then((hashp) => {
-			console.log('compare', hashp)
 			resolve (hashp)})
 		.catch(err => reject(err))	
 	})

@@ -25,7 +25,7 @@ function ViewAllWords(){
 			.then(res => res.json())
 			.then(json => setWordArray(json))
 			.then(() => setTriggerComponent(true))
-			.catch(err => console.log(err))}, [triggerComponent])
+			.catch(err => console.log(err))}, [wordArray])
 	
 	useEffect(() => {	
 		let wordList = wordArray.map(word => word.enteredWord )

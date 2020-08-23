@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var jwt = require('jsonwebtoken')
 
 const User = require("../Models/members.model");
 const UserSession = require('../Models/userSession.model');
+
+const accessTokenSecret = require('../config/constants').accessTokenSecret;
 
 // creating route endpoint for signing up new users
 router.post('/signup', (req, res, next) => {
@@ -80,7 +83,6 @@ router.post('/signin', (req, res, next) => {
         email,
         password
     } = req.body;
-
     if (!password) {
         return res.send({
             message: "Password cannot be blank" })
@@ -98,31 +100,44 @@ router.post('/signin', (req, res, next) => {
                 message: "Server error" })
         } else if (docs.length != 1) {
             return res.send({
-                message: 'not signed up' })
+                message: 'Not signed up' })
         } else {
             const user = docs[0]
+            console.log('logged in', user)
 
             async function matchPassword(){
                 let compare = await user.validPassword(password)
                 return compare }
 
+            async function setAccessToken(){
+                const accessToken = await jwt.sign({ user: user._id }, accessTokenSecret)
+                console.log('jwt', accessToken)
+                return accessToken
+            }    
+
             matchPassword()
-            .then((result) => {
+            .then(result => {
                 if(result){
-                    let userSession = new UserSession()
-                    userSession.userID = user._id
-                    userSession.save()
-                    .then((docs, err) => {
-                        if(docs){
-                            return res.send({
-                                message: 'signed in',
-                                token: docs._id,  
-                                success: true })}
-                        else return res.send({
-                            err: err ,
-                            success: false })})
-                    .catch(err => console.log('err', err))
-                } else return res.send({ message: 'wrong password'})})
+                    setAccessToken()
+                    .then(token => {
+                        let userSession = new UserSession()
+                        userSession.userID = user._id
+                        userSession.save()
+                        .then((docs, err) => {
+                            if(docs){
+                                return res.send({
+                                    message: 'signed in',
+                                    token: token,
+                                    doc: docs,  
+                                    success: true 
+                                })}
+                            else return res.send({
+                                err: err ,
+                                success: false })
+                        })
+                    }
+                )}                
+                else return res.send({ message: 'wrong password'})})
             .catch(err => console.log(err))
         }
     })
@@ -156,3 +171,19 @@ router.post('/signout', (req, res, next) => {
 })
 
 module.exports = router;
+
+// // 
+// .then((docs, err) => {
+//     if(docs){
+//         return res.send({
+//             message: 'signed in',
+//             token: docs._id,
+//             doc: docs,  
+//             success: true 
+//         })}
+//     else return res.send({
+//         err: err ,
+//         success: false })
+//     }
+//         )
+// .catch(err => console.log('err', err))

@@ -9,22 +9,22 @@ class MemberHeader extends Component{
 	constructor(){
 		super();
 		this.state = { doLogout: false }
-		this.logout = this.logout.bind(this);	}
+		this.logout = this.logout.bind(this); }
 
 	logout(){
-			let token = sessionStorage.getItem('token')
-			fetch(`${backendURL}${signoutURL}`, {
-				method: 'POST',
-				headers:{
-					'Access-Control-Allow-Origin': `${frontendURL}`,
-					'Content-Type': 'application/json',
-					'Autherization': token },
-				body: JSON.stringify({ shouldLogout: this.state.doLogout })})
-			.then(res => res.json())
-			.then(json => {
-				if(json.success){
-					window.location.href = `${frontendURL}` }})
-			.catch(err => console.log(err))}
+		let token = sessionStorage.getItem('token')
+		fetch(`${backendURL}${signoutURL}`, {
+			method: 'POST',
+			headers:{
+				'Access-Control-Allow-Origin': `${frontendURL}`,
+				'Content-Type': 'application/json',
+				'Autherization': token },
+			body: JSON.stringify({ shouldLogout: this.state.doLogout })})
+		.then(res => res.json())
+		.then(json => {
+			if(json.success){
+				window.location.href = `${frontendURL}` }})
+		.catch(err => console.log(err))}
 
 	render(){
 		return(

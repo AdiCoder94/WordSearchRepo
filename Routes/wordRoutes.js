@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-var Words = require('../Models/word.model');
-const { compareSync } = require('bcrypt');
+var authenticateUser = require('../config/middlewares').authenticateJWT
 
-router.post('/new', function (req, res, next) {
+var Words = require('../Models/word.model');
+var UserSession = require('../Models/userSession.model');
+
+router.post('/new', authenticateUser, function (req, res, next) {
 	var {
 		enteredWord,
 		partOfSpeech,
@@ -14,7 +16,7 @@ router.post('/new', function (req, res, next) {
 		languageOfOrigin,
 		definition
 	} = req.body;
-
+	
 	if (!enteredWord || !partOfSpeech || !partOfSpeechSubCategory || !connotation || !root || !languageOfOrigin || !definition) {
 		return res.send({
 			err_msg: "Fill all the fields" })
@@ -50,14 +52,18 @@ router.post('/new', function (req, res, next) {
 					word: result,
 					message:"Word saved!" })})}})})
 
-router.get('/allwords', function(req, res, next){
-	Words.find({}, (err, doc) => {
+
+router.get('/allwords', authenticateUser, function(req, res, next){
+	Words.find({})
+	.populate('savedByUsers')
+	.exec((err, doc) => {
 		if(err){
-		return res.send("Server error")	}
+			return res.send("Server error")	}
 		else if(doc){
 			return res.send(doc) }})})
 
-router.post('/viewwordsbyletter', function(req, res, next){
+
+router.post('/viewwordsbyletter', authenticateUser, function(req, res, next){
 	var { letter } = req.body
 	letter = letter.trim()
 	var toMatch = `^${letter}`
