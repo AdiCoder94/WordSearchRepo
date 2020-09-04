@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "node-sass": "^4.10.0",
+    "node-sass": "^4.14.1",
     "react": "^16.8",
     "react-dom": "^16.8 ",
-    "react-redux": "^6.0.0",
+    "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
-    "redux": "^4.0.1",
-    "whatwg-fetch": "^3.0.0"
+    "redux": "^4.0.5",
+    "whatwg-fetch": "^3.4.0"
   },
   "scripts": {
     "start": "set PORT=3012 && react-scripts start",

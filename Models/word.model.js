@@ -30,9 +30,10 @@ const wordSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 		default: ''	},
-	savedByUsers: {
+	savedBy: [{
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Member' }}
+		ref: 'Member' }]	
+	}
 )
 
 wordSchema.methods.capitalize = function(word){

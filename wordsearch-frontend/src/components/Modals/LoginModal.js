@@ -55,19 +55,20 @@ class LoginModal extends Component{
 				method: 'POST',
 				headers:{
 					'Access-Control-Allow-Origin': `${frontendURL}`,
-					'Content-Type': 'application/json'},
+					'Content-Type': 'application/json',
+					'Authorization': '' },
 				body: JSON.stringify({
 					email: signUpEmail,
 					password: logInPassword	})})
 				.then(res => res.json())
-				.then(json =>{
+				.then(json => {
 					if(json.success){
-						sessionStorage.setItem('token', json.token)
 						this.setState({
-							token: json.token, 
 							viewLoginModal: false,
-							isLoading: false,
-						}, () => window.location.href = `${frontendURL}${memberDashboardURL}`)
+							isLoading: false
+						}, () => { 
+							sessionStorage.setItem('token', json.header.authorization)
+							window.location.href = `${frontendURL}${memberDashboardURL}` })
 					}else this.setState({
 						isLoading: false,
 						inputErrorMsg: json.message,

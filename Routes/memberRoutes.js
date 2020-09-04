@@ -79,6 +79,11 @@ router.post('/signup', (req, res, next) => {
 
 // creating route endpoints for logging in members
 router.post('/signin', (req, res, next) => {
+
+    async function setAuthHeader(token){
+        if(req.headers.authorization === '' || req.headers.authorization === undefined){
+            req.headers.authorization = token }}
+
     var {
         email,
         password
@@ -103,17 +108,14 @@ router.post('/signin', (req, res, next) => {
                 message: 'Not signed up' })
         } else {
             const user = docs[0]
-            console.log('logged in', user)
 
             async function matchPassword(){
                 let compare = await user.validPassword(password)
                 return compare }
 
             async function setAccessToken(){
-                const accessToken = await jwt.sign({ user: user._id }, accessTokenSecret)
-                console.log('jwt', accessToken)
-                return accessToken
-            }    
+                const accessToken = await jwt.sign({ user: user._id }, accessTokenSecret, { expiresIn: 3600 })
+                return accessToken }    
 
             matchPassword()
             .then(result => {
@@ -121,19 +123,20 @@ router.post('/signin', (req, res, next) => {
                     setAccessToken()
                     .then(token => {
                         let userSession = new UserSession()
-                        userSession.userID = user._id
-                        userSession.save()
-                        .then((docs, err) => {
-                            if(docs){
-                                return res.send({
-                                    message: 'signed in',
-                                    token: token,
-                                    doc: docs,  
-                                    success: true 
-                                })}
-                            else return res.send({
-                                err: err ,
-                                success: false })
+                        userSession.userID = token
+                        setAuthHeader(token)
+                        .then(() => {
+                            userSession.save()
+                            .then((docs, err) => {
+                                if(docs){ 
+                                    return res.send({ 
+                                        message: 'signed in',
+                                        header: req.headers,
+                                        success: true
+                                    })}
+                                else return res.send({
+                                    err: err ,
+                                    success: false })})
                         })
                     }
                 )}                
@@ -146,15 +149,15 @@ router.post('/signin', (req, res, next) => {
 // creating route endpoints for logging out members
 router.post('/signout', (req, res, next) => {
     // getting the token by sending query parameters
-    var token  = req.header('Autherization')
+    var { user }  = req.body
     
     UserSession.findOneAndUpdate(
-        { _id: token, isDeleted: false }, 
+        { userID: user, isDeleted: false }, 
         { $set: { isDeleted: true } },
-        { new: true },
+        { new: true }, 
         (err, docs) => {
             if(err){
-                return res.send({
+                return res.send({ 
                     err: err,
                     success: false })
             }else UserSession.deleteOne({_id: docs._id}, (err, status) => {
@@ -171,19 +174,3 @@ router.post('/signout', (req, res, next) => {
 })
 
 module.exports = router;
-
-// // 
-// .then((docs, err) => {
-//     if(docs){
-//         return res.send({
-//             message: 'signed in',
-//             token: docs._id,
-//             doc: docs,  
-//             success: true 
-//         })}
-//     else return res.send({
-//         err: err ,
-//         success: false })
-//     }
-//         )
-// .catch(err => console.log('err', err))

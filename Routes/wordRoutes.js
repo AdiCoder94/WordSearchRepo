@@ -5,6 +5,8 @@ var authenticateUser = require('../config/middlewares').authenticateJWT
 
 var Words = require('../Models/word.model');
 var UserSession = require('../Models/userSession.model');
+var User = require('../Models/members.model');
+
 
 router.post('/new', authenticateUser, function (req, res, next) {
 	var {
@@ -16,7 +18,7 @@ router.post('/new', authenticateUser, function (req, res, next) {
 		languageOfOrigin,
 		definition
 	} = req.body;
-	
+
 	if (!enteredWord || !partOfSpeech || !partOfSpeechSubCategory || !connotation || !root || !languageOfOrigin || !definition) {
 		return res.send({
 			err_msg: "Fill all the fields" })
@@ -33,6 +35,7 @@ router.post('/new', authenticateUser, function (req, res, next) {
 				err_msg: "Word already exists in the database" })
 		} else if (!err) {
 			//creating new word document in the database
+			const currentUser = req.currentUser.user
 			const newWord = new Words();
 			newWord.enteredWord = newWord.capitalize(enteredWord);
 			newWord.partOfSpeech = partOfSpeech;
@@ -41,6 +44,7 @@ router.post('/new', authenticateUser, function (req, res, next) {
 			newWord.root = root;
 			newWord.languageOfOrigin = languageOfOrigin;
 			newWord.definition = definition;
+			newWord.savedBy.push(currentUser)
 			newWord.save((err, result) => {
 				if (err) {
 					return res.send({
@@ -50,12 +54,13 @@ router.post('/new', authenticateUser, function (req, res, next) {
 				return res.send({
 					success: true,
 					word: result,
+					user: currentUser,
 					message:"Word saved!" })})}})})
 
 
 router.get('/allwords', authenticateUser, function(req, res, next){
 	Words.find({})
-	.populate('savedByUsers')
+	.populate('savedBy')
 	.exec((err, doc) => {
 		if(err){
 			return res.send("Server error")	}
@@ -63,7 +68,7 @@ router.get('/allwords', authenticateUser, function(req, res, next){
 			return res.send(doc) }})})
 
 
-router.post('/viewwordsbyletter', authenticateUser, function(req, res, next){
+router.post('/viewwordsbyletter', function(req, res, next){
 	var { letter } = req.body
 	letter = letter.trim()
 	var toMatch = `^${letter}`
@@ -85,4 +90,3 @@ router.post('/viewwordsbyletter', authenticateUser, function(req, res, next){
 			})			
 
 module.exports = router;
-

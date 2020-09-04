@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { frontendURL, backendURL, signoutURL } from '../../config/constants';
+import { frontendURL, backendURL, signoutURL, signinURL } from '../../config/constants';
 
 import '../../scss/base_styles.scss';
 import '../../scss/header_styles.scss';
@@ -17,12 +17,14 @@ class MemberHeader extends Component{
 			method: 'POST',
 			headers:{
 				'Access-Control-Allow-Origin': `${frontendURL}`,
-				'Content-Type': 'application/json',
-				'Autherization': token },
-			body: JSON.stringify({ shouldLogout: this.state.doLogout })})
+				'Content-Type': 'application/json' },
+			body: JSON.stringify({ 
+				shouldLogout: this.state.doLogout,
+				user: token })})
 		.then(res => res.json())
 		.then(json => {
 			if(json.success){
+				sessionStorage.removeItem('token')
 				window.location.href = `${frontendURL}` }})
 		.catch(err => console.log(err))}
 
