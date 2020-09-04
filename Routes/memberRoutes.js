@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken')
+var base64 = require('base64url')
 
 const User = require("../Models/members.model");
 const UserSession = require('../Models/userSession.model');
@@ -79,7 +80,6 @@ router.post('/signup', (req, res, next) => {
 
 // creating route endpoints for logging in members
 router.post('/signin', (req, res, next) => {
-
     async function setAuthHeader(token){
         if(req.headers.authorization === '' || req.headers.authorization === undefined){
             req.headers.authorization = token }}
@@ -126,12 +126,16 @@ router.post('/signin', (req, res, next) => {
                         userSession.userID = token
                         setAuthHeader(token)
                         .then(() => {
+                            const signedToken = req.headers.authorization
+                            const signedToken_payload = signedToken.split('.')
+                            const currentUserString = base64.decode(signedToken_payload[1])
+                            const currentUserObj = JSON.parse(currentUserString)
                             userSession.save()
                             .then((docs, err) => {
                                 if(docs){ 
                                     return res.send({ 
                                         message: 'signed in',
-                                        header: req.headers,
+                                        user: currentUserObj.user,
                                         success: true
                                     })}
                                 else return res.send({

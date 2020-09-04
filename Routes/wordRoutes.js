@@ -59,6 +59,7 @@ router.post('/new', authenticateUser, function (req, res, next) {
 
 
 router.get('/allwords', authenticateUser, function(req, res, next){
+	console.log(req.currentUser.user)
 	Words.find({})
 	.populate('savedBy')
 	.exec((err, doc) => {
