@@ -5,6 +5,9 @@ const userSessionSchema = new mongoose.Schema({
 	userID: {
 		type: String,
 		default: -1	},
+	currentUser: {
+		type: String,
+		default: -1	},	
 	timeStamp: {
 		type: Date,
 		default: Date.now()	},

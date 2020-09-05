@@ -13,7 +13,7 @@ class LoginModal extends Component{
 			logInError:"",
 			signUpEmail:'',
 			logInPassword:'', 
-			token: '' ,
+			token:'' ,
 			clickedHeaderBtn: false,
 			inputErrorDisplay: false,
 			inputErrorMsg: ''}
@@ -67,7 +67,7 @@ class LoginModal extends Component{
 							viewLoginModal: false,
 							isLoading: false
 						}, () => { 
-							sessionStorage.setItem('token', json.header.authorization)
+							sessionStorage.setItem('token', json.user)
 							window.location.href = `${frontendURL}${memberDashboardURL}` })
 					}else this.setState({
 						isLoading: false,

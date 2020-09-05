@@ -130,6 +130,7 @@ router.post('/signin', (req, res, next) => {
                             const signedToken_payload = signedToken.split('.')
                             const currentUserString = base64.decode(signedToken_payload[1])
                             const currentUserObj = JSON.parse(currentUserString)
+                            userSession.currentUser = currentUserObj.user
                             userSession.save()
                             .then((docs, err) => {
                                 if(docs){ 
@@ -156,7 +157,7 @@ router.post('/signout', (req, res, next) => {
     var { user }  = req.body
     
     UserSession.findOneAndUpdate(
-        { userID: user, isDeleted: false }, 
+        { currentUser: user, isDeleted: false }, 
         { $set: { isDeleted: true } },
         { new: true }, 
         (err, docs) => {
