@@ -7,6 +7,8 @@ const User = require("../Models/members.model");
 const UserSession = require('../Models/userSession.model');
 
 const accessTokenSecret = require('../config/constants').accessTokenSecret;
+var authenticateUser = require('../config/middlewares').authenticateJWT
+
 
 // creating route endpoint for signing up new users
 router.post('/signup', (req, res, next) => {
@@ -80,6 +82,7 @@ router.post('/signup', (req, res, next) => {
 
 // creating route endpoints for logging in members
 router.post('/signin', (req, res, next) => {
+
     async function setAuthHeader(token){
         if(req.headers.authorization === '' || req.headers.authorization === undefined){
             req.headers.authorization = token }}
@@ -136,9 +139,12 @@ router.post('/signin', (req, res, next) => {
                                 if(docs){ 
                                     return res.send({ 
                                         message: 'signed in',
+                                        token: signedToken,
                                         user: currentUserObj.user,
                                         success: true
-                                    })}
+                                    })
+                                
+                                }
                                 else return res.send({
                                     err: err ,
                                     success: false })})
@@ -152,12 +158,12 @@ router.post('/signin', (req, res, next) => {
 })
 
 // creating route endpoints for logging out members
-router.post('/signout', (req, res, next) => {
-    // getting the token by sending query parameters
-    var { user }  = req.body
-    
+router.post('/signout', authenticateUser, (req, res, next) => {
+
+    let userToken = req.header('Authorization').split(' ')[1]  
+
     UserSession.findOneAndUpdate(
-        { currentUser: user, isDeleted: false }, 
+        { userID: userToken, isDeleted: false }, 
         { $set: { isDeleted: true } },
         { new: true }, 
         (err, docs) => {

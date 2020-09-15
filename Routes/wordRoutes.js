@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var getToken = require('../config/middlewares').getToken
 var authenticateUser = require('../config/middlewares').authenticateJWT
 
 var Words = require('../Models/word.model');
@@ -59,7 +60,6 @@ router.post('/new', authenticateUser, function (req, res, next) {
 
 
 router.get('/allwords', authenticateUser, function(req, res, next){
-	console.log(req.currentUser.user)
 	Words.find({})
 	.populate('savedBy')
 	.exec((err, doc) => {
@@ -69,7 +69,8 @@ router.get('/allwords', authenticateUser, function(req, res, next){
 			return res.send(doc) }})})
 
 
-router.post('/viewwordsbyletter', function(req, res, next){
+router.post('/viewwordsbyletter', authenticateUser, function(req, res, next){
+
 	var { letter } = req.body
 	letter = letter.trim()
 	var toMatch = `^${letter}`

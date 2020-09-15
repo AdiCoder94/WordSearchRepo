@@ -1,94 +1,50 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import * as authActions from '../../redux_components/actions/authActions/authActionCreator';
+
 import '../../scss/base_styles.scss';
 import '../../scss/article_styles.scss';
 import Spinner from "../Components/spinner";
-import { frontendURL, backendURL, memberDashboardURL, signinURL } from '../../config/constants';
 
 class LoginModal extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
 			viewLoginModal:true,
-			isLoading:false,
-			logInError:"",
+			isLoading:false, //to be props
 			signUpEmail:'',
 			logInPassword:'', 
-			token:'' ,
+			token:'' , //to be props
 			clickedHeaderBtn: false,
 			inputErrorDisplay: false,
-			inputErrorMsg: ''}
+			inputErrorMsg: '' // to be props
+		}
 		this.hideModal = this.hideModal.bind(this);
 		this.onTextboxChangeUserName = this.onTextboxChangeUserName.bind(this);
-		this.onTextboxChangeLogInPassword = this.onTextboxChangeLogInPassword.bind(this);
-		this.onSignIn = this.onSignIn.bind(this);	}
+		this.onTextboxChangeLogInPassword = this.onTextboxChangeLogInPassword.bind(this);	}
 
-	onTextboxChangeUserName(e){
-		this.setState({
-			signUpEmail:e.target.value	})}
+	onTextboxChangeUserName(event){
+		this.setState({	signUpEmail:event.target.value	})}
 
-	onTextboxChangeLogInPassword(e){
-		this.setState({
-			logInPassword:e.target.value })}
+	onTextboxChangeLogInPassword(event){
+		this.setState({	logInPassword:event.target.value })}
 
-	onSignIn(){
-		this.setState({ isLoading: !this.state.isLoading });	
-
-		// grab state
-		var {
-			signUpEmail,
-			logInPassword } = this.state;
-
-		const checkEmptyField = () => {
-			// empty field scenario
-			if(!signUpEmail || !logInPassword){ 
-				this.setState({ 
-					inputErrorDisplay: true,
-					inputErrorMsg: 'All fields are neccessary.',
-					isLoading: false })
-					return false }	
-			else return true;}	
-
-		var check = checkEmptyField()	
-		
-		if(check){	
-			fetch(`${backendURL}${signinURL}`, {
-				method: 'POST',
-				headers:{
-					'Access-Control-Allow-Origin': `${frontendURL}`,
-					'Content-Type': 'application/json',
-					'Authorization': '' },
-				body: JSON.stringify({
-					email: signUpEmail,
-					password: logInPassword	})})
-				.then(res => res.json())
-				.then(json => {
-					if(json.success){
-						this.setState({
-							viewLoginModal: false,
-							isLoading: false
-						}, () => { 
-							sessionStorage.setItem('token', json.user)
-							window.location.href = `${frontendURL}${memberDashboardURL}` })
-					}else this.setState({
-						isLoading: false,
-						inputErrorMsg: json.message,
-						inputErrorDisplay: true	})})}}
 
 	hideModal(){
-		this.setState({ viewLoginModal:false },() => {
+		this.setState({ viewLoginModal: false }, () => {
 			this.props.headerBtnActive(this.state.viewLoginModal)
 			this.props.isModalClosed(this.state.viewLoginModal) })}
 
 	render(){
-		let hideModalClassName, loaderClassName, messageClassName;
+		let hideModalClassName, loaderClassName, messageClassName, fetchStatus;
 		(this.state.viewLoginModal) ? (hideModalClassName = "modal-container") : (hideModalClassName="hidden");
 		(this.state.isLoading) ? (loaderClassName = 'loader-container flex-row') : (loaderClassName = 'hidden');
 		(this.state.inputErrorDisplay) ? (messageClassName='message-container') : (messageClassName = 'hidden');
+		(this.props.signInState.isFetching) ? (fetchStatus = 'hello') : (fetchStatus = 'bye');
 	
-		var {
-			signUpEmail,
-			logInPassword,
-			inputErrorMsg	} = this.state
+		var { signUpEmail, logInPassword } = this.state
+		const userCred = { signUpEmail, logInPassword }
 
 		return(
 			<React.Fragment>
@@ -102,10 +58,26 @@ class LoginModal extends Component{
 							<input type='password' value={logInPassword} onChange={this.onTextboxChangeLogInPassword} /></div>
 						<div className='login-cancel-holder flex-row'>	
 							<button className='close-modal-btn modal-btn' onClick={this.hideModal}>Cancel</button>
-							<button className="submit-form-btn modal-btn" onClick={this.onSignIn}>Login</button></div>
+							<button className="submit-form-btn modal-btn" onClick={() => this.props.onSignIn(userCred)}>Login</button></div>
 						<div className={loaderClassName}>
 							<Spinner />
 							<p className='pleasewait-txt'>Please wait...</p></div>	
-						<p className={ messageClassName }>{inputErrorMsg}</p></div></div></React.Fragment>)}}
+						{/* <p className={ messageClassName }>{inputErrorMsg}</p> */}
+						
+						</div></div></React.Fragment>)}}
 
-export default LoginModal;
+const mapStateToProps = (state) => {
+	return {
+		signInState: state.signinState
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		// not understood bindActionCreator
+		// onSignIn: (userCred) => (bindActionCreators(authActions.requestSignin(userCred), dispatch))
+		onSignIn: userCred => dispatch(authActions.requestSignin(userCred))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);

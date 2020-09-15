@@ -25,7 +25,8 @@ class MemberHeader extends Component{
 		.then(json => {
 			if(json.success){
 				sessionStorage.removeItem('token')
-				window.location.href = `${frontendURL}` }})
+				window.location.href = `${frontendURL}` 
+			}})
 		.catch(err => console.log(err))}
 
 	render(){
