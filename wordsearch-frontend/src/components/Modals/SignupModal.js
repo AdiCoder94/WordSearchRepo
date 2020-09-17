@@ -92,7 +92,9 @@ class SignupModal extends Component{
 					username: signUpUsername,
 					email: signUpEmail,
 					password: signUpPassword,
-					confirmPassword: signUpPasswordConfirm } )})
+					confirmPassword: signUpPasswordConfirm } )}
+					
+					)
 			.then(res => res.json())
 			.then(json => {
 				(json.success) ? 

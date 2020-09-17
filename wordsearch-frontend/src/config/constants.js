@@ -38,5 +38,7 @@ module.exports = {
     "Adjective": ['Descriptive', 'Demonstrative', 'Possessive', 'Indefinite'],
     "Adverb": ['Conjuctive', 'Time/Frequency', 'Place/Direction', 'Degree', 'Manner'],
     "Verb": ['Action', 'Phrasal', 'Stative']
-  }    
+  },
+  emptyFieldError: 'Fill all the fields!'    
+
 }

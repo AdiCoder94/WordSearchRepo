@@ -4,7 +4,7 @@ const authActionTypes = {
 
   // signin actions
   SIGNIN_REQUEST: 'SIGNIN_REQUEST',
-  SIGNIN_GRANTED: 'SIGNIN_GRANTED',
+  SIGNIN_AUTHENTICATED: 'SIGNIN_AUTHENTICATED',
   SIGNIN_FAILED: 'SIGNIN_FAILED',
 
   // signout actions

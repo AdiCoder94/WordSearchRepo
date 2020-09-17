@@ -4,7 +4,9 @@ const initialState = {
   isFetching: false,
   isAuthenticated: false,
   isErr: false,
-  user: ''
+  user: null,
+  token: '',
+  err: ''
 } 
 
 function signinReducer(state = initialState, action){
@@ -15,8 +17,21 @@ function signinReducer(state = initialState, action){
         isFetching: true,
         user: action.payload
       }
-    
-
+    case authActionTypes.SIGNIN_AUTHENTICATED:
+      return {
+        ...state,
+        isFetching: false,
+        isErr: false,
+        isAuthenticated: true,
+        token: action.payload
+      }  
+    case authActionTypes.SIGNIN_FAILED:
+      return {
+        ...state, 
+        isFetching: false,
+        isErr: true,
+        err: action.payload
+      }  
     default: return state }
   }
 

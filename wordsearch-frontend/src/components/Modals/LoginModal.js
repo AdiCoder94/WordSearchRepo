@@ -2,23 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as authActions from '../../redux_components/actions/authActions/authActionCreator';
+import { frontendURL } from '../../config/constants';
+
 
 import '../../scss/base_styles.scss';
 import '../../scss/article_styles.scss';
 import Spinner from "../Components/spinner";
+import { memberDashboardURL } from '../../config/constants';
 
 class LoginModal extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
 			viewLoginModal:true,
-			isLoading:false, //to be props
 			signUpEmail:'',
 			logInPassword:'', 
-			token:'' , //to be props
 			clickedHeaderBtn: false,
 			inputErrorDisplay: false,
-			inputErrorMsg: '' // to be props
 		}
 		this.hideModal = this.hideModal.bind(this);
 		this.onTextboxChangeUserName = this.onTextboxChangeUserName.bind(this);
@@ -36,16 +36,21 @@ class LoginModal extends Component{
 			this.props.headerBtnActive(this.state.viewLoginModal)
 			this.props.isModalClosed(this.state.viewLoginModal) })}
 
+	componentDidUpdate(){
+		if(this.props.signinState.isAuthenticated){
+			window.location.href = `${frontendURL}${memberDashboardURL}`
+		}
+	}		
+
 	render(){
-		let hideModalClassName, loaderClassName, messageClassName, fetchStatus;
+		let hideModalClassName, loaderClassName, messageClassName;
 		(this.state.viewLoginModal) ? (hideModalClassName = "modal-container") : (hideModalClassName="hidden");
-		(this.state.isLoading) ? (loaderClassName = 'loader-container flex-row') : (loaderClassName = 'hidden');
-		(this.state.inputErrorDisplay) ? (messageClassName='message-container') : (messageClassName = 'hidden');
-		(this.props.signInState.isFetching) ? (fetchStatus = 'hello') : (fetchStatus = 'bye');
+		(this.props.signinState.isFetching) ? (loaderClassName = 'loader-container flex-row') : (loaderClassName = 'hidden');
+		(this.props.signinState.isErr) ? (messageClassName='message-container') : (messageClassName = 'hidden');
 	
 		var { signUpEmail, logInPassword } = this.state
 		const userCred = { signUpEmail, logInPassword }
-
+		console.log('states', this.props.signinState)
 		return(
 			<React.Fragment>
 				<div className={hideModalClassName}>
@@ -62,13 +67,13 @@ class LoginModal extends Component{
 						<div className={loaderClassName}>
 							<Spinner />
 							<p className='pleasewait-txt'>Please wait...</p></div>	
-						{/* <p className={ messageClassName }>{inputErrorMsg}</p> */}
+						<p className={ messageClassName }>{this.props.signinState.err}</p>
 						
 						</div></div></React.Fragment>)}}
 
 const mapStateToProps = (state) => {
 	return {
-		signInState: state.signinState
+		signinState: state.signinState
 	}
 }
 
@@ -76,7 +81,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		// not understood bindActionCreator
 		// onSignIn: (userCred) => (bindActionCreators(authActions.requestSignin(userCred), dispatch))
-		onSignIn: userCred => dispatch(authActions.requestSignin(userCred))
+		onSignIn: userCred => dispatch(authActions.initiateSignin(userCred))
 	}
 }
 
