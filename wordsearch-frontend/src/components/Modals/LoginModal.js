@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as authActions from '../../redux_components/actions/authActions/authActionCreator';
-import { frontendURL } from '../../config/constants';
-
+import { frontendURL, memberDashboardURL } from '../../config/constants';
 
 import '../../scss/base_styles.scss';
 import '../../scss/article_styles.scss';
 import Spinner from "../Components/spinner";
-import { memberDashboardURL } from '../../config/constants';
 
 class LoginModal extends Component{
 	constructor(props){
@@ -38,6 +36,7 @@ class LoginModal extends Component{
 
 	componentDidUpdate(){
 		if(this.props.signinState.isAuthenticated){
+			window.sessionStorage.setItem('token', this.props.signinState.token)
 			window.location.href = `${frontendURL}${memberDashboardURL}`
 		}
 	}		
@@ -50,7 +49,7 @@ class LoginModal extends Component{
 	
 		var { signUpEmail, logInPassword } = this.state
 		const userCred = { signUpEmail, logInPassword }
-		console.log('states', this.props.signinState)
+
 		return(
 			<React.Fragment>
 				<div className={hideModalClassName}>
