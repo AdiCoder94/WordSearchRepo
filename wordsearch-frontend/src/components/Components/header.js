@@ -7,8 +7,8 @@ import LoginModal from '../Modals/LoginModal';
 import SignUpModal from '../Modals/SignupModal';
 
 class Header extends Component{
-	constructor(props){
-		super(props);
+	constructor(){
+		super();
 		this.state = {
 			viewLoginModal:false,
 			viewSignupModal:false,

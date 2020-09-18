@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../../scss/article_styles.scss';
 
 import ElementOfStory from '../Components/ElementsOfStory';
 import Header from './../Components/header';
 
-class StoryConflict extends Component{
-	render(){
+function StoryConflict(){
 		return(
 			<React.Fragment>
 				<Header/>				
@@ -17,6 +16,6 @@ class StoryConflict extends Component{
 								<ElementOfStory /></div>  
 							<div className='article-right-section'>
 								<h2 className='section-heading'>Conflict</h2>
-							<hr /></div></div></div></React.Fragment>)}}
+							<hr /></div></div></div></React.Fragment>)}
 
 export default StoryConflict;

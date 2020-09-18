@@ -9,8 +9,8 @@ import '../../scss/article_styles.scss';
 import Spinner from "../Components/spinner";
 
 class LoginModal extends Component{
-	constructor(props){
-		super(props);
+	constructor(){
+		super();
 		this.state = {
 			viewLoginModal:true,
 			signUpEmail:'',
@@ -27,7 +27,6 @@ class LoginModal extends Component{
 
 	onTextboxChangeLogInPassword(event){
 		this.setState({	logInPassword:event.target.value })}
-
 
 	hideModal(){
 		this.setState({ viewLoginModal: false }, () => {

@@ -1,35 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { frontendURL, backendURL, signoutURL, signinURL } from '../../config/constants';
+
+import * as authActions from '../../redux_components/actions/authActions/authActionCreator';
+import { frontendURL } from '../../config/constants';
 
 import '../../scss/base_styles.scss';
 import '../../scss/header_styles.scss';
 
 class MemberHeader extends Component{
-	constructor(){
-		super();
-		this.state = { doLogout: false }
-		this.logout = this.logout.bind(this); }
 
-	logout(){
-		let token = sessionStorage.getItem('token')
-		fetch(`${backendURL}${signoutURL}`, {
-			method: 'POST',
-			headers:{
-				'Access-Control-Allow-Origin': `${frontendURL}`,
-				'Content-Type': 'application/json' },
-			body: JSON.stringify({ 
-				shouldLogout: this.state.doLogout,
-				user: token })})
-		.then(res => res.json())
-		.then(json => {
-			if(json.success){
-				sessionStorage.removeItem('token')
-				window.location.href = `${frontendURL}` 
-			}})
-		.catch(err => console.log(err))}
+	componentDidUpdate(){
+		if(this.props.signoutState.isSuccess){
+			window.sessionStorage.removeItem('token')
+			window.location.href = `${frontendURL}`
+		}
+	}
 
 	render(){
+		const token = window.sessionStorage.getItem('token')
+		let { signoutState } = this.props
+
 		return(
 			<React.Fragment>	
 				<div className="site-header flex-row">
@@ -38,6 +29,18 @@ class MemberHeader extends Component{
 					<Link to="/memberdashboard/new_entry"><p className='enter-newword-link'>Enter new word</p></Link>
 					<Link to="/memberdashboard/viewallwords"><p className='view-all-words-link'>View database</p></Link>
 					<div className="btn-holder">          
-						<button className='login-btn site-btn' onClick={this.logout}>Logout</button></div></div></React.Fragment>)}}
+					<button className='login-btn site-btn' onClick={() => this.props.onSignout(token)} disabled={signoutState.isFetching}>Logout</button></div></div></React.Fragment>)}}
 
-export default MemberHeader;
+const mapStateToProps = (state) => {
+ return {
+	 signoutState: state.signoutState
+ }
+}
+
+const mapDispatchToProps = (dispatch) => {
+ return {
+	 onSignout: token => dispatch(authActions.initiateSignout(token))
+ }
+}	
+
+export default connect(mapStateToProps, mapDispatchToProps)(MemberHeader);

@@ -6,8 +6,8 @@ import '../../scss/article_styles.scss';
 import { frontendURL, backendURL, signupURL } from '../../config/constants';
 
 class SignupModal extends Component{
-	constructor(props){
-		super(props);
+	constructor(){
+		super();
 		this.state = {
 			viewSignUpModal:true,
 			isLoading:false,

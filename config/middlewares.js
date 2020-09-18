@@ -1,15 +1,13 @@
 const accessTokenSecret = require('./constants').accessTokenSecret
 var jwt = require('jsonwebtoken')
 
-
 // middleware to validate jwt token
 const authenticateJWT = function(req, res, next){
-  const authHeader = req.header('Authorization')
+  const authHeader = req.headers.authorization
   
   if(authHeader){
-    const token  = authHeader.split(' ')[1]
-    jwt.verify(token, accessTokenSecret, (err, JWTToken) => {
-      if(err){ return res.sendStatus(403) }
+    jwt.verify(authHeader, accessTokenSecret, (err, JWTToken) => {
+      if(err){ return res.sendStatus(403).send(err) }
       req.currentUser = JWTToken
       next();
     })
@@ -20,3 +18,5 @@ const authenticateJWT = function(req, res, next){
 module.exports = {
   authenticateJWT: authenticateJWT
 }
+
+// return res.sendStatus(403)

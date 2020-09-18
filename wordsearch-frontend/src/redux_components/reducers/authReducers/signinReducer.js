@@ -11,12 +11,12 @@ const initialState = {
 
 function signinReducer(state = initialState, action){
   switch(action.type){
-    case authActionTypes.SIGNIN_REQUEST:
+    case authActionTypes.SIGNIN_INITIATE:
       return {
         ...state,
         isFetching: true,
         user: action.payload  }
-    case authActionTypes.SIGNIN_AUTHENTICATED:
+    case authActionTypes.SIGNIN_SUCCESS:
       return {
         ...state,
         isFetching: false,

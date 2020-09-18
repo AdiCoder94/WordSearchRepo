@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { originLanguages, partsOfSpeech, connotation, subTypes } from '../../config/constants';
 
 class NewWordFormComponent extends Component{
-	constructor(props){
-		super(props);
+	constructor(){
+		super();
 
 		this.state = {
 			value:"There is no definition provided",

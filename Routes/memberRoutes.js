@@ -5,6 +5,7 @@ var base64 = require('base64url')
 
 const User = require("../Models/members.model");
 const UserSession = require('../Models/userSession.model');
+const { authenticateJWT } = require('../config/middlewares');
 
 const accessTokenSecret = require('../config/constants').accessTokenSecret;
 var authenticateUser = require('../config/middlewares').authenticateJWT
@@ -118,6 +119,7 @@ router.post('/signin', (req, res, next) => {
 
             async function setAccessToken(){
                 const accessToken = await jwt.sign({ user: user._id }, accessTokenSecret, { expiresIn: 3600 })
+                res.setHeader('Authorization', accessToken)
                 return accessToken }    
 
             matchPassword()
@@ -143,7 +145,6 @@ router.post('/signin', (req, res, next) => {
                                         user: currentUserObj.user,
                                         success: true
                                     })
-                                
                                 }
                                 else return res.send({
                                     err: err ,
@@ -158,9 +159,9 @@ router.post('/signin', (req, res, next) => {
 })
 
 // creating route endpoints for logging out members
-router.post('/signout', authenticateUser, (req, res, next) => {
+router.post('/signout',  authenticateJWT, (req, res, next) => {
 
-    let userToken = req.header('Authorization').split(' ')[1]  
+    let userToken = req.headers.authorization 
 
     UserSession.findOneAndUpdate(
         { userID: userToken, isDeleted: false }, 

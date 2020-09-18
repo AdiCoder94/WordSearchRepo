@@ -7,8 +7,8 @@ import WordPreview from "../Components/newWordPreview";
 import { frontendURL, backendURL, enternewwordURL } from '../../config/constants';
 
 class EnterNewWord extends Component{
-	constructor(props){
-		super(props);
+	constructor(){
+		super();
 		this.state = {
 			newWord:"",
 			originLang:"",
