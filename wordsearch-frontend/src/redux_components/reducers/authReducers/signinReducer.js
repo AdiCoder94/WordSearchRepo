@@ -15,23 +15,21 @@ function signinReducer(state = initialState, action){
       return {
         ...state,
         isFetching: true,
-        user: action.payload
-      }
+        user: action.payload  }
     case authActionTypes.SIGNIN_AUTHENTICATED:
       return {
         ...state,
         isFetching: false,
         isErr: false,
         isAuthenticated: true,
-        token: action.payload
-      }  
+        user: action.payload.user,
+        token: action.payload.token }
     case authActionTypes.SIGNIN_FAILED:
       return {
         ...state, 
         isFetching: false,
         isErr: true,
-        err: action.payload
-      }  
+        err: action.payload }  
     default: return state }
   }
 

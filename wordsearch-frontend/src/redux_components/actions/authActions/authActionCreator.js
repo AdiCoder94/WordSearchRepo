@@ -9,10 +9,10 @@ export function requestSignin(userCred){
   }
 }
 
-export function authenticateSignin(token){
+export function authenticateSignin(data){
   return {
     type: authActionTypes.SIGNIN_AUTHENTICATED,
-    payload: token
+    payload: data
   }
 }
 
@@ -44,7 +44,7 @@ export function initiateSignin(userCred){
       .then(res => res.json())
       .then(json => 
         (json.success) ?
-          dispatch(authenticateSignin(json.token))
+          dispatch(authenticateSignin(json))
         : dispatch(failSignin(json.message)) )
       .catch(err => console.log(err))  
       }}

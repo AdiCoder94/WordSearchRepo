@@ -49,7 +49,6 @@ class LoginModal extends Component{
 	
 		var { signUpEmail, logInPassword } = this.state
 		const userCred = { signUpEmail, logInPassword }
-
 		return(
 			<React.Fragment>
 				<div className={hideModalClassName}>
