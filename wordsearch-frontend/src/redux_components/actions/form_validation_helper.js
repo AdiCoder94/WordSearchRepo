@@ -20,3 +20,7 @@ export const matchPassword = (string1, string2) => {
     return true
   } else return false  
 }
+
+export const capitalizeFirstLetter = (word) => {
+  const lowerCased = word.toLowerCase()
+  return word.charAt(0).toUpperCase() + lowerCased.slice(1)	}

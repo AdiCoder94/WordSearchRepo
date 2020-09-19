@@ -39,6 +39,7 @@ module.exports = {
     "Adverb": ['Conjuctive', 'Time/Frequency', 'Place/Direction', 'Degree', 'Manner'],
     "Verb": ['Action', 'Phrasal', 'Stative']
   },
-  emptyFieldError: 'Fill all the fields!'    
+  emptyFieldError: 'Fill all the fields!',
+  passwordsDonotMatchError: 'Passwords donot match!'    
 
 }

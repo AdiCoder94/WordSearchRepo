@@ -20,11 +20,6 @@ router.post('/new', authenticateUser, function (req, res, next) {
 		definition
 	} = req.body;
 
-	if (!enteredWord || !partOfSpeech || !partOfSpeechSubCategory || !connotation || !root || !languageOfOrigin || !definition) {
-		return res.send({
-			err_msg: "Fill all the fields" })
-	}
-
 	Words.findOne({
 		enteredWord: enteredWord
 	}, (err, doc) => {

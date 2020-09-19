@@ -1,6 +1,6 @@
 import authActionTypes from './authActionTypes'
 import { checkEmptyFields, matchPassword } from '../form_validation_helper'
-import { frontendURL, backendURL, signinURL,signoutURL, signupURL, emptyFieldError } from '../../../config/constants';
+import { frontendURL, backendURL, signinURL,signoutURL, signupURL, emptyFieldError, passwordsDonotMatchError } from '../../../config/constants';
 
 /**
  * signup action creators
@@ -79,9 +79,8 @@ export function failSignout(err){
 
 // signup function
 export function initiateSignup(userDetail){
-  let emptyField = checkEmptyFields(userDetail)
-  console.log('user det', typeof(userDetail.signUpPassword))
-  if(emptyField){
+  let noEmptyField = checkEmptyFields(userDetail)
+  if(noEmptyField){
     let matchedPassword = matchPassword(userDetail.signUpPassword, userDetail.signUpPasswordConfirm)
     if(matchedPassword){
       return dispatch => {
@@ -102,20 +101,20 @@ export function initiateSignup(userDetail){
         .then(res => res.json())
         .then(json => 
           (json.success) ?
-            dispatch(successSignup()):
+            dispatch(successSignup()) :
             dispatch(failSignup(json.err_msg))
           )
       }      
     }
-    else return dispatch => dispatch(failSignup('passwords donot match'))  
+    else return dispatch => dispatch(failSignup(`${passwordsDonotMatchError}`))  
   }
   else return dispatch => dispatch(failSignup(`${emptyFieldError}`)) 
 } 
 
 // signin function 
 export function initiateSignin(userCred){
-  let emptyField = checkEmptyFields(userCred)
-  if(emptyField){
+  let noEmptyField = checkEmptyFields(userCred)
+  if(noEmptyField){
     return dispatch => { 
       dispatch(requestSignin(userCred)) 
       return (    
@@ -159,8 +158,8 @@ export function initiateSignout(token){
     .then(res => res.json())
     .then(json => 
       (json.success) ?
-        dispatch(successSignout())
-      : dispatch(failSignout()))
+        dispatch(successSignout()) :
+        dispatch(failSignout()))
   }
 }
 
