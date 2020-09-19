@@ -15,6 +15,8 @@ export const checkEmptyFields = (object) => {
     } else return true
 }
 
-export const matchPassword = () => {
-  
+export const matchPassword = (string1, string2) => {
+  if(string1 === string2){
+    return true
+  } else return false  
 }

@@ -1,6 +1,29 @@
 import authActionTypes from './authActionTypes'
-import { checkEmptyFields } from '../form_validation_helper'
-import { frontendURL, backendURL, signinURL,signoutURL, emptyFieldError } from '../../../config/constants';
+import { checkEmptyFields, matchPassword } from '../form_validation_helper'
+import { frontendURL, backendURL, signinURL,signoutURL, signupURL, emptyFieldError } from '../../../config/constants';
+
+/**
+ * signup action creators
+ */
+export function requestSignup(userDetail){
+  return {
+    type: authActionTypes.SIGNUP_INITIATE,
+    payload: userDetail
+  }
+}
+
+export function successSignup(){
+  return {
+    type: authActionTypes.SIGNUP_SUCCESS,
+  }
+}
+
+export function failSignup(err){
+  return {
+    type: authActionTypes.SIGNUP_FAILED,
+    payload: err
+  }
+}
 
 /**
  * signin action creators
@@ -13,11 +36,6 @@ export function requestSignin(userCred){
 }
 
 export function authenticateSignin(data){
-  // let authHeader = new Headers()
-  // authHeader.append('Authorization', token)
-  // authHeader.append('Access-Control-Allow-Origin', `${frontendURL}`)
-  // authHeader.append('Content-Type', 'application/json')
-
   return {
     type: authActionTypes.SIGNIN_SUCCESS,
     payload: data
@@ -56,8 +74,43 @@ export function failSignout(err){
 
 /**
  * auth functions
- * @param {} userCred 
+ * @param {} userDetail
  */
+
+// signup function
+export function initiateSignup(userDetail){
+  let emptyField = checkEmptyFields(userDetail)
+  console.log('user det', typeof(userDetail.signUpPassword))
+  if(emptyField){
+    let matchedPassword = matchPassword(userDetail.signUpPassword, userDetail.signUpPasswordConfirm)
+    if(matchedPassword){
+      return dispatch => {
+        dispatch(requestSignup(userDetail))
+        return (
+          fetch(`${backendURL}${signupURL}`, {
+            method: 'POST',
+            headers:{ 
+              'Access-Control-Allow-Origin': `${frontendURL}`,
+              'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              username: userDetail.signUpUsername,
+              email: userDetail.signUpEmail,
+              password: userDetail.signUpPassword,
+              confirmPassword: userDetail.signUpPasswordConfirm }) 
+          })
+        )
+        .then(res => res.json())
+        .then(json => 
+          (json.success) ?
+            dispatch(successSignup()):
+            dispatch(failSignup(json.err_msg))
+          )
+      }      
+    }
+    else return dispatch => dispatch(failSignup('passwords donot match'))  
+  }
+  else return dispatch => dispatch(failSignup(`${emptyFieldError}`)) 
+} 
 
 // signin function 
 export function initiateSignin(userCred){
@@ -79,8 +132,8 @@ export function initiateSignin(userCred){
       .then(res => res.json())
       .then(json => 
         (json.success) ?
-          dispatch(authenticateSignin(json))
-        : dispatch(failSignin(json.message)) )
+          dispatch(authenticateSignin(json)) :
+          dispatch(failSignin(json.message)) )
       .catch(err => console.log(err))  
       }}
     else return dispatch => {
@@ -110,23 +163,4 @@ export function initiateSignout(token){
       : dispatch(failSignout()))
   }
 }
-
-
-// logout(){
-//   let token = sessionStorage.getItem('token')
-//   fetch(`${backendURL}${signoutURL}`, {
-//     method: 'POST',
-//     headers:{
-//       'Access-Control-Allow-Origin': `${frontendURL}`,
-//       'Content-Type': 'application/json' },
-//     body: JSON.stringify({ 
-//       shouldLogout: this.state.doLogout,
-//       user: token })})
-//   .then(res => res.json())
-//   .then(json => {
-//     if(json.success){
-//       sessionStorage.removeItem('token')
-//       window.location.href = `${frontendURL}` 
-//     }})
-//   .catch(err => console.log(err))}
 

@@ -4,7 +4,7 @@ import '../../scss/base_styles.scss';
 import '../../scss/header_styles.scss';
 
 import LoginModal from '../Modals/LoginModal';
-import SignUpModal from '../Modals/SignupModal';
+import SignupModal from '../Modals/SignupModal';
 
 class Header extends Component{
 	constructor(){
@@ -20,17 +20,17 @@ class Header extends Component{
 
 	showLoginModal(){
 		this.setState({ headerUnclickable: true })
-		this.setState(() =>({
-			viewLoginModal: true})
-		)}
+		this.setState(() =>({	viewLoginModal: true }))
+	}
 
 	showSignupModal(){
 		this.setState({ headerUnclickable: true })
-		this.setState(() => ({
-			viewSignupModal: true} ))}
+		this.setState(() => ({ viewSignupModal: true }))
+	}
 
 	activateHeader(e){
-		this.setState({	headerUnclickable: e	})}	
+		this.setState({	headerUnclickable: e })
+	}	
 			
 	closeModal(e){
 		this.setState({
@@ -38,9 +38,10 @@ class Header extends Component{
 			viewSignupModal:e })}		
 
 	render(){
-		let LogInModal, SignupModal;
+		let LogInModal, SignUpModal;
 		this.state.viewLoginModal ? (LogInModal = <LoginModal  headerBtnActive={this.activateHeader} isModalClosed={this.closeModal} />) : (LogInModal = <React.Fragment />);
-		this.state.viewSignupModal ? (SignupModal = <SignUpModal headerBtnActive={this.activateHeader} isModalClosed={this.closeModal} />) : (SignupModal = <React.Fragment />);
+		this.state.viewSignupModal ? (SignUpModal = <SignupModal headerBtnActive={this.activateHeader} isModalClosed={this.closeModal} />) : (SignUpModal = <React.Fragment />);
+
   		return(
 		    <React.Fragment>
 		      <div className="site-header flex-row">
@@ -48,7 +49,7 @@ class Header extends Component{
 		        <div className="btn-holder">
 			        <button className='signup-btn site-btn' onClick={this.showSignupModal} disabled={this.state.headerUnclickable}>Sign up</button>	        
 			        <button className='login-btn site-btn' onClick={this.showLoginModal} disabled={this.state.headerUnclickable}>Login</button></div></div>
-		      	{SignupModal}
+		      	{SignUpModal}
 	      	  {LogInModal}</React.Fragment>)}} 
 
 export default Header;

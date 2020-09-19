@@ -48,6 +48,7 @@ class LoginModal extends Component{
 	
 		var { signUpEmail, logInPassword } = this.state
 		const userCred = { signUpEmail, logInPassword }
+		
 		return(
 			<React.Fragment>
 				<div className={hideModalClassName}>
@@ -64,9 +65,7 @@ class LoginModal extends Component{
 						<div className={loaderClassName}>
 							<Spinner />
 							<p className='pleasewait-txt'>Please wait...</p></div>	
-						<p className={ messageClassName }>{this.props.signinState.err}</p>
-						
-						</div></div></React.Fragment>)}}
+						<p className={messageClassName}>{this.props.signinState.err}</p></div></div></React.Fragment>)}}
 
 const mapStateToProps = (state) => {
 	return {

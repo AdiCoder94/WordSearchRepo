@@ -8,8 +8,6 @@ const UserSession = require('../Models/userSession.model');
 const { authenticateJWT } = require('../config/middlewares');
 
 const accessTokenSecret = require('../config/constants').accessTokenSecret;
-var authenticateUser = require('../config/middlewares').authenticateJWT
-
 
 // creating route endpoint for signing up new users
 router.post('/signup', (req, res, next) => {
@@ -19,16 +17,6 @@ router.post('/signup', (req, res, next) => {
         password,
         username
     } = req.body;
-
-    if (!email) {
-        return res.send({
-            message: "Email cannot be blank" })
-    } else if (!password) {
-        return res.send({
-            message: "Password cannot be blank" })
-    } else if (!username) {
-        return res.send({
-            message: "Username cannot be blank" })}
 
     email = email.toLowerCase().trim();
     username = username.trim();
@@ -74,7 +62,7 @@ router.post('/signup', (req, res, next) => {
                         else return res.send({
                             success: true,
                             user: doc })}))
-                    .catch(err => res.send({err_msg: err}))
+                    .catch(err => res.send({ err_msg: err }))
                 }
             })
         }
@@ -92,12 +80,6 @@ router.post('/signin', (req, res, next) => {
         email,
         password
     } = req.body;
-    if (!password) {
-        return res.send({
-            message: "Password cannot be blank" })
-    } else if (!email) {
-        return res.send({
-            message: "Email cannot be blank" })}
 
     email = email.trim();
 
