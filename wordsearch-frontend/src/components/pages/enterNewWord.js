@@ -8,7 +8,7 @@ import WordPreview from "../Components/newWordPreview";
 import * as wordActions from '../../redux_components/actions/wordActions/wordActionCreator';
 
 class EnterNewWord extends Component{
-	constructor(props){
+	constructor(){
 		super();
 		this.state = {
 			newWord:"",
@@ -59,8 +59,7 @@ class EnterNewWord extends Component{
 				partOfSpeech:"",
 				subCategory:"",
 				wordConnotation:"",
-				definition:"" }
-		}
+				definition:"" }}
 	}	
 
 	render(){
@@ -118,15 +117,9 @@ class EnterNewWord extends Component{
 							{this.props.addwordState.err}{this.props.addwordState.savedStatus}</div></div></React.Fragment>)}}
 
 const mapStateToProps = (state) => {
-	return {
-		addwordState: state.addwordState
-	}
-}
+	return { addwordState: state.addwordState }}
 
 const mapDispatchToProps = (dispatch) => {
-	return{
-		saveWord: wordDetail => dispatch(wordActions.initiateAddWord(wordDetail))
-	}
-}
+	return { saveWord: wordDetail => dispatch(wordActions.initiateAddWord(wordDetail)) }}
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnterNewWord);

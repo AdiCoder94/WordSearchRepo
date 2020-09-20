@@ -15,8 +15,19 @@ const authenticateJWT = function(req, res, next){
     res.sendStatus(401) }
   }
 
+// middleware for running through savedby array and return result
+const isSavedBy = (array, toMatch) => {
+  let result = false;
+  let item = 0;
+  for(item; item < array.length; item++){
+    if(array[item].toString() === toMatch){
+      result = true
+      return result }}
+  return result }
+
 module.exports = {
-  authenticateJWT: authenticateJWT
+  authenticateJWT: authenticateJWT,
+  isSavedBy: isSavedBy
 }
 
 // return res.sendStatus(403)

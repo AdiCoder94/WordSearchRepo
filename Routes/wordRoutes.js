@@ -1,12 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-var getToken = require('../config/middlewares').getToken
 var authenticateUser = require('../config/middlewares').authenticateJWT
-
+var isSavedBy = require('../config/middlewares').isSavedBy
 var Words = require('../Models/word.model');
-var UserSession = require('../Models/userSession.model');
-var User = require('../Models/members.model');
 
 
 router.post('/new', authenticateUser, function (req, res, next) {
@@ -22,13 +19,25 @@ router.post('/new', authenticateUser, function (req, res, next) {
 
 	Words.findOne({
 		enteredWord: enteredWord
-	}, (err, doc) => {
-		if (err) {
+	}, (err, word) => {
+		if(err) {
 			return res.send({
 				err_msg: err })
-		} else if (doc) {
-			return res.send({
-				err_msg: "Word already exists in the database" })
+		} else if(word){
+				let savedByResult = isSavedBy(word.savedBy, req.currentUser.user)
+				if(!savedByResult){
+					word.savedBy.push(req.currentUser.user)
+					word.save((err, result) => {
+						if(err){
+							return res.send({
+								success: false,
+								err_msg: err
+							})
+						}	return res.send({ success: result })
+					})
+				} else return res.send({
+					success: false,
+					err_msg: 'Word already saved'	})
 		} else if (!err) {
 			//creating new word document in the database
 			const currentUser = req.currentUser.user
@@ -50,9 +59,7 @@ router.post('/new', authenticateUser, function (req, res, next) {
 				return res.send({
 					success: true,
 					word: result,
-					user: currentUser,
-					message:"Word saved!" })})}})})
-
+					user: currentUser })})}})})
 
 router.get('/allwords', authenticateUser, function(req, res, next){
 	Words.find({})
