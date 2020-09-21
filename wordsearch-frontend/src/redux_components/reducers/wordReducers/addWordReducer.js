@@ -12,13 +12,11 @@ const initialState = {
 function addwordReducer(state = initialState, action){
   switch(action.type){
     case wordActionTypes.ADDWORD_INITIATE:
-      console.log('add word inintiated')
       return {
         ...state,
         isFetching: true,
         user: action.payload }
     case wordActionTypes.ADDWORD_SUCCESS:
-      console.log('success')
       return {
         ...state,
         isFetching: false,
@@ -27,7 +25,6 @@ function addwordReducer(state = initialState, action){
         err: '', 
         savedStatus: 'Word successfully saved!' }
     case wordActionTypes.ADDWORD_FAILED:
-      console.log('failed', action.payload)
       return {
         ...state, 
         isFetching: false,

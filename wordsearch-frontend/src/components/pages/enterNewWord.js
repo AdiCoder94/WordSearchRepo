@@ -60,6 +60,7 @@ class EnterNewWord extends Component{
 				subCategory:"",
 				wordConnotation:"",
 				definition:"" }}
+		else return null;		
 	}	
 
 	render(){

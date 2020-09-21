@@ -64,14 +64,20 @@ router.post('/new', authenticateUser, function (req, res, next) {
 router.get('/allwords', authenticateUser, function(req, res, next){
 	Words.find({})
 	.populate('savedBy')
-	.exec((err, doc) => {
+	.exec((err, words) => {
 		if(err){
-			return res.send("Server error")	}
-		else if(doc){
-			return res.send(doc) }})})
+			return res.send({
+				success: false,
+				err_msg: err
+			})}
+		else if(words){
+			return res.send({
+				success: true,
+				words: words
+			}) }})})
 
 
-router.post('/viewwordsbyletter', authenticateUser, function(req, res, next){
+router.post('/viewwordsbyletter', function(req, res, next){
 
 	var { letter } = req.body
 	letter = letter.trim()

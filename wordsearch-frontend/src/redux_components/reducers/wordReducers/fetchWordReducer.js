@@ -1,36 +1,33 @@
-// import authActionTypes from '../../actions/authActions/authActionTypes';
+import wordActionTypes from '../../actions/wordActions/wordActionTypes';
 
-// const initialState = {
-//   isFetching: false,
-//   isAuthenticated: false,
-//   isErr: false,
-//   user: null,
-//   token: '',
-//   err: ''
-// } 
+const initialState = {
+  isFetching: false,
+  isFetched: false,
+  isErr: false,
+  wordsArray: null,
+  err: ''
+} 
 
-// function signinReducer(state = initialState, action){
-//   switch(action.type){
-//     case authActionTypes.SIGNIN_INITIATE:
-//       return {
-//         ...state,
-//         isFetching: true,
-//         user: action.payload  }
-//     case authActionTypes.SIGNIN_SUCCESS:
-//       return {
-//         ...state,
-//         isFetching: false,
-//         isErr: false,
-//         isAuthenticated: true,
-//         user: action.payload.user,
-//         token: action.payload.token }
-//     case authActionTypes.SIGNIN_FAILED:
-//       return {
-//         ...state, 
-//         isFetching: false,
-//         isErr: true,
-//         err: action.payload }  
-//     default: return state }
-//   }
+function fetchWordReducer(state = initialState, action){
+  switch(action.type){
+    case wordActionTypes.FETCHWORDS_INITIATE:
+      return {
+        ...state,
+        isFetching: true  }
+    case wordActionTypes.FETCHWORDS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        isErr: false,
+        isFetched: true,
+        wordsArray: action.payload }
+    case wordActionTypes.FETCHWORDS_FAILED:
+      return {
+        ...state, 
+        isFetching: false,
+        isErr: true,
+        err: action.payload }  
+    default: return state }
+  }
 
-// export default signinReducer;
+export default fetchWordReducer;

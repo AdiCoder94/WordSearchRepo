@@ -1,12 +1,11 @@
 import wordActionTypes from './wordActionTypes'
-import { frontendURL, backendURL, emptyFieldError, enternewwordURL } from '../../../config/constants';
+import { frontendURL, backendURL, emptyFieldError, enternewwordURL, viewworddatabaseURL } from '../../../config/constants';
 import { checkEmptyFields, capitalizeFirstLetter } from '../form_validation_helper'
 
 /**
  * add word action creators
  */
 export function requestAddWord(wordDetail){
-  console.log('add word started', wordDetail)
   return {
     type: wordActionTypes.ADDWORD_INITIATE,
     payload: wordDetail
@@ -26,6 +25,27 @@ export function failAddWord(err){
   }
 }
 
+export function requestFetchWord(){
+  return {
+    type: wordActionTypes.FETCHWORDS_INITIATE,
+  }
+}
+
+export function successFetchWord(data){
+  return {
+    type: wordActionTypes.FETCHWORDS_SUCCESS,
+    payload: data
+  }
+}
+
+export function failFetchWord(err){
+  return {
+    type: wordActionTypes.FETCHWORDS_FAILED,
+    payload: err
+  }
+}
+
+//TODO: create an explicit function to set auth headers
 /**
  * auth functions
  * @param {} userDetail
@@ -68,50 +88,28 @@ export function initiateAddWord(wordDetail){
   else return dispatch => dispatch(failAddWord(`${emptyFieldError}`)) 
 } 
 
+// fetchwords function
+export function initiateFetchWord(){
+  let authHeaders = new Headers()
+  let currentUser = window.sessionStorage.getItem('token')
+  authHeaders.append('Authorization', currentUser)
+  authHeaders.append('Access-Control-Allow-Origin', `${frontendURL}`)
+  authHeaders.append('Content-Type', 'application/json')
 
-
-// saveWord(){
-//   // grabbing state
-//   var {
-//     newWord,
-//     originLang,
-//     rootWord,
-//     partOfSpeech,
-//     subCategory,
-//     wordConnotation,
-//     definition } = this.state
-
-//   fetch(`${backendURL}${enternewwordURL}`, {
-//     method: 'POST',
-//     headers:{
-//       'Access-Control-Allow-Origin': `${frontendURL}`,
-//       'Content-Type': 'application/json'},
-//     body: JSON.stringify({
-//       enteredWord: this.capitalizeFirstLetter(newWord),
-//       languageOfOrigin: originLang,
-//       root: rootWord,
-//       partOfSpeech: partOfSpeech,
-//       partOfSpeechSubCategory: subCategory,
-//       connotation: wordConnotation,
-//       definition: definition})})
-//     .then(res => res.json())
-//     .then(json => {
-//       if(json.success){
-//         this.setState({
-//           newWord: '',
-//           originLang: '',
-//           rootWord: '',
-//           partOfSpeech: '',
-//           subCategory: '',
-//           wordConnotation: '',
-//           definition: '',
-//           savingStatus: json.message,
-//           showWordSavedMsg: true }, () => {
-//             setTimeout(this.changeSaveWordMsgState, 1000)})}
-//       else {
-//         this.setState({
-//           savingStatus: json.err_msg,
-//           showWordSavedMsg: true }, () => {
-//           setTimeout(this.changeSaveWordMsgState, 1000)})}})}		
-
+  return dispatch => {
+    dispatch(requestFetchWord())
+    return(
+      fetch(`${backendURL}${viewworddatabaseURL}`, 
+        {	method: 'GET',
+          headers: authHeaders })
+        .then(res => res.json())
+        .then(json => 
+          (json.success) ? 
+            (dispatch(successFetchWord(json))) :
+            (dispatch(failFetchWord(json.err_msg)))
+          )
+        .catch(err => console.log(err))
+    )
+  }
+} 
 
