@@ -62,7 +62,7 @@ router.post('/new', authenticateUser, function (req, res, next) {
 					user: currentUser })})}})})
 
 router.get('/allwords', authenticateUser, function(req, res, next){
-	Words.find({})
+	Words.find({ savedBy: req.currentUser.user })
 	.populate('savedBy')
 	.exec((err, words) => {
 		if(err){
