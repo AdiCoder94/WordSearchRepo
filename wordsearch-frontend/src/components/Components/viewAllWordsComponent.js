@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import * as wordActions from '../../redux_components/actions/wordActions/wordActionCreator';
 import { alphabetsArray, viewWordsByLetterURL } from '../../config/constants';
+
 import MemberHeader from '../Components/memberHeader';
-import Spinner from "../Components/spinner";
+import Spinner from "./spinner";
 
 function alphabetOrder(inputArray, char){
 	let alphabetArr = []
 	for(var i = 0; i < inputArray.length; i++) {
 		if(inputArray[i].charAt(0) === char){
-			alphabetArr.push(inputArray[i])}
-		}	
+			alphabetArr.push(inputArray[i]) }}	
 	return alphabetArr }
 
 function ViewAllWordsComponent(props){
@@ -49,7 +49,7 @@ function ViewAllWords(){
 	let [triggerComponent, setTriggerComponent] = useState(false)
 	let fetchWordState = useSelector(state => state.fetchWordState)
 
-	useEffect(() => { dispatch(wordActions.initiateFetchWord()) }, [])
+	useEffect(() => dispatch(wordActions.initiateFetchWord()), [])
 	
 	useEffect(() => { 
 		if(fetchWordState){ setTriggerComponent(true) }}, [triggerComponent, fetchWordState])
@@ -60,6 +60,7 @@ function ViewAllWords(){
 			<div className="site-article-container">
 				<ViewAllWordsComponent isFetchedProps={fetchWordState} />
 				</div></React.Fragment>) }
+
 
 export default ViewAllWords;
 

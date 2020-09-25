@@ -8,6 +8,7 @@ module.exports = {
   signupURL: '/api/account/signup',
   signinURL:'/api/account/signin',
   signoutURL: '/api/account/signout',
+  getCurrentUserURL: '/api/account/getcurrentuser',
   viewworddatabaseURL: '/api/word/allwords',
   viewwordbyletterURL: '/api/word/viewwordsbyletter',
   enternewwordURL: '/api/word/new',

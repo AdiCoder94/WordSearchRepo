@@ -1,6 +1,6 @@
 import authActionTypes from './authActionTypes'
 import { checkEmptyFields, matchPassword } from '../form_validation_helper'
-import { frontendURL, backendURL, signinURL,signoutURL, signupURL, emptyFieldError, passwordsDonotMatchError } from '../../../config/constants';
+import { frontendURL, backendURL, signinURL,signoutURL, signupURL, emptyFieldError, passwordsDonotMatchError, getCurrentUserURL } from '../../../config/constants';
 
 /**
  * signup action creators
@@ -72,6 +72,29 @@ export function failSignout(err){
   }
 }
 
+/**
+ * get current user action creators
+ */
+export function requestGetCurrentUser(token){
+  return {
+    type: authActionTypes.GETCURRENTUSER_INITIATE,
+    payload: token
+  }
+}
+
+export function successGetCurrentUser(user){
+  return {
+    type: authActionTypes.GETCURRENTUSER_SUCCESS,
+    payload: user
+  }
+}
+
+export function failGetCurrentUser(err){
+  return {
+    type: authActionTypes.GETCURRENTUSER_FAILED,
+    payload: err
+  }
+}
 /**
  * auth functions
  * @param {} userDetail
@@ -163,3 +186,26 @@ export function initiateSignout(token){
   }
 }
 
+// get current user function
+export function initiateGetCurrentUser(token){
+  let authHeaders = new Headers()
+  authHeaders.append('Authorization', token)
+  authHeaders.append('Access-Control-Allow-Origin', `${frontendURL}`)
+  authHeaders.append('Content-Type', 'application/json')
+
+  return dispatch => {
+    dispatch(requestGetCurrentUser(token))
+    return (
+      fetch(`${backendURL}${getCurrentUserURL}`, {
+        method: 'POST',
+        headers: authHeaders,
+        body: JSON.stringify({ token: token }) 
+      })
+    )
+    .then(res => res.json())
+    .then(json => 
+      (json.success) ?
+        dispatch(successGetCurrentUser(json.user)) :
+        dispatch(failGetCurrentUser(json.err_msg)))
+  }
+}

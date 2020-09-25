@@ -167,4 +167,33 @@ router.post('/signout',  authenticateJWT, (req, res, next) => {
         }) 
 })
 
+// creating route endpoints for logging out members
+router.post('/getcurrentuser',  authenticateJWT, (req, res, next) => {
+    let { token } = req.body
+
+    UserSession.findOne({userID: token}, (err, result) => {
+        if(err) {
+            res.send({
+                success: false,
+                err_msg: err })
+        }
+        else if(result){
+            let { currentUser } = result
+            User.findOne({_id: currentUser}, (err, result) => {
+                if(err){
+                    res.send({
+                        success: false,
+                        err_msg: err })
+                }
+                else if(result){
+                    res.send({
+                        success: true,
+                        user: result
+                    })
+                }
+            })
+        }
+    })
+})
+
 module.exports = router;

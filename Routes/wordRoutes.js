@@ -77,13 +77,13 @@ router.get('/allwords', authenticateUser, function(req, res, next){
 			}) }})})
 
 
-router.post('/viewwordsbyletter', function(req, res, next){
+router.post('/viewwordsbyletter', authenticateUser, function(req, res, next){
 
 	var { letter } = req.body
 	letter = letter.trim()
 	var toMatch = `^${letter}`
 
-	Words.find({}, (err, docs) => {
+	Words.find({ savedBy: req.currentUser.user }, (err, docs) => {
 		if(err){
 			return res.send({
 				success: false,

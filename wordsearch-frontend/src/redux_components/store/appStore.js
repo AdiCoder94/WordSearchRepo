@@ -9,4 +9,6 @@ const appStore = createStore(
   composeEnhancer(applyMiddleware(thunkMiddleware))
 )
 
+appStore.getState()
+
 export default appStore;

@@ -4,24 +4,24 @@ const initialState = {
   isFetching: false,
   isSuccess: false,
   isErr: false,
-  err: '',
-  user: null
+  user: null,
+  err: ''
 } 
 
-function signupReducer(state = initialState, action){
+function getCurrentUserReducer(state = initialState, action){
   switch(action.type){
-    case authActionTypes.SIGNUP_INITIATE:
+    case authActionTypes.GETCURRENTUSER_INITIATE:
       return {
         ...state,
-        isFetching: true,
-        user: action.payload  }
-    case authActionTypes.SIGNUP_SUCCESS:
+        isFetching: true }
+    case authActionTypes.GETCURRENTUSER_SUCCESS:
       return {
         ...state,
         isFetching: false,
         isErr: false,
-        isSuccess: true}
-    case authActionTypes.SIGNUP_FAILED:
+        isSuccess: true,
+        user: action.payload }
+    case authActionTypes.GETCURRENTUSER_FAILED:
       return {
         ...state, 
         isFetching: false,
@@ -30,4 +30,4 @@ function signupReducer(state = initialState, action){
     default: return state }
   }
 
-export default signupReducer;
+export default getCurrentUserReducer;

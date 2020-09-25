@@ -1,5 +1,5 @@
 import wordActionTypes from './wordActionTypes'
-import { frontendURL, backendURL, emptyFieldError, enternewwordURL, viewworddatabaseURL } from '../../../config/constants';
+import { frontendURL, backendURL, emptyFieldError, enternewwordURL, viewworddatabaseURL, viewwordbyletterURL } from '../../../config/constants';
 import { checkEmptyFields, capitalizeFirstLetter } from '../form_validation_helper'
 
 /**
@@ -45,21 +45,44 @@ export function failFetchWord(err){
   }
 }
 
+export function requestFetchWordByLetter(){
+  return {
+    type: wordActionTypes.FETCHWORDSBYLETTER_INITIATE,
+  }
+}
+
+export function successFetchWordByLetter(data){
+  return {
+    type: wordActionTypes.FETCHWORDSBYLETTER_SUCCESS,
+    payload: data
+  }
+}
+
+export function failFetchWordByLetter(err){
+  return {
+    type: wordActionTypes.FETCHWORDSBYLETTER_FAILED,
+    payload: err
+  }
+}
+
+
 //TODO: create an explicit function to set auth headers
 /**
  * auth functions
  * @param {} userDetail
  */
 
+// creating auth headers
+let currentUser = window.sessionStorage.getItem('token')
+let authHeaders = new Headers()
+authHeaders.append('Authorization', currentUser)
+authHeaders.append('Access-Control-Allow-Origin', `${frontendURL}`)
+authHeaders.append('Content-Type', 'application/json')
+
 // addword  function
 export function initiateAddWord(wordDetail){
-  let authHeaders = new Headers()
-  let currentUser = window.sessionStorage.getItem('token')
-  authHeaders.append('Authorization', currentUser)
-  authHeaders.append('Access-Control-Allow-Origin', `${frontendURL}`)
-  authHeaders.append('Content-Type', 'application/json')
-
   let noEmptyField = checkEmptyFields(wordDetail)
+
   if(noEmptyField){
     return dispatch => {
       dispatch(requestAddWord(wordDetail))
@@ -90,12 +113,6 @@ export function initiateAddWord(wordDetail){
 
 // fetchwords function
 export function initiateFetchWord(){
-  let authHeaders = new Headers()
-  let currentUser = window.sessionStorage.getItem('token')
-  authHeaders.append('Authorization', currentUser)
-  authHeaders.append('Access-Control-Allow-Origin', `${frontendURL}`)
-  authHeaders.append('Content-Type', 'application/json')
-
   return dispatch => {
     dispatch(requestFetchWord())
     return(
@@ -113,3 +130,22 @@ export function initiateFetchWord(){
   }
 } 
 
+// fetch words by letter function
+export function initiateFetchWordByLetter(char){
+  return dispatch => {
+    dispatch(requestFetchWordByLetter(char))
+    return(
+      fetch(`${backendURL}${viewwordbyletterURL}`, {
+        method: 'POST',
+        headers: authHeaders ,
+        body: JSON.stringify({ letter: char })  
+      })
+      .then(res => res.json())
+      .then(json =>
+        (json.success) ? 
+          (dispatch(successFetchWordByLetter(json.obj))) :
+          (dispatch(failFetchWordByLetter(json.err_msg)))
+        ) 
+    )  
+  }
+}

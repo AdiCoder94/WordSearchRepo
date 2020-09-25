@@ -7,10 +7,12 @@ import './scss/article_styles.scss';
 
 import Routes from './routes';
 
+
 class App extends Component {
   render() {
     return (
       <Provider store={appStore}>
         <Routes /></Provider>)}}
+        
 
 export default App;

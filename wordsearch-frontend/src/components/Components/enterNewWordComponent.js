@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MemberHeader from "../Components/memberHeader";
-import NewWordFormComponent from "../Components/newWordFormComponent";
+import NewWordFormComponent from "./newWordFormComponent";
 import WordPreview from "../Components/newWordPreview";
 
 import * as wordActions from '../../redux_components/actions/wordActions/wordActionCreator';
@@ -85,7 +84,6 @@ class EnterNewWord extends Component{
 
 		return(
 			<React.Fragment>
-				<MemberHeader />
 				<div className="site-article-container">
 					<h2 className='section-heading'>Enter word in the database</h2>
 					<hr />
