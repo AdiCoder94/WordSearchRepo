@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import * as wordActions from '../../redux_components/actions/wordActions/wordActionCreator';
 import { alphabetsArray, viewWordsByLetterURL } from '../../config/constants';
 
-import MemberHeader from '../Components/memberHeader';
 import Spinner from "./spinner";
 
 function alphabetOrder(inputArray, char){
@@ -49,14 +48,12 @@ function ViewAllWords(){
 	let [triggerComponent, setTriggerComponent] = useState(false)
 	let fetchWordState = useSelector(state => state.fetchWordState)
 
-	useEffect(() => dispatch(wordActions.initiateFetchWord()), [])
-	
-	useEffect(() => { 
-		if(fetchWordState){ setTriggerComponent(true) }}, [triggerComponent, fetchWordState])
-		
+	useEffect(() => {
+		setTriggerComponent(true)
+		dispatch(wordActions.initiateFetchWord())}, [triggerComponent])
+
 	return (
 		<React.Fragment>
-			<MemberHeader />
 			<div className="site-article-container">
 				<ViewAllWordsComponent isFetchedProps={fetchWordState} />
 				</div></React.Fragment>) }

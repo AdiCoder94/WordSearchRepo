@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import ViewAllWordsComponent from '../Components/viewAllWordsComponent'
 import EnterNewWord from '../Components/enterNewWordComponent'
 import MemberHeader from '../Components/memberHeader';
-import WordsByLetterListComponent from '../Components/wordByLetterListComponent';
 
 import * as authActions from '../../redux_components/actions/authActions/authActionCreator';
 

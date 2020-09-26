@@ -30,7 +30,7 @@ class MemberHeader extends Component{
 			
 	triggerViewDatabase(){
 		if(!this.state.viewDatabase){
-			this.setState({ viewDatabase: true }, () => { this.props.bottomComponent(this.state.viewDatabase) }) }
+			this.setState({ viewDatabase: true }, () => {	this.props.bottomComponent(this.state.viewDatabase) }) }
 		else return null
 	}
 

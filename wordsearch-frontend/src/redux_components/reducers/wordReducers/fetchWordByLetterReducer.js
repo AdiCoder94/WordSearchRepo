@@ -4,7 +4,7 @@ const initialState = {
   isFetching: false,
   isFetched: false,
   isErr: false,
-  wordsArray: null,
+  wordsArray: [],
   err: ''
 } 
 
