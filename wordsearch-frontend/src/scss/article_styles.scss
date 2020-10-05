@@ -333,9 +333,15 @@
 }
 
 //view all word styles
-.wordcount_header {
+.search-word_header{
+    justify-content: space-between;
     font-family: 'Open Sans Condensed-Bold';
-    margin: 0;
+    align-items: flex-end;
+
+    .wordcount_header {
+        margin: 0;
+    }
+    
 }
 
 .no_word_msg {

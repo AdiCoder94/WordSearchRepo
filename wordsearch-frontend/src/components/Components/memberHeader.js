@@ -41,11 +41,11 @@ class MemberHeader extends Component{
 			<React.Fragment>	
 				<div className="site-header flex-row">
 					<h2 className='site-name'>Welcome, {currentUser}</h2>
-					<span className='search-word-text'>Search words:</span><input className='search-newword-textfield'></input>
-					<h4 className='enter-newword-link' onClick={this.triggerEnterNewWord}>Enter new word</h4>
-					<h4 className='view-all-words-link' onClick={this.triggerViewDatabase}>View database</h4>
-					<div className="btn-holder">          
-					<button className='login-btn site-btn' onClick={() => this.props.onSignout(token)} disabled={signoutState.isFetching}>Logout</button></div></div></React.Fragment>)}}
+					<div className='flex-row site-header-btn-holder'>
+						<h4 className='enter-newword-link' onClick={this.triggerEnterNewWord}>Enter new word</h4>
+						<h4 className='view-all-words-link' onClick={this.triggerViewDatabase}>View database</h4>
+						<div className="btn-holder">          
+						<button className='login-btn site-btn' onClick={() => this.props.onSignout(token)} disabled={signoutState.isFetching}>Logout</button></div></div></div></React.Fragment>)}}
 
 const mapStateToProps = (state) => {
  return { signoutState: state.signoutState }}

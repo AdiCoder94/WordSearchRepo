@@ -7,6 +7,8 @@ import { alphabetsArray, viewWordsByLetterURL } from '../../config/constants';
 
 import Spinner from "./spinner";
 
+import '../../scss/article_styles.scss';
+
 function alphabetOrder(inputArray, char){
 	let alphabetArr = []
 	for(var i = 0; i < inputArray.length; i++) {
@@ -14,15 +16,26 @@ function alphabetOrder(inputArray, char){
 			alphabetArr.push(inputArray[i]) }}	
 	return alphabetArr }
 
+function getWords(data){
+
+		console.log('words', data.wordsArray)
+}
+
 function ViewAllWordsComponent(props){
 	if(props.isFetchedProps.isFetched){
 		let { isFetchedProps } = props
 		let wordList = isFetchedProps.wordsArray.words.map(word => word.enteredWord)
 		let orderWordList = (char) => alphabetOrder(wordList.sort(), char)
+
 		if(isFetchedProps.wordsArray.words.length > 0){
 			return(
 				<React.Fragment>
-						<h2 className='wordcount_header'>Total words:{isFetchedProps.wordsArray.words.length}</h2>
+						<div className='flex-row search-word_header'>
+							<h2 className='wordcount_header'>Total words:{isFetchedProps.wordsArray.words.length}</h2>
+							<div>
+								<span className='search-word-text'>Search words:</span>
+								<input className='search-newword-textfield' onClick={() => getWords(isFetchedProps)}></input></div>
+						</div>
 						<div className='view_word_gridcontainer'>
 							{ alphabetsArray.map(char => {
 								return (
@@ -35,7 +48,7 @@ function ViewAllWordsComponent(props){
 										{ orderWordList(char).map(word => {
 												return <li key={word._id}>{word}</li>})}</ul></div>)})}</div></React.Fragment>
 			)}
-			return(<p className='no_word_msg'>No words in database</p>)
+			return (<p className='no_word_msg'>No words in database</p>)
 	} else return(
 		<React.Fragment>
 			<div className='loader-container flex-row'>
@@ -50,7 +63,7 @@ function ViewAllWords(){
 
 	useEffect(() => {
 		setTriggerComponent(true)
-		dispatch(wordActions.initiateFetchWord())}, [triggerComponent])
+		dispatch(wordActions.initiateFetchWord()) }, [triggerComponent])
 
 	return (
 		<React.Fragment>

@@ -8,9 +8,12 @@
     .site-name {
         flex-grow: 1;
     }
+    .site-header-btn-holder{
+        align-items: center;
 
-    .login-btn {
-        margin-left: 1em;
+        .view-all-words-link, .login-btn{
+            margin-left: 1em;
+        }
     }
 }
 
@@ -20,7 +23,6 @@
 }
 
 .search-newword-textfield {
-    margin-right: 1em;
     width: 20em;
 }
 
