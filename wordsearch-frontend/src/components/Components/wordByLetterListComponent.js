@@ -28,8 +28,7 @@ function WordByLetterListComponent(props){
       <div className='wordlist-section flex-column'>
         <div className='wordlist-header flex-row'>
           <h2 className='section-heading'>Word list</h2>
-          <p>({ recievedWordsProps.length })</p>
-          </div>
+          <p>({ recievedWordsProps.length })</p></div>
         <hr />
         <div className='wordlist-container'>
           <ul>

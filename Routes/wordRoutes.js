@@ -96,7 +96,7 @@ router.post('/viewwordsbyletter', authenticateUser, function(req, res, next){
 				else return null })
 			res.send({
 				success: true,
-				obj: enteredWordArray	})}})
+				obj: enteredWordArray.sort() })}})
 			})			
 
 module.exports = router;
