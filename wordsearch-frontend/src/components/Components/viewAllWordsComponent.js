@@ -33,8 +33,9 @@ function ViewAllWordsComponent(props){
 						<div className='flex-row search-word_header'>
 							<h2 className='wordcount_header'>Total words:{isFetchedProps.wordsArray.words.length}</h2>
 							<div>
-								<span className='search-word-text'>Search words:</span>
-								<input className='search-newword-textfield' onClick={() => getWords(isFetchedProps)}></input></div>
+								{/* <span className='search-word-text'>Search words:</span>
+								<input className='search-newword-textfield' onClick={() => getWords(isFetchedProps)}></input> */}
+								</div>
 						</div>
 						<div className='view_word_gridcontainer'>
 							{ alphabetsArray.map(char => {
