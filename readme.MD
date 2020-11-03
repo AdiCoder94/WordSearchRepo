@@ -1,9 +1,8 @@
-<!-- Documenting your app in github:-
-1. Brief description about your app. Read the description of the existent app that your app emulates from wikipedia or directly from their site. Eg: if you are app is a social media app then read about facebook, twitter, instagram in wikipedia or from the site. -->
-
 <div>
   <h2>1. Description:-</h2>
-  <p>Mauris tristique rhoncus libero porta posuere. Donec id arcu lectus. Proin et pharetra nisi. Sed libero tortor, sagittis vitae ex vitae, eleifend commodo dui. Nulla facilisi. Nam aliquam, sem vel eleifend cursus, est lorem porttitor ex, at rutrum nibh nisl sed nulla. Aliquam odio ex, eges</p>
+  <p>
+    The vocabulary journal is a kind of personal dictionary; learners record the words they encounter, along with their meanings and any other
+    important aspects. Based on the previous studies, it has been frequently suggested that vocabulary journals are recommended as effective tools for students to use to take charge of, organize and manage their vocabulary learning.</p>
 </div>  
 
 <div>
