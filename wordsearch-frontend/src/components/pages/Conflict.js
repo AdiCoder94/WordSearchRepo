@@ -2,7 +2,7 @@ import React from 'react';
 import '../../scss/article_styles.scss';
 
 import ElementOfStory from '../Components/ElementsOfStory';
-import Header from './../Components/header';
+import Header from '../Components/header';
 
 function StoryConflict(){
 		return(
