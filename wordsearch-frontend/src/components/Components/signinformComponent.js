@@ -8,7 +8,7 @@ import '../../scss/base_styles.scss';
 import '../../scss/article_styles.scss';
 import Spinner from "../Components/spinner";
 
-class LoginModal extends Component{
+class SigninFormComponent extends Component{
 	constructor(){
 		super();
 		this.state = {
@@ -18,7 +18,6 @@ class LoginModal extends Component{
 			clickedHeaderBtn: false,
 			inputErrorDisplay: false,
 		}
-		this.hideModal = this.hideModal.bind(this);
 		this.onTextboxChangeUserName = this.onTextboxChangeUserName.bind(this);
 		this.onTextboxChangeLogInPassword = this.onTextboxChangeLogInPassword.bind(this);	}
 
@@ -26,13 +25,8 @@ class LoginModal extends Component{
 		this.setState({	signUpEmail:event.target.value	})}
 
 	onTextboxChangeLogInPassword(event){
-		this.setState({	logInPassword:event.target.value })}
-
-	hideModal(){
-		this.setState({ viewLoginModal: false }, () => {
-			this.props.headerBtnActive(this.state.viewLoginModal)
-			this.props.isModalClosed(this.state.viewLoginModal) })}
-
+    this.setState({	logInPassword:event.target.value })}
+    
 	componentDidUpdate(){
 		if(this.props.signinState.isAuthenticated){
 			window.sessionStorage.setItem('token', this.props.signinState.token)
@@ -51,7 +45,7 @@ class LoginModal extends Component{
 		
 		return(
 			<React.Fragment>
-				<div className={hideModalClassName}>
+				<div>
 					<div className="modal-content flex-column">
 						<div className="username-section flex-row">	
 							<p className="username-subheading">Email:</p>
@@ -60,7 +54,6 @@ class LoginModal extends Component{
 							<p className="password-subheading">Password:</p>
 							<input type='password' value={logInPassword} onChange={this.onTextboxChangeLogInPassword} /></div>
 						<div className='login-cancel-holder flex-row'>	
-							<button className='close-modal-btn modal-btn' onClick={this.hideModal}>Cancel</button>
 							<button className="submit-form-btn modal-btn" onClick={() => this.props.onSignIn(userCred)}>Login</button></div>
 						<div className={loaderClassName}>
 							<Spinner />
@@ -81,4 +74,4 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
+export default connect(mapStateToProps, mapDispatchToProps)(SigninFormComponent);

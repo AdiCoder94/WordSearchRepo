@@ -1,0 +1,61 @@
+.landingpage-console {
+  .landingpage-console__info-section {
+    margin-right: 1em;
+
+    .infotext-heading {
+      text-decoration: underline;
+      font-size: 1.9em;
+      margin-bottom: 0.2em;
+    }
+
+    .infotext-txt1 {
+      text-align: justify;
+      padding-right: 5em;
+    }
+
+    .infotext-txt2 {
+      font-weight: bold;
+    }
+  }
+
+  .landingpage__signup-console {
+    padding-left: 0.5em;
+
+    .signupform-heading {
+      font-weight: bold;
+      font-size: 1.5em;
+      margin-bottom: -0.5em;
+    }
+
+    hr {
+      border-top: 2px solid rgb(24, 22, 22) !important;
+    }
+
+    .username-section,
+    .email-section,
+    .password-section,
+    .confirm-password-section {
+      margin-bottom: 1.5em;
+      align-items: center;
+      justify-content: space-between;
+      height: 2.5em;
+
+      .username-subheading,
+      .email-subheading,
+      .password-subheading,
+      .confirm-password-subheading {
+        position: relative;
+        top: 5px;
+        font-size: 0.9em;
+        white-space: nowrap;
+        font-weight: bold;
+      }
+
+      // .login-can
+    }
+
+    .submit-form-btn {
+      float: right;
+    }
+  }
+}

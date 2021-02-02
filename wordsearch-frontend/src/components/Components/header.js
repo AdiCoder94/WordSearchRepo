@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
+import SigninFormComponent from '../Components/signinformComponent'
+
 import '../../scss/base_styles.scss';
 import '../../scss/header_styles.scss';
-
-import LoginModal from '../Modals/LoginModal';
-import SignupModal from '../Modals/SignupModal';
 
 class Header extends Component{
 	constructor(){
@@ -38,18 +37,10 @@ class Header extends Component{
 			viewSignupModal:e })}		
 
 	render(){
-		let LogInModal, SignUpModal;
-		this.state.viewLoginModal ? (LogInModal = <LoginModal  headerBtnActive={this.activateHeader} isModalClosed={this.closeModal} />) : (LogInModal = <React.Fragment />);
-		this.state.viewSignupModal ? (SignUpModal = <SignupModal headerBtnActive={this.activateHeader} isModalClosed={this.closeModal} />) : (SignUpModal = <React.Fragment />);
-
-  		return(
-		    <React.Fragment>
-		      <div className="site-header flex-row">
-		        <h2 className='site-name'>Word search</h2>
-		        <div className="btn-holder">
-			        <button className='signup-btn site-btn' onClick={this.showSignupModal} disabled={this.state.headerUnclickable}>Sign up</button>	        
-			        <button className='login-btn site-btn' onClick={this.showLoginModal} disabled={this.state.headerUnclickable}>Login</button></div></div>
-		      	{SignUpModal}
-						{LogInModal}</React.Fragment>)}} 
+		return(
+			<React.Fragment>
+				<div className="site-header flex-row">
+					<h2 className='site-name'>Word search</h2>
+					<SigninFormComponent /></div></React.Fragment>)}} 
 
 export default Header;

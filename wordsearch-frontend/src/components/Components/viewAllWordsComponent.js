@@ -16,11 +16,6 @@ function alphabetOrder(inputArray, char){
 			alphabetArr.push(inputArray[i]) }}	
 	return alphabetArr }
 
-// function getWords(data){
-
-// 		console.log('words', data.wordsArray)
-// }
-
 function ViewAllWordsComponent(props){
 	if(props.isFetchedProps.isFetched){
 		let { isFetchedProps } = props

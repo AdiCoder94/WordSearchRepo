@@ -41,6 +41,6 @@ module.exports = {
     "Verb": ['Action', 'Phrasal', 'Stative']
   },
   emptyFieldError: 'Fill all the fields!',
-  passwordsDonotMatchError: 'Passwords donot match!'    
-
+  passwordsDonotMatchError: 'Passwords donot match!',
+  landingpageInfoText: 'The vocabulary journal is a kind of personal dictionary; learners record the words they encounter, along with their meanings and any other important aspects. Based on the previous studies, it has been frequently suggested that vocabulary journals are recommended as effective tools for students to use to take charge of, organize and manage their vocabulary learning.'
 }

@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 
 import * as authActions from '../../redux_components/actions/authActions/authActionCreator';
 
-import Spinner from "../Components/spinner";
+import Spinner from "./spinner";
 import '../../scss/base_styles.scss';
 import '../../scss/article_styles.scss';
 
-class SignupModal extends Component{
+class SignupFormComponent extends Component{
 	constructor(){
 		super();
 		this.state = {
@@ -39,13 +39,11 @@ class SignupModal extends Component{
 	// closing the modal on clicking Cancel
 	hideModal(){
 		this.setState({ viewSignUpModal:false }, () => {
-			console.log('clicked' + JSON.stringify(this.props.signupState))
 			this.props.headerBtnActive(this.state.viewSignUpModal)
 			this.props.isModalClosed(this.state.viewSignUpModal)})}
 	
 	componentDidUpdate(){
 		if(this.props.signupState.isSuccess && !this.props.signupState.isFetching){ this.hideModal() }
-		console.log('update:'+ this.props.signupState.isSuccess)
 	}		
 
 	render(){
@@ -64,27 +62,25 @@ class SignupModal extends Component{
 
 		return(
 			<React.Fragment>
-				<div className={hideModalClassName}>
-					<div className="signup-modal-content flex-column">
-						<div className="username-section flex-row">	
-							<p className="username-subheading">User name:</p>
-							<input type='text' onChange={this.onTextboxChangeUserName} value={signUpUsername} /></div>
-						<div className="email-section flex-row">	
-							<p className="email-subheading">Email:</p>
-							<input type='text' onChange={this.onTextboxChangeSignUpEmail} value={signUpEmail} /></div>
-						<div className="password-section flex-row">
-							<p className="password-subheading">Password:</p>
-							<input type='password' onChange={this.onTextboxChangeSignUpPassword} value={signUpPassword} /></div>
-						<div className="confirm-password-section flex-row">
-							<p className="confirm-password-subheading">Confirm password:</p>
-							<input type='password' onChange={this.onTextboxChangeSignUpPasswordConfirm} value={signUpPasswordConfirm} /></div>
-						<div className='login-cancel-holder flex-row'>	
-							<button className='close-modal-btn modal-btn' onClick={this.hideModal}>Cancel</button>
-							<button className="submit-form-btn modal-btn" onClick={() => this.props.onSignUp(userDetail)}>Submit</button></div>
-						<div className={loaderClassName}>
-							<Spinner />
-							<p className='pleasewait-txt'>Please wait...</p></div>
-							<p className={messageClassName}>{this.props.signupState.err}</p></div></div></React.Fragment>)}}
+				<p className='signupform-heading'>Sign up</p>
+				<hr />
+				<div className="username-section flex-row">	
+					<p className="username-subheading">User name:</p>
+					<input type='text' onChange={this.onTextboxChangeUserName} value={signUpUsername} /></div>
+				<div className="email-section flex-row">	
+					<p className="email-subheading">Email:</p>
+					<input type='text' onChange={this.onTextboxChangeSignUpEmail} value={signUpEmail} /></div>
+				<div className="password-section flex-row">
+					<p className="password-subheading">Password:</p>
+					<input type='password' onChange={this.onTextboxChangeSignUpPassword} value={signUpPassword} /></div>
+				<div className="confirm-password-section flex-row">
+					<p className="confirm-password-subheading">Confirm password:</p>
+					<input type='password' onChange={this.onTextboxChangeSignUpPasswordConfirm} value={signUpPasswordConfirm} /></div>
+				<button className="submit-form-btn modal-btn" onClick={() => this.props.onSignUp(userDetail)}>Submit</button>
+				<div className={loaderClassName}>
+					<Spinner />
+					<p className='pleasewait-txt'>Please wait...</p></div>
+					<p className={messageClassName}>{this.props.signupState.err}</p></React.Fragment>)}}
 
 const mapStateToProps = (state) => {
 	return {
@@ -98,4 +94,4 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignupModal);
+export default connect(mapStateToProps, mapDispatchToProps)(SignupFormComponent);
