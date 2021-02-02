@@ -18,11 +18,11 @@ class SignupFormComponent extends Component{
 			signUpPassword:'',			
 			signUpPasswordConfirm:'' }
 
-		this.hideModal = this.hideModal.bind(this);
 		this.onTextboxChangeUserName = this.onTextboxChangeUserName.bind(this);
 		this.onTextboxChangeSignUpEmail = this.onTextboxChangeSignUpEmail.bind(this);
 		this.onTextboxChangeSignUpPassword = this.onTextboxChangeSignUpPassword.bind(this);		
-		this.onTextboxChangeSignUpPasswordConfirm = this.onTextboxChangeSignUpPasswordConfirm.bind(this); }
+		this.onTextboxChangeSignUpPasswordConfirm = this.onTextboxChangeSignUpPasswordConfirm.bind(this);
+	}
 
 	onTextboxChangeUserName(e){
 		this.setState({ signUpUsername:e.target.value })}
@@ -35,20 +35,13 @@ class SignupFormComponent extends Component{
 
 	onTextboxChangeSignUpPasswordConfirm(e){
 		this.setState({ signUpPasswordConfirm:e.target.value } )}
-
-	// closing the modal on clicking Cancel
-	hideModal(){
-		this.setState({ viewSignUpModal:false }, () => {
-			this.props.headerBtnActive(this.state.viewSignUpModal)
-			this.props.isModalClosed(this.state.viewSignUpModal)})}
 	
 	componentDidUpdate(){
 		if(this.props.signupState.isSuccess && !this.props.signupState.isFetching){ this.hideModal() }
 	}		
 
 	render(){
-		let hideModalClassName, loaderClassName, messageClassName;
-		(this.state.viewSignUpModal) ? (hideModalClassName = 'modal-container') : (hideModalClassName='hidden');
+		let loaderClassName, messageClassName;
 		(this.props.signupState.isFetching) ? (loaderClassName = 'loader-container flex-row') : (loaderClassName = 'hidden');
 		(this.props.signupState.isErr) ? (messageClassName='message-container') : (messageClassName = 'hidden');
 
@@ -59,11 +52,10 @@ class SignupFormComponent extends Component{
 			signUpPasswordConfirm } = this.state
 
 		const userDetail = { signUpUsername, signUpEmail, signUpPassword, signUpPasswordConfirm }	
-
 		return(
 			<React.Fragment>
 				<p className='signupform-heading'>Sign up</p>
-				<hr />
+				<hr/>
 				<div className="username-section flex-row">	
 					<p className="username-subheading">User name:</p>
 					<input type='text' onChange={this.onTextboxChangeUserName} value={signUpUsername} /></div>
@@ -76,11 +68,12 @@ class SignupFormComponent extends Component{
 				<div className="confirm-password-section flex-row">
 					<p className="confirm-password-subheading">Confirm password:</p>
 					<input type='password' onChange={this.onTextboxChangeSignUpPasswordConfirm} value={signUpPasswordConfirm} /></div>
-				<button className="submit-form-btn modal-btn" onClick={() => this.props.onSignUp(userDetail)}>Submit</button>
+				<div className='signup-holder'>
+						<button className="submit-form-btn modal-btn" onClick={() => this.props.onSignUp(userDetail)}>Submit</button></div>
+				<p className={messageClassName}>{this.props.signupState.err}</p>
 				<div className={loaderClassName}>
 					<Spinner />
-					<p className='pleasewait-txt'>Please wait...</p></div>
-					<p className={messageClassName}>{this.props.signupState.err}</p></React.Fragment>)}}
+					<p className='pleasewait-txt'>Please wait...</p></div></React.Fragment>)}}
 
 const mapStateToProps = (state) => {
 	return {

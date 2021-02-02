@@ -17,24 +17,27 @@
     }
 }
 
-//member header
-.search-word-text {
-    margin-right: 0.3em;
-}
-
-.search-newword-textfield {
-    width: 20em;
-}
-
-a {
-    text-decoration: none;
-
-    .enter-newword-link, .view-all-words-link {
-        color: black;
-        margin-right: 0.5em;
+.userprofile-console{
+    padding: 0.3em 0 0.3em 0;
+    .username-section, .password-section{
+        justify-content: space-between;
+        align-items: center;
+        .username-subheading, .password-subheading{
+            position: relative;
+            top: 0.3em;
+        }
     }
 
-    &:hover {
-        text-decoration: underline;
+    .requeststatus-display{
+        border: 1px solid red;
+    }
+    .signin-holder{
+        justify-content: space-between;
+        padding: 0.3em 0;
+        margin: 0 !important;
+        .signin-btn{
+            margin-left: auto;
+            height: 2em;
+        }
     }
 }
