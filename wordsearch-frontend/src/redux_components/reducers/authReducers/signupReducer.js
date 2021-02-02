@@ -16,11 +16,12 @@ function signupReducer(state = initialState, action){
         isFetching: true,
         user: action.payload  }
     case authActionTypes.SIGNUP_SUCCESS:
+      window.location.reload()
       return {
         ...state,
         isFetching: false,
         isErr: false,
-        isSuccess: true}
+        isSuccess: true }
     case authActionTypes.SIGNUP_FAILED:
       return {
         ...state, 

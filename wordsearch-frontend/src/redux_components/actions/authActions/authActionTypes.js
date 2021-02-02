@@ -1,5 +1,6 @@
 // creating authentication actions
 const authActionTypes = {
+  
   // signup actions
   SIGNUP_INITIATE: 'SIGNUP_INITIATE',
   SIGNUP_SUCCESS: 'SIGNUP_SUCCESS',

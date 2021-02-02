@@ -50,6 +50,6 @@ class Header extends Component{
 			        <button className='signup-btn site-btn' onClick={this.showSignupModal} disabled={this.state.headerUnclickable}>Sign up</button>	        
 			        <button className='login-btn site-btn' onClick={this.showLoginModal} disabled={this.state.headerUnclickable}>Login</button></div></div>
 		      	{SignUpModal}
-	      	  {LogInModal}</React.Fragment>)}} 
+						{LogInModal}</React.Fragment>)}} 
 
 export default Header;

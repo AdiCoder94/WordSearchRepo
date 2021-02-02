@@ -7,8 +7,6 @@ import Spinner from "../Components/spinner";
 import '../../scss/base_styles.scss';
 import '../../scss/article_styles.scss';
 
-
-
 class SignupModal extends Component{
 	constructor(){
 		super();
@@ -41,11 +39,13 @@ class SignupModal extends Component{
 	// closing the modal on clicking Cancel
 	hideModal(){
 		this.setState({ viewSignUpModal:false }, () => {
+			console.log('clicked' + JSON.stringify(this.props.signupState))
 			this.props.headerBtnActive(this.state.viewSignUpModal)
 			this.props.isModalClosed(this.state.viewSignUpModal)})}
 	
 	componentDidUpdate(){
-		if(this.props.signupState.isSuccess){ this.hideModal() }
+		if(this.props.signupState.isSuccess && !this.props.signupState.isFetching){ this.hideModal() }
+		console.log('update:'+ this.props.signupState.isSuccess)
 	}		
 
 	render(){
@@ -53,7 +53,6 @@ class SignupModal extends Component{
 		(this.state.viewSignUpModal) ? (hideModalClassName = 'modal-container') : (hideModalClassName='hidden');
 		(this.props.signupState.isFetching) ? (loaderClassName = 'loader-container flex-row') : (loaderClassName = 'hidden');
 		(this.props.signupState.isErr) ? (messageClassName='message-container') : (messageClassName = 'hidden');
-
 
 		var {
 			signUpUsername,
@@ -85,7 +84,7 @@ class SignupModal extends Component{
 						<div className={loaderClassName}>
 							<Spinner />
 							<p className='pleasewait-txt'>Please wait...</p></div>
-							<p className={messageClassName}>{this.props.signupState.err}</p></div></div>	</React.Fragment>)}}
+							<p className={messageClassName}>{this.props.signupState.err}</p></div></div></React.Fragment>)}}
 
 const mapStateToProps = (state) => {
 	return {
