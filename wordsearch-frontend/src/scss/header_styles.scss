@@ -8,35 +8,51 @@
     .site-name {
         flex-grow: 1;
     }
-    .site-header-btn-holder{
+
+    .site-header-btn-holder {
         align-items: center;
 
-        .view-all-words-link, .login-btn{
+        .view-all-words-link,
+        .login-btn {
             margin-left: 1em;
         }
     }
 }
 
-.userprofile-console{
+.userprofile-console {
     padding: 0.3em 0 0.3em 0;
-    .username-section, .password-section{
-        justify-content: space-between;
+
+    .username-section,
+    .password-section {
+        justify-content: flex-end   ;
         align-items: center;
-        .username-subheading, .password-subheading{
+
+        .username-subheading,
+        .password-subheading {
             position: relative;
             top: 0.3em;
         }
     }
 
-    .requeststatus-display{
+    .requeststatus-display {
         border: 1px solid red;
     }
-    .signin-holder{
-        justify-content: space-between;
+
+    .signin-holder {
+        justify-content: flex-end;
         padding: 0.3em 0;
         margin: 0 !important;
-        .signin-btn{
-            margin-left: auto;
+        height: 3em;
+        align-items: center;
+        .loader-container{
+            margin-left: 0.5em;
+        }
+        .message-container{
+            align-self: center;
+            margin-bottom: 0;
+        }
+        .signin-btn {
+            margin-left: 0.5em;
             height: 2em;
         }
     }
