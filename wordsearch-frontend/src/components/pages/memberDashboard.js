@@ -10,7 +10,6 @@ import * as authActions from '../../redux_components/actions/authActions/authAct
 import '../../scss/base_styles.scss';
 import '../../scss/header_styles.scss';
 
-
 class MemberDashboard extends Component{
 	constructor(){
 		super();

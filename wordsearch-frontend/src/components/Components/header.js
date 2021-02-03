@@ -11,30 +11,9 @@ class Header extends Component{
 		this.state = {
 			viewLoginModal:false,
 			viewSignupModal:false,
-			headerUnclickable: false	}
-		this.showLoginModal = this.showLoginModal.bind(this);
-		this.showSignupModal = this.showSignupModal.bind(this);	
-		this.activateHeader = this.activateHeader.bind(this);
-		this.closeModal = this.closeModal.bind(this)}
-
-	showLoginModal(){
-		this.setState({ headerUnclickable: true })
-		this.setState(() =>({	viewLoginModal: true }))
+			headerUnclickable: false	}	
 	}
 
-	showSignupModal(){
-		this.setState({ headerUnclickable: true })
-		this.setState(() => ({ viewSignupModal: true }))
-	}
-
-	activateHeader(e){
-		this.setState({	headerUnclickable: e })
-	}	
-			
-	closeModal(e){
-		this.setState({
-			viewLoginModal: e,
-			viewSignupModal:e })}		
 
 	render(){
 		return(
