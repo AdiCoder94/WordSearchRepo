@@ -66,9 +66,7 @@ class SigninFormComponent extends Component{
 							{ statusDisplayComponent }
 							{ loadingDisplayComponent }
 							<button className="signin-btn modal-btn" onClick={() => this.props.onSignIn(userCred)}>Sign In</button>
-						</div></div></React.Fragment>
-						
-						)}}
+						</div></div></React.Fragment>	)}}
 
 const mapStateToProps = (state) => {
 	return {

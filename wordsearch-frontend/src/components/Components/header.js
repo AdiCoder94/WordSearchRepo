@@ -14,7 +14,6 @@ class Header extends Component{
 			headerUnclickable: false	}	
 	}
 
-
 	render(){
 		return(
 			<React.Fragment>

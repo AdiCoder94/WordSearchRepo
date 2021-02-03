@@ -5,10 +5,6 @@
     background-color: #aaa;
     font-family: 'Open Sans Condensed-Bold';
 
-    .site-name {
-        flex-grow: 1;
-    }
-
     .site-header-btn-holder {
         align-items: center;
 
@@ -55,5 +51,24 @@
             margin-left: 0.5em;
             height: 2em;
         }
+    }
+}
+
+.member-header__tab-container {
+    margin-top: auto;
+    .member-tabcontainer__enterwordtab, .member-tabcontainer__viewdatabasetab{
+        background-color: #fff;
+        padding: 0.2em 1.5em;
+        clip-path: polygon(5% 0%, 0% 100%, 100% 100%, 95% 0%);   
+        cursor: pointer;     
+        width: 14em;
+        text-align: center;
+    }
+    .active{
+        padding: 0.2em 0.2em;
+        font-size: 1.1em;
+        background-color: #eee;
+        border-bottom: 0;
+        text-decoration: underline;
     }
 }

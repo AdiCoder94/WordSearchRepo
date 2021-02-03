@@ -25,13 +25,14 @@ function ViewAllWordsComponent(props){
 		if(isFetchedProps.wordsArray.words.length > 0){
 			return(
 				<React.Fragment>
-						<div className='flex-row search-word_header'>
-							<h2 className='wordcount_header'>Total words:{isFetchedProps.wordsArray.words.length}</h2>
+						<h2 className='section-heading'>Total words:{isFetchedProps.wordsArray.words.length}</h2>
+						<hr />
+						{/* <div className='flex-row search-word_header'>
 							<div>
-								{/* <span className='search-word-text'>Search words:</span>
-								<input className='search-newword-textfield' onClick={() => getWords(isFetchedProps)}></input> */}
+								<span className='search-word-text'>Search words:</span>
+								<input className='search-newword-textfield' onClick={() => getWords(isFetchedProps)}></input>
 								</div>
-						</div>
+						</div> */}
 						<div className='view_word_gridcontainer'>
 							{ alphabetsArray.map(char => {
 								return (
