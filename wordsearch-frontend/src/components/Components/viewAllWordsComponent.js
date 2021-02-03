@@ -8,6 +8,7 @@ import { alphabetsArray, viewWordsByLetterURL } from '../../config/constants';
 import Spinner from "./spinner";
 
 import '../../scss/article_styles.scss';
+import '../../scss/pages_styles/viewallwordspage.scss'
 
 function alphabetOrder(inputArray, char){
 	let alphabetArr = []
@@ -27,12 +28,6 @@ function ViewAllWordsComponent(props){
 				<React.Fragment>
 						<h2 className='section-heading'>Total words:{isFetchedProps.wordsArray.words.length}</h2>
 						<hr />
-						{/* <div className='flex-row search-word_header'>
-							<div>
-								<span className='search-word-text'>Search words:</span>
-								<input className='search-newword-textfield' onClick={() => getWords(isFetchedProps)}></input>
-								</div>
-						</div> */}
 						<div className='view_word_gridcontainer'>
 							{ alphabetsArray.map(char => {
 								return (

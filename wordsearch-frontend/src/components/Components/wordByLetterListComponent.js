@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import '../../scss/pages_styles/viewwordbyletter.scss'
+
 function WordInDetailComponent(props){
   let { recievedWordsProps } = props
   if(recievedWordsProps !== null){
@@ -7,14 +9,14 @@ function WordInDetailComponent(props){
       <React.Fragment>
         <div className='word-preview-section flex-column'>
           <div className='word-partofspeech flex-row'>
-            <h1 className='word-preview-txt'>{recievedWordsProps.enteredWord}</h1>
+            <p className='word-preview-txt'>{recievedWordsProps.enteredWord}</p>
             <p className='noun-type-txt'>{recievedWordsProps.partOfSpeechSubCategory} {recievedWordsProps.partOfSpeech}</p>
             <p className='connotation-txt'>{recievedWordsProps.connotation}</p></div>
           <div className="etymology-section flex-column">
             <p className='originlanguage-txt'><b>Language of origin:</b>{recievedWordsProps.languageOfOrigin}</p>
             <p className='rootword-txt'><b>Root word:</b>{recievedWordsProps.root}</p></div>
           <div className='meaning-section'>
-            <h4 className='meaning-heading-txt'>Meaning:</h4>
+            <h4 className='meaning-heading-txt'><b>Meaning :-</b></h4>
             <p className="meaning-desc-txt">{recievedWordsProps.definition}</p></div></div></React.Fragment>)}
   else return <React.Fragment />}
 

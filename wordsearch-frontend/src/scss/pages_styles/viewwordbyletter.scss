@@ -1,0 +1,17 @@
+.viewwordindetail-section-container{
+  .word-preview-section{
+    .word-partofspeech{
+      align-items: flex-end;  
+      .word-preview-txt{
+        margin: 0;
+        font-size: 2em;
+        margin: 0 !important;
+        font-weight: bold;
+      }
+      .noun-type-txt, .connotation-txt{
+        font-weight: bold;
+        margin-bottom: 0.4em;
+      }
+    }
+  }
+}
